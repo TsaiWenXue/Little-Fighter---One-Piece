@@ -8,7 +8,9 @@ import tw.edu.ntut.csie.game.GameObject;
 
 public class Background_stage1 implements GameObject {
     private MovingBitmap _sky;
-    private MovingBitmap _road;
+    private MovingBitmap _road1;
+    private MovingBitmap _road2;
+    private MovingBitmap _road3;
 
     private Animation _wave;
 
@@ -16,7 +18,9 @@ public class Background_stage1 implements GameObject {
 
     public Background_stage1() {
         _sky = new MovingBitmap(R.drawable.sky);
-        _road = new MovingBitmap(R.drawable.road);
+        _road1 = new MovingBitmap(R.drawable.road);
+        _road2 = new MovingBitmap(R.drawable.road);
+        _road3 = new MovingBitmap(R.drawable.road);
 
         _wave = new Animation();
         px = 0; py = 0;
@@ -47,18 +51,24 @@ public class Background_stage1 implements GameObject {
         _wave.addFrame(R.drawable.wave032);
         _wave.addFrame(R.drawable.wave033);
 
-        _road.setLocation(px, py);
+        _road1.setLocation(px-800, py+50);
+        _road2.setLocation(px, py+50);
+        _road3.setLocation(px+800, py+50);
     }
 
     @Override
     public void release() {
         _sky.release();
         _wave.release();
-        _road.release();
+        _road1.release();
+        _road2.release();
+        _road3.release();
 
         _sky = null;
         _wave = null;
-        _road = null;
+        _road1 = null;
+        _road2 = null;
+        _road3 = null;
     }
 
     @Override
@@ -70,6 +80,8 @@ public class Background_stage1 implements GameObject {
     public void show() {
         _sky.show();
         _wave.show();
-        _road.show();
+        _road1.show();
+        _road2.show();
+        _road3.show();
     }
 }

@@ -48,12 +48,12 @@ public class Game extends Activity {
     /**
      * 遊戲畫面的寬度。
      */
-    public static final int GAME_FRAME_WIDTH = 640;
+    public static final int GAME_FRAME_WIDTH = 800;
 
     /**
      * 遊戲畫面的高度。
      */
-    public static final int GAME_FRAME_HEIGHT = 376;
+    public static final int GAME_FRAME_HEIGHT = 450;
 
     /**
      * 開啟或關閉在選單上顯示資訊選項。
