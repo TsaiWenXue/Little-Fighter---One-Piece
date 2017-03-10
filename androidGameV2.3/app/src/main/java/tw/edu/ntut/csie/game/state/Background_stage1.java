@@ -5,8 +5,9 @@ import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.GameObject;
+import tw.edu.ntut.csie.game.PointerEventHandler;
 
-public class Background_stage1 implements GameObject {
+public class Background_stage1 implements GameObject, PointerEventHandler{
     private MovingBitmap _sky;
     private MovingBitmap _road1;
     private MovingBitmap _road2;
