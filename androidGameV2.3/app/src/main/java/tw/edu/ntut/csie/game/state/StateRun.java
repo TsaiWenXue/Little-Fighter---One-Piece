@@ -7,7 +7,7 @@ import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
 import tw.edu.ntut.csie.game.engine.GameEngine;
-import tw.edu.ntut.csie.game.state.abc;
+import tw.edu.ntut.csie.game.state.Luffy;
 
 public class StateRun extends GameState {
 
@@ -26,9 +26,9 @@ public class StateRun extends GameState {
     private boolean _grab;
     private int _cx, _cy;
     */
-    private abc aaaa;
-    private Navigation n = new Navigation();
+    private Navigation controller = new Navigation();
     private Background_stage1 background;
+    private Luffy luffy = new Luffy();
 
     private Audio _music;
 
@@ -65,7 +65,8 @@ public class StateRun extends GameState {
 
         background = new Background_stage1();
         background.initialize();
-        aaaa.initialize();
+        controller.initialize();
+        luffy.initialize();
 
         _music = new Audio(R.raw.ntut);
         _music.setRepeating(true);
@@ -94,18 +95,21 @@ public class StateRun extends GameState {
         _android.show();
         */
         background.show();
-        //button.show();
+        controller.show();
+        luffy.show();
     }
 
     @Override
     public void release() {
         _music.release();
         background.release();
-        //button.release();
+        controller.release();
+        luffy.release();
 
         _music = null;
         background = null;
-        //button = null;
+        controller = null;
+        luffy = null;
     }
 
     @Override
@@ -147,7 +151,7 @@ public class StateRun extends GameState {
                 _grab = false;
             }
         }*/
-        //button.pointerPressed(pointers);
+        controller.pointerPressed(pointers);
         return true;
 
     }
@@ -163,14 +167,14 @@ public class StateRun extends GameState {
                 moveY + _android.getHeight() / 2 > _door.getY() && moveY < _door.getY() + _door.getHeight() / 2)
             changeState(Game.OVER_STATE);
            */
-        //button.pointerMoved(pointers);
+            controller.pointerMoved(pointers);
         return false;
     }
 
     @Override
     public boolean pointerReleased(List<Pointer> pointers) {
         //_grab = false;
-        //button.pointerReleased(pointers);
+        controller.pointerReleased(pointers);
         return false;
     }
 
