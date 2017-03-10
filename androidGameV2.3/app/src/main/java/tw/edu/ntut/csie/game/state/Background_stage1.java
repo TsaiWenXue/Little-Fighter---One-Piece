@@ -31,8 +31,8 @@ public class Background_stage1 implements GameObject, PointerEventHandler{
         _sky.setLocation(px, py);
 
         _wave.setLocation(px, py + 70);
-        _wave.addFrame(R.drawable.wave014);
-        _wave.addFrame(R.drawable.wave015);
+        //_wave.addFrame(R.drawable.wave014);
+       _wave.addFrame(R.drawable.wave015);
         _wave.addFrame(R.drawable.wave016);
         _wave.addFrame(R.drawable.wave017);
         _wave.addFrame(R.drawable.wave018);
