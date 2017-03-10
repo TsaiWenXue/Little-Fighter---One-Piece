@@ -3,17 +3,14 @@ package tw.edu.ntut.csie.game.state;
 import java.util.List;
 import java.util.Map;
 
-import tw.edu.ntut.csie.game.Game;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
-import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.engine.GameEngine;
-import tw.edu.ntut.csie.game.extend.Animation;
-import tw.edu.ntut.csie.game.extend.Integer;
-import tw.edu.ntut.csie.game.state.Background_stage1;
+import tw.edu.ntut.csie.game.state.abc;
 
 public class StateRun extends GameState {
+
     public static final int DEFAULT_SCORE_DIGITS = 4;
     /*
     private MovingBitmap _background;
@@ -29,8 +26,10 @@ public class StateRun extends GameState {
     private boolean _grab;
     private int _cx, _cy;
     */
-
+    private abc aaaa;
+    private Navigation n = new Navigation();
     private Background_stage1 background;
+
     private Audio _music;
 
     public StateRun(GameEngine engine) {
@@ -66,6 +65,7 @@ public class StateRun extends GameState {
 
         background = new Background_stage1();
         background.initialize();
+        aaaa.initialize();
 
         _music = new Audio(R.raw.ntut);
         _music.setRepeating(true);
@@ -94,15 +94,18 @@ public class StateRun extends GameState {
         _android.show();
         */
         background.show();
+        //button.show();
     }
 
     @Override
     public void release() {
         _music.release();
         background.release();
+        //button.release();
 
         _music = null;
         background = null;
+        //button = null;
     }
 
     @Override
@@ -132,8 +135,8 @@ public class StateRun extends GameState {
 
     @Override
     public boolean pointerPressed(List<Pointer> pointers) {
-        /*
-        _message.setVisible(false);
+    /*
+        //_message.setVisible(false);
         if (pointers.size() == 1) {
             int touchX = pointers.get(0).getX();
             int touchY = pointers.get(0).getY();
@@ -144,6 +147,7 @@ public class StateRun extends GameState {
                 _grab = false;
             }
         }*/
+        //button.pointerPressed(pointers);
         return true;
 
     }
@@ -159,12 +163,14 @@ public class StateRun extends GameState {
                 moveY + _android.getHeight() / 2 > _door.getY() && moveY < _door.getY() + _door.getHeight() / 2)
             changeState(Game.OVER_STATE);
            */
+        //button.pointerMoved(pointers);
         return false;
     }
 
     @Override
     public boolean pointerReleased(List<Pointer> pointers) {
         //_grab = false;
+        //button.pointerReleased(pointers);
         return false;
     }
 

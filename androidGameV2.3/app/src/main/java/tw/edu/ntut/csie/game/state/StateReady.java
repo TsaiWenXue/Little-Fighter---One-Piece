@@ -46,7 +46,7 @@ public class StateReady extends AbstractGameState {
      */
     // �}�o²��
     private void initializeAboutButton() {
-        addGameObject(_aboutButton = new BitmapButton(R.drawable.about, R.drawable.about_pressed, 465, 270));
+        addGameObject(_aboutButton = new BitmapButton(R.drawable.about, R.drawable.about_pressed, 600, 300));
         _aboutButton.addButtonEventHandler(new ButtonEventHandler() {
             @Override
             public void perform(BitmapButton button) {
@@ -61,7 +61,7 @@ public class StateReady extends AbstractGameState {
      */
     // �C������
     private void initializeHelpButton() {
-        addGameObject(_helpButton = new BitmapButton(R.drawable.help, R.drawable.help_pressed, 465, 220));
+        addGameObject(_helpButton = new BitmapButton(R.drawable.help, R.drawable.help_pressed, 600, 250));
         _helpButton.addButtonEventHandler(new ButtonEventHandler() {
             @Override
             public void perform(BitmapButton button) {
@@ -75,7 +75,7 @@ public class StateReady extends AbstractGameState {
      * ��l�ơyMenu�z�����s�C
      */
     private void initializeMenuButton() {
-        addGameObject(_menuButton = new BitmapButton(R.drawable.menu, R.drawable.menu_pressed, 465, 320));
+        addGameObject(_menuButton = new BitmapButton(R.drawable.menu, R.drawable.menu_pressed, 600, 350));
         _menuButton.addButtonEventHandler(new ButtonEventHandler() {
             @Override
             public void perform(BitmapButton button) {
@@ -89,7 +89,7 @@ public class StateReady extends AbstractGameState {
      * ��l�ơyExit�z�����s�C
      */
     private void initializeExitButton() {
-        addGameObject(_exitButton = new BitmapButton(R.drawable.exit, R.drawable.exit_pressed, 465, 320));
+        addGameObject(_exitButton = new BitmapButton(R.drawable.exit, R.drawable.exit_pressed, 600, 350));
         _exitButton.addButtonEventHandler(new ButtonEventHandler() {
             @Override
             public void perform(BitmapButton button) {
@@ -103,7 +103,7 @@ public class StateReady extends AbstractGameState {
      * ��l�ơyStart�z�����s�C
      */
     private void initializeStartButton() {
-        addGameObject(_startButton = new BitmapButton(R.drawable.start, R.drawable.start_pressed, 465, 170));
+        addGameObject(_startButton = new BitmapButton(R.drawable.start, R.drawable.start_pressed, 600, 200));
         _startButton.addButtonEventHandler(new ButtonEventHandler() {
             @Override
             public void perform(BitmapButton button) {

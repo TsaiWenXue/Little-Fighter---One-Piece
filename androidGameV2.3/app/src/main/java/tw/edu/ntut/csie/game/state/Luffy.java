@@ -18,4 +18,12 @@ public class Luffy  {
     public void initialize() {
         luffy_Normal.setLocation(px, py );
     }
+    public void show(){
+        luffy_Normal.show();
+    };
+    public void release(){
+        luffy_Normal.release();
+
+        luffy_Normal = null;
+    }
 }
