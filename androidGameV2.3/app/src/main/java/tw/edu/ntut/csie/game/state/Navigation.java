@@ -15,19 +15,20 @@ public class Navigation implements GameObject, PointerEventHandler {
     private MovingBitmap button_controller;
     private MovingBitmap button_background;
     private boolean _grab;
-    public int controllerPx, controllerPy;
+    public static int initialCtrlPx = 40, initialCtrlPy = 300;
+    public static int controllerPx, controllerPy;
 
     public Navigation() {
         button_controller = new MovingBitmap(R.drawable.button_direction);
         button_background = new MovingBitmap(R.drawable.button_background);
-        controllerPx = 40;
-        controllerPy = 300;
+        controllerPx = initialCtrlPx;
+        controllerPy = initialCtrlPy;
     }
 
     public void initialize(){
         button_controller.setLocation(controllerPx, controllerPy);
-        button_background.setLocation(controllerPx + button_controller.getWidth()/2 - button_background.getWidth()/2,
-                                      controllerPy + button_controller.getHeight()/2 - button_background.getHeight()/2 );
+        button_background.setLocation(initialCtrlPx + button_controller.getWidth()/2 - button_background.getWidth()/2,
+                                      initialCtrlPy + button_controller.getHeight()/2 - button_background.getHeight()/2 );
         //button_background.setLocation(controllerPx, controllerPy);
     }
 
@@ -66,10 +67,14 @@ public class Navigation implements GameObject, PointerEventHandler {
     @Override
     public boolean pointerMoved(List<Pointer> pointers){
         if (_grab){
-            if ((controllerPx - 40) * (controllerPx - 40) + (controllerPy - 300) * (controllerPy - 300)<=
-                (button_controller.getWidth() / 2) * (button_controller.getWidth() / 2)){
-                controllerPx = pointers.get(0).getX() - button_controller.getWidth() / 2;
-                controllerPy = pointers.get(0).getY() - button_controller.getHeight() / 2;
+            controllerPx = pointers.get(0).getX() - button_controller.getWidth() / 2;
+            controllerPy = pointers.get(0).getY() - button_controller.getHeight() / 2;
+            if ((controllerPx - initialCtrlPx) * (controllerPx - initialCtrlPx) + (controllerPy - initialCtrlPy) * (controllerPy - initialCtrlPy) >=
+                (button_controller.getWidth() / 2) * (button_controller.getWidth() / 2)) {
+                    double distant = Math.sqrt( (controllerPx - initialCtrlPx) * (controllerPx - initialCtrlPx) +
+                                                (controllerPy - initialCtrlPy) * (controllerPy - initialCtrlPy) );
+                    controllerPx = (int)((controllerPx - initialCtrlPx) * ((button_controller.getWidth()/2) / distant) + initialCtrlPx);
+                    controllerPy = (int)((controllerPy - initialCtrlPy) * ((button_controller.getWidth()/2) / distant) + initialCtrlPy);
                 }
             button_controller.setLocation(controllerPx, controllerPy);
         }
@@ -79,8 +84,8 @@ public class Navigation implements GameObject, PointerEventHandler {
     @Override
     public boolean pointerReleased(List<Pointer> pointers) {
         _grab = false;
-        controllerPx = 40;
-        controllerPy = 300;
+        controllerPx = initialCtrlPx;
+        controllerPy = initialCtrlPy;
         button_controller.setLocation(controllerPx, controllerPy);
         return false;
     }

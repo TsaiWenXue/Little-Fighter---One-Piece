@@ -3,6 +3,7 @@ package tw.edu.ntut.csie.game.state;
 import java.util.List;
 import java.util.Map;
 
+import tw.edu.ntut.csie.game.Game;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
@@ -27,7 +28,7 @@ public class StateRun extends GameState {
     private int _cx, _cy;
     */
     private Navigation controller = new Navigation();
-    private Background_stage1 background;
+    //private Background_stage1 background;
     private Luffy luffy = new Luffy();
 
     private Audio _music;
@@ -63,8 +64,8 @@ public class StateRun extends GameState {
         //_flower.addFrame(R.drawable.flower5);
         //_flower.setDelay(2);
 
-        background = new Background_stage1();
-        background.initialize();
+        //background = new Background_stage1();
+        //background.initialize();
         controller.initialize();
         luffy.initialize();
 
@@ -77,7 +78,7 @@ public class StateRun extends GameState {
 
     @Override
     public void move() {
-        background.move();
+        //background.move();
         //_flower.move();
         //_cloud.setLocation(_cx, _cy);
     }
@@ -94,7 +95,7 @@ public class StateRun extends GameState {
         _door.show();
         _android.show();
         */
-        background.show();
+        //background.show();
         controller.show();
         luffy.show();
     }
@@ -102,12 +103,12 @@ public class StateRun extends GameState {
     @Override
     public void release() {
         _music.release();
-        background.release();
+        //background.release();
         controller.release();
         luffy.release();
 
         _music = null;
-        background = null;
+        //background = null;
         controller = null;
         luffy = null;
     }
