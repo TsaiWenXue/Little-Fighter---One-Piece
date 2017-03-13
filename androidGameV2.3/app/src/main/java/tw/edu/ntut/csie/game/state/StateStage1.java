@@ -84,7 +84,7 @@ public class StateStage1 extends GameState {
         else if(roadPx <= -800)
             roadPx += 1;*/
         if (roadPx < 800 && roadPx > -800)
-            roadPx -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+            roadPx -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
         if (roadPx > 800)
             roadPx = 800;
         else if (roadPx < -800)
