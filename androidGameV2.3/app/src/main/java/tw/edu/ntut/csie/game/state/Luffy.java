@@ -11,17 +11,39 @@ import tw.edu.ntut.csie.game.state.StateStage1;
 public class Luffy implements GameObject {
     private MovingBitmap luffy;
     private MovingBitmap luffy_r;
+    private Animation luffyRun;
+    private Animation luffyRun_r;
+
     private int px, py;
+    private boolean run = false, run_r = false;
 
     public Luffy() {
         luffy = new MovingBitmap(R.drawable.luffy);
         luffy_r = new MovingBitmap(R.drawable.luffy_r);
+
+        luffyRun = new Animation();
+        luffyRun_r = new Animation();
         px = 400; py = 200;
     }
 
     public void initialize() {
         luffy.setLocation(px, py );
         luffy_r.setVisible(false);
+
+        luffyRun.addFrame(R.drawable.luffy_run01);
+        luffyRun.addFrame(R.drawable.luffy_run02);
+        luffyRun.addFrame(R.drawable.luffy_run03);
+        luffyRun.addFrame(R.drawable.luffy_run02);
+        luffyRun.setDelay(2);
+
+        luffyRun_r.addFrame(R.drawable.luffy_run01_r);
+        luffyRun_r.addFrame(R.drawable.luffy_run02_r);
+        luffyRun_r.addFrame(R.drawable.luffy_run03_r);
+        luffyRun_r.addFrame(R.drawable.luffy_run02_r);
+        luffyRun_r.setDelay(2);
+
+        luffyRun.setVisible(false);
+        luffyRun_r.setVisible(false);
     }
 
     public int getX() {
@@ -36,13 +58,16 @@ public class Luffy implements GameObject {
 
     @Override
     public void show(){
-        luffy_r.show();
         luffy.show();
+        luffy_r.show();
+        luffyRun.show();
+        luffyRun_r.show();
     }
 
     @Override
     public void move() {
-
+        luffyRun.move();
+        luffyRun_r.move();
 
         py += (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
         if (py < -20 || py > 375)
@@ -55,21 +80,44 @@ public class Luffy implements GameObject {
             px++;
         else if (StateStage1.roadPx > -800 && px > 400)
             px--;
-        //luffy.setLocation(px, py);
+
+        luffy.setLocation(px, py);
+        luffy_r.setLocation(px, py);
+        luffyRun.setLocation(px, py);
+        luffyRun_r.setLocation(px, py);
+        if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run_r == true) {
+            //luffy_r.setLocation(px, py);
+            luffy.setVisible(false);
+            luffyRun.setVisible(false);
+            luffyRun_r.setVisible(false);
+            luffy_r.setVisible(true);
+        }
+        else if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run == true) {
+            //luffy.setLocation(px, py);
+            luffy_r.setVisible(false);
+            luffyRun.setVisible(false);
+            luffyRun_r.setVisible(false);
+            luffy.setVisible(true);
+        }
 
         if (Navigation.controllerPx - Navigation.initialCtrlPx < 0) {
-            luffy_r.setLocation(px, py);
+            run_r = true;
+            run = false;
+            //luffyRun_r.setLocation(px, py);
+            luffy_r.setVisible(false);
             luffy.setVisible(false);
-            luffy_r.setVisible(true);
-            //luffy.show(); luffy_r.show();
+            luffyRun.setVisible(false);
+            luffyRun_r.setVisible(run_r);
         }
         else if (Navigation.controllerPx - Navigation.initialCtrlPx > 0) {
-            luffy.setLocation(px, py);
+            run = true;
+            run_r = false;
+            //luffyRun.setLocation(px, py);
+            luffy.setVisible(false);
             luffy_r.setVisible(false);
-            luffy.setVisible(true);
-            //luffy.show(); luffy_r.show();
+            luffyRun_r.setVisible(false);
+            luffyRun.setVisible(run);
         }
-
     }
 
     @Override
