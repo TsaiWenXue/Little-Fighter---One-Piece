@@ -245,7 +245,7 @@ public class BitmapButton implements GameObject, PointerEventHandler {
     public boolean pointerReleased(List<Pointer> pointers) {
         _pressed = false;
         if (pointers.size() == 1 && _visible) {
-            Pointer pointer = pointers.get(1);
+            Pointer pointer = pointers.get(0);
             if (pointer.getType() == Pointer.LEFT_MOUSE_BUTTON && contains(pointer)) {
                 notifyButtonEventHandlers();
                 return true;

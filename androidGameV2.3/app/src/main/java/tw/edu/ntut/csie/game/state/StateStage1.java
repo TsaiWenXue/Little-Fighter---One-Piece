@@ -82,10 +82,7 @@ public class StateStage1 extends GameState {
     public void move() {
         _wave.move();
         luffy.move();
-        /*if(roadPx >= 800)
-            roadPx == 800;
-        else if(roadPx <= -800)
-            roadPx += 1;*/
+
         if (roadPx < 800 && roadPx > -800)
             roadPx -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
         if (roadPx > 800)
@@ -157,6 +154,7 @@ public class StateStage1 extends GameState {
     @Override
     public boolean pointerPressed(List<Pointer> pointers) {
         controller.pointerPressed(pointers);
+        button.pointerPressed(pointers);
         return true;
 
     }
@@ -170,6 +168,7 @@ public class StateStage1 extends GameState {
     @Override
     public boolean pointerReleased(List<Pointer> pointers) {
         controller.pointerReleased(pointers);
+        button.pointerReleased(pointers);
         return false;
     }
 
