@@ -10,26 +10,42 @@ import tw.edu.ntut.csie.game.GameObject;
 import tw.edu.ntut.csie.game.PointerEventHandler;
 import tw.edu.ntut.csie.game.extend.BitmapButton;
 
-public class Button implements BitmapButton{
+public class Button implements GameObject {
   //private BitmapButton button_attack_normal;
   //private BitmapButton button_attack_pressed;
   private int at_x = 700;
   private int at_y = 300;
 
-  private boolean at_pressed;
-  private boolean at_visible;
-  private boolean at_hovered;
-
-  private MovingBitmap at_normalImage;
-  private MovingBitmap at_pressedImage;
-
-  private List<ButtonEventHandler> at_handlers;
-
-  public Button(){
-  at_normalImage = new MovingBitmap(R.drawable.button_attack_normal);
-  at_pressedImage = new MovingBitmap(R.drawable.button_attack_pressed);
+  private BitmapButton attack = new BitmapButton(R.drawable.button_attack_normal);
+  public Button() {}
+/*
+  public Button() {
+    attack = new BitmapButton(R.drawable.button_attack_normal);
+    attack.loadPressedBitmap(R.drawable.button_attack_pressed);
+    attack.loadHoveredBitmap(R.drawable.button_attack_hovered);
   }
+*/
   public void initialize(){
+      attack.loadPressedBitmap(R.drawable.button_attack_pressed);
+      attack.loadHoveredBitmap(R.drawable.button_attack_hovered);
+      attack.setLocation(at_x,at_y);
+  }
+
+@Override
+  public void show() {
+    attack.show();
+  }
+
+@Override
+  public void move(){}
+
+  public void release() {
+    attack.release();
+    attack = null;
+  }
+
+
+  /*public void initialize(){
     at_normalImage.setLocation(at_x,at_y);
     at_pressedImage.setLocation(at_x,at_y);
   }
@@ -103,6 +119,6 @@ public class Button implements BitmapButton{
       for (ButtonEventHandler handler : at_handlers) {
           handler.perform(this);
       }
-  }
+  }*/
 
 }

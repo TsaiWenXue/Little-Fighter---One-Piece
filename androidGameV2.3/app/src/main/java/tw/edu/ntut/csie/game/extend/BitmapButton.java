@@ -179,7 +179,7 @@ public class BitmapButton implements GameObject, PointerEventHandler {
      *
      * @param id 圖片資源ID
      */
-    public void loadHoverdBitmap(int id) {
+    public void loadHoveredBitmap(int id) {
         if (_hoveredImage == null) {
             _hoveredImage = new MovingBitmap();
         }
@@ -245,7 +245,7 @@ public class BitmapButton implements GameObject, PointerEventHandler {
     public boolean pointerReleased(List<Pointer> pointers) {
         _pressed = false;
         if (pointers.size() == 1 && _visible) {
-            Pointer pointer = pointers.get(0);
+            Pointer pointer = pointers.get(1);
             if (pointer.getType() == Pointer.LEFT_MOUSE_BUTTON && contains(pointer)) {
                 notifyButtonEventHandlers();
                 return true;

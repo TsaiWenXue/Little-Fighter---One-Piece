@@ -12,6 +12,7 @@ import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.state.Luffy;
 import tw.edu.ntut.csie.game.state.Navigation;
+import tw.edu.ntut.csie.game.state.Button;
 
 public class StateStage1 extends GameState {
     //Background
@@ -26,6 +27,7 @@ public class StateStage1 extends GameState {
 
     private Navigation controller = new Navigation();
     private Luffy luffy = new Luffy();
+    private Button button = new Button();
 
     public StateStage1(GameEngine engine) {
         super(engine);
@@ -73,6 +75,7 @@ public class StateStage1 extends GameState {
 
         controller.initialize();
         luffy.initialize();
+        button.initialize();
     }
 
     @Override
@@ -107,6 +110,7 @@ public class StateStage1 extends GameState {
 
         controller.show();
         luffy.show();
+        button.show();
     }
 
     @Override
@@ -125,8 +129,10 @@ public class StateStage1 extends GameState {
 
         luffy.release();
         controller.release();
+        button.release();
         luffy = null;
         controller = null;
+        button = null;
     }
     @Override
     public void keyPressed(int keyCode) {
