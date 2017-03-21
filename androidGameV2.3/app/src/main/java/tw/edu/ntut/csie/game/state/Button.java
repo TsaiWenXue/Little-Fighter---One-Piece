@@ -14,7 +14,7 @@ public class Button implements GameObject, PointerEventHandler {
     private int at_x = 700;
     private int at_y = 300;
     public static boolean atPointerPressed;
-
+    
     private MovingBitmap attack = new MovingBitmap(R.drawable.button_attack_normal);
     private MovingBitmap attack_pressed = new MovingBitmap(R.drawable.button_attack_pressed);
     public Button() {}

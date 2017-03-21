@@ -68,7 +68,7 @@ public class StateStage1 extends GameState {
         _road2.setLocation(roadPx, roadPy);
         _road3.setLocation(roadPx+800, roadPy);
 
-        _music = new Audio(R.raw.ntut);
+        _music = new Audio(R.raw.onepiece_op1);
         _music.setRepeating(true);
         _music.play();
 

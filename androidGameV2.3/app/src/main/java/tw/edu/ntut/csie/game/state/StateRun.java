@@ -8,30 +8,50 @@ import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
 import tw.edu.ntut.csie.game.engine.GameEngine;
-import tw.edu.ntut.csie.game.state.Luffy;
+import tw.edu.ntut.csie.game.core.MovingBitmap;
 
 public class StateRun extends GameState {
-
-    public static final int DEFAULT_SCORE_DIGITS = 4;
-    /*
-    private MovingBitmap _background;
-    private MovingBitmap _android;
-    private MovingBitmap _cloud;
-    private MovingBitmap _door;
-    private MovingBitmap _message;
-    private Animation _flower;
-
-
-    private Integer _scores;
-
-    private boolean _grab;
-    private int _cx, _cy;
-    */
-    private Navigation controller = new Navigation();
-    //private Background_stage1 background;
-    private Luffy luffy = new Luffy();
-
     private Audio _music;
+
+    private MovingBitmap background = new MovingBitmap(R.drawable.character_select);
+    private int bg_X = 0, bg_Y = 0;
+
+    private MovingBitmap luffy = new MovingBitmap(R.drawable.luffy_f);
+    private MovingBitmap zoro = new MovingBitmap(R.drawable.zoro_f);
+    private int character_X = 130, character_Y = 105;
+
+    private MovingBitmap luffyName = new MovingBitmap(R.drawable.name_luffy_f);
+    private MovingBitmap zoroName = new MovingBitmap(R.drawable.name_zoro_f);
+    private int name_X = 130, name_Y = 275;
+
+    private MovingBitmap characterLeft = new MovingBitmap(R.drawable.arrow_left);
+    private int characterLeft_X = 50, characterLeft_Y = 150;
+    private MovingBitmap characterRight = new MovingBitmap(R.drawable.arrow_right);
+    private int characterRight_X = 280, characterRight_Y = 150;
+    private MovingBitmap stageLeft = new MovingBitmap(R.drawable.arrow_left);
+    private int stageLeft_X = 420, stageLeft_Y = 190;
+    private MovingBitmap stageRight = new MovingBitmap(R.drawable.arrow_right);
+    private int stageRight_X = 695, stageRight_Y = 190;
+    private MovingBitmap difficultLeft = new MovingBitmap(R.drawable.arrow_left);
+    private int difficultLeft_X = 420, difficultLeft_Y = 270;
+    private MovingBitmap difficultRight = new MovingBitmap(R.drawable.arrow_right);
+    private int difficultRight_X = 695, difficultRight_Y = 270;
+
+    private MovingBitmap start = new MovingBitmap(R.drawable.game_start);
+    private int start_X = 500, start_Y = 105;
+
+    private MovingBitmap stage1 = new MovingBitmap(R.drawable.stage1);
+    private MovingBitmap stage2 = new MovingBitmap(R.drawable.stage2);
+    private int stage_X = 500, stage_Y = 185;
+
+    private MovingBitmap easy = new MovingBitmap(R.drawable.easy);
+    private MovingBitmap normal = new MovingBitmap(R.drawable.normal);
+    private int difficult_X = 500, difficult_Y = 265;
+
+
+    public static int character = 0;
+    public static int stage = 0;
+    public static int difficult = 0;
 
     public StateRun(GameEngine engine) {
         super(engine);
@@ -39,78 +59,109 @@ public class StateRun extends GameState {
 
     @Override
     public void initialize(Map<String, Object> data) {
-        //_background = new MovingBitmap(R.drawable.background);
-        //_message = new MovingBitmap(R.drawable.message, 130, 150);
+        background.setLocation(bg_X, bg_Y);
 
-        //_android = new MovingBitmap(R.drawable.android_green);
-        //_android.setLocation(100, 200);
+        luffy.setLocation(character_X, character_Y);
+        luffyName.setLocation(name_X, name_Y);
+        zoro.setLocation(character_X, character_Y);
+        zoroName.setLocation(name_X, name_Y);
+        zoro.setVisible(false); zoroName.setVisible(false);
 
-        //_cloud = new MovingBitmap(R.drawable.cloud);
-        //_cx = 100;
-        //_cy = 50;
-        //_cloud.setLocation(_cx, _cy);
+        characterLeft.setLocation(characterLeft_X, characterLeft_Y);
+        characterRight.setLocation(characterRight_X, characterRight_Y);
+        stageLeft.setLocation(stageLeft_X, stageLeft_Y);
+        stageRight.setLocation(stageRight_X, stageRight_Y);
+        difficultLeft.setLocation(difficultLeft_X, difficultLeft_Y);
+        difficultRight.setLocation(difficultRight_X, difficultRight_Y);
 
-        //_door = new MovingBitmap(R.drawable.door);
-        //_door.setLocation(300, 200);
+        start.setLocation(start_X, start_Y);
 
-        //_scores = new Integer(DEFAULT_SCORE_DIGITS, 50, 550, 10);
+        stage1.setLocation(stage_X, stage_Y);
+        stage2.setLocation(stage_X, stage_Y);
+        stage2.setVisible(false);
 
-        //_flower = new Animation();
-        //_flower.setLocation(560, 310);
-        //_flower.addFrame(R.drawable.flower1);
-        //_flower.addFrame(R.drawable.flower2);
-        //_flower.addFrame(R.drawable.flower3);
-        //_flower.addFrame(R.drawable.flower4);
-        //_flower.addFrame(R.drawable.flower5);
-        //_flower.setDelay(2);
+        easy.setLocation(difficult_X, difficult_Y);
+        normal.setLocation(difficult_X, difficult_Y);
+        normal.setVisible(false);
 
-        //background = new Background_stage1();
-        //background.initialize();
-        controller.initialize();
-        luffy.initialize();
-
-        _music = new Audio(R.raw.ntut);
+        _music = new Audio(R.raw.onepiece_op1);
         _music.setRepeating(true);
         _music.play();
 
-        //_grab = false;
     }
 
     @Override
     public void move() {
-        //background.move();
-        //_flower.move();
-        //_cloud.setLocation(_cx, _cy);
+
     }
 
     @Override
     public void show() {
-        // �I�s���Ǭ��K�϶���
-        /*
-        _background.show();
-        _scores.show();
-        _flower.show();
-        _message.show();
-        _cloud.show();
-        _door.show();
-        _android.show();
-        */
-        //background.show();
-        controller.show();
-        luffy.show();
+        background.show();
+
+        luffy.show(); luffyName.show();
+        zoro.show(); zoroName.show();
+
+        characterLeft.show();
+        characterRight.show();
+        stageLeft.show();
+        stageRight.show();
+        difficultLeft.show();
+        difficultRight.show();
+
+        start.show();
+
+        stage1.show();
+        stage2.show();
+
+        easy.show();
+        normal.show();
     }
 
     @Override
     public void release() {
         _music.release();
-        //background.release();
-        controller.release();
-        luffy.release();
+        background.release();
+
+        luffy.release(); luffyName.release();
+        zoro.release(); zoroName.release();
+
+        characterLeft.release();
+        characterRight.release();
+        stageLeft.release();
+        stageRight.release();
+        difficultLeft.release();
+        difficultRight.release();
+
+        start.release();
+
+        stage1.release();
+        stage2.release();
+
+        easy.release();
+        normal.release();
+
 
         _music = null;
-        //background = null;
-        controller = null;
-        luffy = null;
+        background = null;
+
+        luffy = null; luffyName = null;
+        zoro = null; zoroName = null;
+
+        characterLeft = null;
+        characterRight = null;
+        stageLeft = null;
+        stageRight = null;
+        difficultLeft = null;
+        difficultRight = null;
+
+        start = null;
+
+        stage1 = null;
+        stage2 = null;
+
+        easy = null;
+        normal = null;
     }
 
     @Override
@@ -125,12 +176,7 @@ public class StateRun extends GameState {
 
     @Override
     public void orientationChanged(float pitch, float azimuth, float roll) {
-        /*
-        if (roll > 15 && roll < 60 && _cx > 50)
-            _cx -= 2;
-        if (roll < -15 && roll > -60 && _cx + _cloud.getWidth() < 500)
-            _cx += 2;
-        */
+
     }
 
     @Override
@@ -140,42 +186,97 @@ public class StateRun extends GameState {
 
     @Override
     public boolean pointerPressed(List<Pointer> pointers) {
-    /*
-        //_message.setVisible(false);
         if (pointers.size() == 1) {
             int touchX = pointers.get(0).getX();
             int touchY = pointers.get(0).getY();
-            if (touchX > _android.getX() && touchX < _android.getX() + _android.getWidth() &&
-                    touchY > _android.getY() && touchY < _android.getY() + _android.getHeight()) {
-                _grab = true;
-            } else {
-                _grab = false;
+            if (touchX > start_X && touchX < start_X + start.getWidth() &&
+                touchY > start_Y && touchY < start_Y + start.getHeight()) {
+                    changeState(Game.STAGE1_STATE);
             }
-        }*/
-        controller.pointerPressed(pointers);
-        return true;
 
+            if (touchX > stageRight_X && touchX < stageRight_X + stageRight.getWidth() &&
+                touchY > stageRight_Y && touchY < stageRight_Y + stageRight.getHeight()) {
+                stage++;
+            }
+            else if (touchX > stageLeft_X && touchX < stageLeft_X + stageLeft.getWidth() &&
+                touchY > stageLeft_Y && touchY < stageLeft_Y + stageLeft.getHeight()) {
+                stage--;
+            }
+
+            if (touchX > difficultRight_X && touchX < difficultRight_X + difficultRight.getWidth() &&
+                touchY > difficultRight_Y && touchY < difficultRight_Y + difficultRight.getHeight()) {
+                difficult++;
+            }
+            else if (touchX > difficultLeft_X && touchX < difficultLeft_X + difficultLeft.getWidth() &&
+                touchY > difficultLeft_Y && touchY < difficultLeft_Y + difficultLeft.getHeight()) {
+                difficult--;
+            }
+
+            if (touchX > characterRight_X && touchX < characterRight_X + characterRight.getWidth() &&
+                touchY > characterRight_Y && touchY < characterRight_Y + characterRight.getHeight()) {
+                character++;
+            }
+            else if (touchX > characterLeft_X && touchX < characterLeft_X + characterLeft.getWidth() &&
+                touchY > characterLeft_Y && touchY < characterLeft_Y + characterLeft.getHeight()) {
+                character--;
+            }
+
+            if (stage < 0)
+                stage = -stage;
+            if (difficult < 0)
+                difficult = -difficult;
+            if (character < 0)
+                character  = -character;
+            stage = stage % 2;
+            difficult = difficult % 2;
+            character = character % 2;
+
+            switch (stage) {
+                case 0:
+                    stage1.setVisible(true);
+                    stage2.setVisible(false);
+                    break;
+                case 1:
+                    stage1.setVisible(false);
+                    stage2.setVisible(true);
+                    break;
+            }
+
+            switch (difficult) {
+                case 0:
+                    easy.setVisible(true);
+                    normal.setVisible(false);
+                    break;
+                case 1:
+                    easy.setVisible(false);
+                    normal.setVisible(true);
+                    break;
+            }
+
+            switch (character) {
+                case 0:
+                    luffy.setVisible(true); luffyName.setVisible(true);
+                    zoro.setVisible(false); zoroName.setVisible(false);
+                    break;
+                case 1:
+                    luffy.setVisible(false); luffyName.setVisible(false);
+                    zoro.setVisible(true); zoroName.setVisible(true);
+                    break;
+            }
+        }
+
+        return true;
     }
 
     @Override
     public boolean pointerMoved(List<Pointer> pointers) {
-        /*
-        if (_grab)
-            _android.setLocation(pointers.get(0).getX() - _android.getWidth() / 2, pointers.get(0).getY() - _android.getHeight() / 2);
-        int moveX = _android.getX();
-        int moveY = _android.getY();
-        if (moveX + _android.getWidth() / 2 > _door.getX() && moveX < _door.getX() + _door.getWidth() / 2 &&
-                moveY + _android.getHeight() / 2 > _door.getY() && moveY < _door.getY() + _door.getHeight() / 2)
-            changeState(Game.OVER_STATE);
-           */
-            controller.pointerMoved(pointers);
+
         return false;
     }
 
     @Override
     public boolean pointerReleased(List<Pointer> pointers) {
-        //_grab = false;
-        controller.pointerReleased(pointers);
+
         return false;
     }
 

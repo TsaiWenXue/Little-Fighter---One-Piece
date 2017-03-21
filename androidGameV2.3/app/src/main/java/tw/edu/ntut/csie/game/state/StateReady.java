@@ -107,7 +107,7 @@ public class StateReady extends AbstractGameState {
         _startButton.addButtonEventHandler(new ButtonEventHandler() {
             @Override
             public void perform(BitmapButton button) {
-                changeState(Game.STAGE1_STATE);
+                changeState(Game.RUNNING_STATE);
             }
         });
         addPointerEventHandler(_startButton);
