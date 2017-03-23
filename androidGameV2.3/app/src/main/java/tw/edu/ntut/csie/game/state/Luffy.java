@@ -116,7 +116,7 @@ public class Luffy implements GameObject {
         luffyRun.setLocation(px, py);
         luffyRun_r.setLocation(px, py);
         luffyattack.setLocation((px-11),(py-35));
-        if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run_r == true) {
+        if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && (run_r == true || visible_r == true)) {
             //luffy_r.setLocation(px, py);
             visible = false;
             visible_r = true;
@@ -130,7 +130,7 @@ public class Luffy implements GameObject {
             luffy_r.setVisible(visible_r);
             luffyattack.setVisible(Button.atPointerPressed);
         }
-        else if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run == true) {
+        else if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && (run == true || visible == true)) {
             //luffy.setLocation(px, py);
             visible = true;
             visible_r = false;

@@ -26,8 +26,9 @@ public class StateStage1 extends GameState {
     private Audio _music;
 
     private Navigation controller = new Navigation();
-    private Luffy luffy = new Luffy();
     private Button button = new Button();
+
+    private Luffy luffy = new Luffy();
 
     public StateStage1(GameEngine engine) {
         super(engine);
