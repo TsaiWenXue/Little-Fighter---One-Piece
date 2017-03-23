@@ -15,6 +15,7 @@ public class Luffy implements GameObject {
     private Animation luffyRun;
     private Animation luffyRun_r;
     private Animation luffyattack;
+    private Animation luffyattack_r;
 
     private int px, py;
     private boolean run = false, run_r = false;
@@ -27,13 +28,13 @@ public class Luffy implements GameObject {
         luffyRun = new Animation();
         luffyRun_r = new Animation();
         luffyattack = new Animation();
+        luffyattack_r = new Animation();
 
-      //  luffy_attack = new Animation();
         px = 400; py = 200;
     }
 
     public void initialize() {
-
+        visible = true;
         visible_r = false;
         run = false;
         run_r = false;
@@ -42,18 +43,21 @@ public class Luffy implements GameObject {
         luffy.setLocation(px, py);
         luffy_r.setVisible(visible_r);
 
+        //luffyrun initialize
         luffyRun.addFrame(R.drawable.luffy_run01);
         luffyRun.addFrame(R.drawable.luffy_run02);
         luffyRun.addFrame(R.drawable.luffy_run03);
         luffyRun.addFrame(R.drawable.luffy_run02);
         luffyRun.setDelay(2);
 
+        //luffyRun reverse initialize
         luffyRun_r.addFrame(R.drawable.luffy_run01_r);
         luffyRun_r.addFrame(R.drawable.luffy_run02_r);
         luffyRun_r.addFrame(R.drawable.luffy_run03_r);
         luffyRun_r.addFrame(R.drawable.luffy_run02_r);
         luffyRun_r.setDelay(2);
 
+        //luffyAttack initialize
         luffyattack.addFrame(R.drawable.luffy_attack00);
         luffyattack.addFrame(R.drawable.luffy_attack01);
         luffyattack.addFrame(R.drawable.luffy_attack02);
@@ -66,11 +70,29 @@ public class Luffy implements GameObject {
         luffyattack.addFrame(R.drawable.luffy_attack01);
         luffyattack.addFrame(R.drawable.luffy_attack06);
         luffyattack.addFrame(R.drawable.luffy_attack07);
-        luffyattack.setDelay(0);
+        luffyattack.setDelay(1);
+        luffyattack.setRepeating(false);
+
+        //luffyAttack reverse
+        luffyattack_r.addFrame(R.drawable.luffy_attack00_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack01_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack02_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack03_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack04_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack05_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack04_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack03_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack02_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack01_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack06_r);
+        luffyattack_r.addFrame(R.drawable.luffy_attack07_r);
+        luffyattack_r.setDelay(1);
+        luffyattack_r.setRepeating(false);
 
         luffyRun.setVisible(run);
         luffyRun_r.setVisible(run_r);
         luffyattack.setVisible(Button.atPointerPressed);
+        luffyattack_r.setVisible(Button.atPointerPressed);
 
     }
 
@@ -91,6 +113,7 @@ public class Luffy implements GameObject {
         luffyRun.show();
         luffyRun_r.show();
         luffyattack.show();
+        luffyattack_r.show();
     }
 
     @Override
@@ -98,7 +121,9 @@ public class Luffy implements GameObject {
         luffyRun.move();
         luffyRun_r.move();
         luffyattack.move();
+        luffyattack_r.move();
 
+        //Let Luffy move base on navigation
         py += (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
         if (py < -20 || py > 375)
             py -= (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
@@ -110,84 +135,101 @@ public class Luffy implements GameObject {
             px++;
         else if (StateStage1.roadPx > -800 && px > 400)
             px--;
-
         luffy.setLocation(px, py);
         luffy_r.setLocation(px, py);
         luffyRun.setLocation(px, py);
         luffyRun_r.setLocation(px, py);
         luffyattack.setLocation((px-11),(py-35));
-        if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && (run_r == true || visible_r == true)) {
+        luffyattack_r.setLocation((px-353),(py-35));
+
+        //luffy stop running
+        if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run_r == true) {
             //luffy_r.setLocation(px, py);
             visible = false;
             visible_r = true;
             run = false;
             run_r = false;
-            Button.atPointerPressed = false;
 
             luffy.setVisible(visible);
             luffyRun.setVisible(run);
             luffyRun_r.setVisible(run_r);
             luffy_r.setVisible(visible_r);
-            luffyattack.setVisible(Button.atPointerPressed);
+            //luffyattack.setVisible(Button.atPointerPressed);
         }
-        else if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && (run == true || visible == true)) {
+        else if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run == true) {
             //luffy.setLocation(px, py);
             visible = true;
             visible_r = false;
             run = false;
             run_r = false;
-            Button.atPointerPressed = false;
 
             luffy_r.setVisible(visible_r);
             luffyRun.setVisible(run);
             luffyRun_r.setVisible(run_r);
             luffy.setVisible(visible);
-            luffyattack.setVisible(Button.atPointerPressed);
+            //luffyattack.setVisible(Button.atPointerPressed);
         }
 
+        //decide Luffy face direction with Navigation
         if (Navigation.controllerPx - Navigation.initialCtrlPx < 0) {
             visible = false;
             visible_r = false;
             run_r = true;
             run = false;
-            Button.atPointerPressed = false;
-            //luffyRun_r.setLocation(px, py);
+
             luffy_r.setVisible(visible_r);
             luffy.setVisible(visible);
             luffyRun.setVisible(run);
             luffyRun_r.setVisible(run_r);
-            luffyattack.setVisible(Button.atPointerPressed);
+            //luffyattack.setVisible(Button.atPointerPressed);
         }
         else if (Navigation.controllerPx - Navigation.initialCtrlPx > 0) {
             visible = false;
             visible_r = false;
             run = true;
             run_r = false;
-            Button.atPointerPressed = false;
-            //luffyRun.setLocation(px, py);
+
             luffy.setVisible(visible);
             luffy_r.setVisible(visible_r);
             luffyRun_r.setVisible(run_r);
             luffyRun.setVisible(run);
+        }
+
+        //Luffy_Attack perform
+        if (Button.atPointerPressed == true && (visible == true || run == true)){
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
             luffyattack.setVisible(Button.atPointerPressed);
+            luffy.setVisible(visible);
+            luffy_r.setVisible(visible_r);
+            luffyRun_r.setVisible(run_r);
+            luffyRun.setVisible(run);
+            luffyattack.reset();
         }
-       if (Button.atPointerPressed == true){
-         visible = false;
-         visible_r = false;
-         run = false;
-         run_r = false;
-         Button.atPointerPressed = true;
-         luffyattack.setRepeating(false);
-         luffyattack.reset();
-         //luffyRun.setLocation(px, py);
-         luffy.setVisible(visible);
-         luffy_r.setVisible(visible_r);
-         luffyRun_r.setVisible(run_r);
-         luffyRun.setVisible(run);
-         luffyattack.setVisible(Button.atPointerPressed);
-         visible = true;
-         luffy.setVisible(visible);
+        else if (Button.atPointerPressed == true && (visible_r == true || run_r == true)){
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
+            luffyattack_r.setVisible(Button.atPointerPressed);
+            luffy.setVisible(visible);
+            luffy_r.setVisible(visible_r);
+            luffyRun_r.setVisible(run_r);
+            luffyRun.setVisible(run);
+            luffyattack_r.reset();
         }
+
+        if ( luffyattack.isLastFrame() && (visible_r == false)) {
+            visible = true;
+            luffy.setVisible(visible);
+        }
+        else if ( luffyattack_r.isLastFrame() ) {
+            visible_r = true;
+            luffy_r.setVisible(visible_r);
+        }
+
     }
 
     @Override
