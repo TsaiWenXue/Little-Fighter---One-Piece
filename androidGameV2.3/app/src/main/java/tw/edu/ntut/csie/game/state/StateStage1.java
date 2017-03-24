@@ -13,6 +13,7 @@ import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.state.Luffy;
 import tw.edu.ntut.csie.game.state.Navigation;
 import tw.edu.ntut.csie.game.state.Button;
+import tw.edu.ntut.csie.game.state.Character;
 
 public class StateStage1 extends GameState {
     //Background
@@ -28,10 +29,51 @@ public class StateStage1 extends GameState {
     private Navigation controller = new Navigation();
     private Button button = new Button();
 
-    private Luffy luffy = new Luffy();
+    //private Luffy luffy = new Luffy();
+    private Character ch = new Character();
 
     public StateStage1(GameEngine engine) {
         super(engine);
+    }
+
+    public void luffy() {
+        ch.loadNormal(R.drawable.luffy);
+        ch.loadNormalReverse(R.drawable.luffy_r);
+
+        ch.addRun(R.drawable.luffy_run01);
+        ch.addRun(R.drawable.luffy_run02);
+        ch.addRun(R.drawable.luffy_run03);
+        ch.addRun(R.drawable.luffy_run02);
+        ch.addRunReverse(R.drawable.luffy_run01_r);
+        ch.addRunReverse(R.drawable.luffy_run02_r);
+        ch.addRunReverse(R.drawable.luffy_run03_r);
+        ch.addRunReverse(R.drawable.luffy_run02_r);
+
+        ch.addAttack(R.drawable.luffy_attack00);
+        ch.addAttack(R.drawable.luffy_attack01);
+        ch.addAttack(R.drawable.luffy_attack02);
+        ch.addAttack(R.drawable.luffy_attack03);
+        ch.addAttack(R.drawable.luffy_attack04);
+        ch.addAttack(R.drawable.luffy_attack05);
+        ch.addAttack(R.drawable.luffy_attack04);
+        ch.addAttack(R.drawable.luffy_attack03);
+        ch.addAttack(R.drawable.luffy_attack02);
+        ch.addAttack(R.drawable.luffy_attack01);
+        ch.addAttack(R.drawable.luffy_attack06);
+        ch.addAttack(R.drawable.luffy_attack07);
+        ch.addAttackReverse(R.drawable.luffy_attack00_r);
+        ch.addAttackReverse(R.drawable.luffy_attack01_r);
+        ch.addAttackReverse(R.drawable.luffy_attack02_r);
+        ch.addAttackReverse(R.drawable.luffy_attack03_r);
+        ch.addAttackReverse(R.drawable.luffy_attack04_r);
+        ch.addAttackReverse(R.drawable.luffy_attack05_r);
+        ch.addAttackReverse(R.drawable.luffy_attack04_r);
+        ch.addAttackReverse(R.drawable.luffy_attack03_r);
+        ch.addAttackReverse(R.drawable.luffy_attack02_r);
+        ch.addAttackReverse(R.drawable.luffy_attack01_r);
+        ch.addAttackReverse(R.drawable.luffy_attack06_r);
+        ch.addAttackReverse(R.drawable.luffy_attack07_r);
+
     }
 
     @Override
@@ -73,16 +115,19 @@ public class StateStage1 extends GameState {
         _music.setRepeating(true);
         _music.play();
 
+        luffy();
 
         controller.initialize();
-        luffy.initialize();
+        //luffy.initialize();
+        ch.initialize();
         button.initialize();
     }
 
     @Override
     public void move() {
         _wave.move();
-        luffy.move();
+        //luffy.move();
+        ch.move();
 
         if (roadPx < 800 && roadPx > -800)
             roadPx -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
@@ -90,8 +135,8 @@ public class StateStage1 extends GameState {
             roadPx = 800;
         else if (roadPx < -800)
             roadPx = -800;
-        else if ( (roadPx == 800 && luffy.getX() >= 410) ||
-                  (roadPx == -800 && luffy.getX() <= 390) )
+        else if ( (roadPx == 800 && ch.getX() >= 410) ||
+                  (roadPx == -800 && ch.getX() <= 390) )
             roadPx -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
         _road1.setLocation(roadPx-800, roadPy);
         _road2.setLocation(roadPx, roadPy);
@@ -107,7 +152,8 @@ public class StateStage1 extends GameState {
         _road3.show();
 
         controller.show();
-        luffy.show();
+        //luffy.show();
+        ch.show();
         button.show();
     }
 
@@ -125,10 +171,10 @@ public class StateStage1 extends GameState {
         _road3 = null;
 
 
-        luffy.release();
+        ch.release();
         controller.release();
         button.release();
-        luffy = null;
+        ch = null;
         controller = null;
         button = null;
     }
