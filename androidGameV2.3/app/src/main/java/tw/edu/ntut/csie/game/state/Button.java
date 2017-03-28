@@ -80,7 +80,7 @@ public class Button implements GameObject, PointerEventHandler {
                 dfPointerPressed = false;
            }
 
-         }
+        }
         return false;
     }
 
