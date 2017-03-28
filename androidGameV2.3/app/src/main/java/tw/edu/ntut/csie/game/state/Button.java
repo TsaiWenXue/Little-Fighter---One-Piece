@@ -60,17 +60,37 @@ public class Button implements GameObject, PointerEventHandler {
 
     @Override
     public boolean pointerPressed(List<Pointer> pointers) {
-        if(pointers.size() == 1){
-            int touchX = pointers.get(0).getX();
-            int touchY = pointers.get(0).getY();
-            if (touchX > attack.getX() && touchX < attack.getX() + attack.getWidth() &&
-                touchY > attack.getY() && touchY < attack.getY() + attack.getHeight()) {
+        if(pointers.size() >= 1){
+            //int touchX = pointers.get(0).getX();
+            //int touchY = pointers.get(0).getY();
+            int touchX, touchY;
+            for(int i = 0; i < pointers.size(); i++){
+                touchX = pointers.get(i).getX();
+                touchY = pointers.get(i).getY();
+                if (MovingBitmap.imageTouched(touchX, touchY, attack)) {
+                    atPointerPressed = true;
+                    attack_pressed.setVisible(true);
+                    attack.setVisible(false);
+                    break;
+                }
+                else if( MovingBitmap.imageTouched(touchX, touchY, defend) ) {
+                    dfPointerPressed = true;
+                    defend_pressed.setVisible(true);
+                    defend.setVisible(false);
+                    break;
+                }
+               else{
+                    atPointerPressed = false;
+                    dfPointerPressed = false;
+                }
+            }
+            /*
+            if ( MovingBitmap.imageTouched(touchX, touchY, attack)) {
                 atPointerPressed = true;
                 attack_pressed.setVisible(true);
                 attack.setVisible(false);
             }
-            else if(touchX > defend.getX() && touchX < defend.getX() + defend.getWidth() &&
-                touchY > defend.getY() && touchY < defend.getY() + defend.getHeight()) {
+            else if( MovingBitmap.imageTouched(touchX, touchY, attack) ) {
                 dfPointerPressed = true;
                 defend_pressed.setVisible(true);
                 defend.setVisible(false);
@@ -81,6 +101,8 @@ public class Button implements GameObject, PointerEventHandler {
            }
 
         }
+           */
+         }
         return false;
     }
 
