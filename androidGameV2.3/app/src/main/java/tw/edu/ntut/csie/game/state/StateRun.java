@@ -9,43 +9,45 @@ import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
 import tw.edu.ntut.csie.game.engine.GameEngine;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
+import tw.edu.ntut.csie.game.extend.BitmapButton;
+import tw.edu.ntut.csie.game.extend.ButtonEventHandler;
 
 public class StateRun extends GameState {
     private Audio _music;
 
-    private MovingBitmap background = new MovingBitmap(R.drawable.character_select);
+    private MovingBitmap background;
     private int bg_X = 0, bg_Y = 0;
 
-    private MovingBitmap luffy = new MovingBitmap(R.drawable.luffy_f);
-    private MovingBitmap zoro = new MovingBitmap(R.drawable.zoro_f);
+    private MovingBitmap luffy;
+    private MovingBitmap zoro;
     private int character_X = 130, character_Y = 105;
 
-    private MovingBitmap luffyName = new MovingBitmap(R.drawable.name_luffy_f);
-    private MovingBitmap zoroName = new MovingBitmap(R.drawable.name_zoro_f);
+    private MovingBitmap luffyName;
+    private MovingBitmap zoroName;
     private int name_X = 130, name_Y = 275;
 
-    private MovingBitmap characterLeft = new MovingBitmap(R.drawable.arrow_left);
+    private MovingBitmap characterLeft;
     private int characterLeft_X = 50, characterLeft_Y = 150;
-    private MovingBitmap characterRight = new MovingBitmap(R.drawable.arrow_right);
+    private MovingBitmap characterRight;
     private int characterRight_X = 280, characterRight_Y = 150;
-    private MovingBitmap stageLeft = new MovingBitmap(R.drawable.arrow_left);
+    private MovingBitmap stageLeft;
     private int stageLeft_X = 420, stageLeft_Y = 190;
-    private MovingBitmap stageRight = new MovingBitmap(R.drawable.arrow_right);
+    private MovingBitmap stageRight;
     private int stageRight_X = 695, stageRight_Y = 190;
-    private MovingBitmap difficultLeft = new MovingBitmap(R.drawable.arrow_left);
+    private MovingBitmap difficultLeft;
     private int difficultLeft_X = 420, difficultLeft_Y = 270;
-    private MovingBitmap difficultRight = new MovingBitmap(R.drawable.arrow_right);
+    private MovingBitmap difficultRight;
     private int difficultRight_X = 695, difficultRight_Y = 270;
 
-    private MovingBitmap start = new MovingBitmap(R.drawable.game_start);
+    private MovingBitmap start;
     private int start_X = 500, start_Y = 105;
 
-    private MovingBitmap stage1 = new MovingBitmap(R.drawable.stage1);
-    private MovingBitmap stage2 = new MovingBitmap(R.drawable.stage2);
+    private MovingBitmap stage1;
+    private MovingBitmap stage2;
     private int stage_X = 500, stage_Y = 185;
 
-    private MovingBitmap easy = new MovingBitmap(R.drawable.easy);
-    private MovingBitmap normal = new MovingBitmap(R.drawable.normal);
+    private MovingBitmap easy;
+    private MovingBitmap normal;
     private int difficult_X = 500, difficult_Y = 265;
 
 
@@ -59,14 +61,25 @@ public class StateRun extends GameState {
 
     @Override
     public void initialize(Map<String, Object> data) {
+        background = new MovingBitmap(R.drawable.character_select);
         background.setLocation(bg_X, bg_Y);
 
+        luffy = new MovingBitmap(R.drawable.luffy_f);
+        luffyName = new MovingBitmap(R.drawable.name_luffy_f);
         luffy.setLocation(character_X, character_Y);
         luffyName.setLocation(name_X, name_Y);
+        zoro = new MovingBitmap(R.drawable.zoro_f);
+        zoroName = new MovingBitmap(R.drawable.name_zoro_f);
         zoro.setLocation(character_X, character_Y);
         zoroName.setLocation(name_X, name_Y);
         zoro.setVisible(false); zoroName.setVisible(false);
 
+        characterLeft = new MovingBitmap(R.drawable.arrow_left);
+        characterRight = new MovingBitmap(R.drawable.arrow_right);
+        stageLeft = new MovingBitmap(R.drawable.arrow_left);
+        stageRight = new MovingBitmap(R.drawable.arrow_right);
+        difficultLeft = new MovingBitmap(R.drawable.arrow_left);
+        difficultRight = new MovingBitmap(R.drawable.arrow_right);
         characterLeft.setLocation(characterLeft_X, characterLeft_Y);
         characterRight.setLocation(characterRight_X, characterRight_Y);
         stageLeft.setLocation(stageLeft_X, stageLeft_Y);
@@ -74,12 +87,17 @@ public class StateRun extends GameState {
         difficultLeft.setLocation(difficultLeft_X, difficultLeft_Y);
         difficultRight.setLocation(difficultRight_X, difficultRight_Y);
 
+        start = new MovingBitmap(R.drawable.game_start);
         start.setLocation(start_X, start_Y);
 
+        stage1 = new MovingBitmap(R.drawable.stage1);
+        stage2 = new MovingBitmap(R.drawable.stage2);
         stage1.setLocation(stage_X, stage_Y);
         stage2.setLocation(stage_X, stage_Y);
         stage2.setVisible(false);
 
+        easy = new MovingBitmap(R.drawable.easy);
+        normal = new MovingBitmap(R.drawable.normal);
         easy.setLocation(difficult_X, difficult_Y);
         normal.setLocation(difficult_X, difficult_Y);
         normal.setVisible(false);

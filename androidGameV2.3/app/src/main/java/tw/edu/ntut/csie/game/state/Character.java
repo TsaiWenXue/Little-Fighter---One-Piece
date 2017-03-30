@@ -1,13 +1,8 @@
 package tw.edu.ntut.csie.game.state;
 
-
-import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.GameObject;
-import tw.edu.ntut.csie.game.state.Navigation;
-import tw.edu.ntut.csie.game.state.StateStage1;
-import tw.edu.ntut.csie.game.state.Button;
 
 public class Character implements GameObject {
     private MovingBitmap ch;
@@ -22,13 +17,6 @@ public class Character implements GameObject {
     private boolean visible = false, visible_r = false;
 
     public Character() {
-        /*luffy = new MovingBitmap(R.drawable.luffy);
-        luffy_r = new MovingBitmap(R.drawable.luffy_r);
-
-        luffyRun = new Animation();
-        luffyRun_r = new Animation();
-        luffyattack = new Animation();
-        luffyattack_r = new Animation();*/
         ch = new MovingBitmap();
         ch_r = new MovingBitmap();
 
@@ -120,13 +108,13 @@ public class Character implements GameObject {
         py += (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
         if (py < -20 || py > 375)
             py -= (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
-        if (StateStage1.roadPx == 800 || StateStage1.roadPx == -800)
+        if (Stage1BG.roadPx == 800 || Stage1BG.roadPx == -800)
             px += (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
         if (px > 750 || px < 0)
             px -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
-        else if (StateStage1.roadPx < 800 && px < 400)
+        else if (Stage1BG.roadPx < 800 && px < 400)
             px++;
-        else if (StateStage1.roadPx > -800 && px > 400)
+        else if (Stage1BG.roadPx > -800 && px > 400)
             px--;
         ch.setLocation(px, py);
         ch_r.setLocation(px, py);

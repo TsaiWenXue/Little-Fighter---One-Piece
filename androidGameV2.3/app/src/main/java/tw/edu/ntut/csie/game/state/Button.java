@@ -18,16 +18,21 @@ public class Button implements GameObject, PointerEventHandler {
     public static boolean atPointerPressed;
     public static boolean dfPointerPressed;
 
-    private MovingBitmap attack = new MovingBitmap(R.drawable.button_attack_normal);
-    private MovingBitmap attack_pressed = new MovingBitmap(R.drawable.button_attack_pressed);
-    private MovingBitmap defend = new MovingBitmap(R.drawable.button_defend_normal);
-    private MovingBitmap defend_pressed = new MovingBitmap(R.drawable.button_defend_pressed);
+    private MovingBitmap attack;
+    private MovingBitmap attack_pressed;
+    private MovingBitmap defend;
+    private MovingBitmap defend_pressed;
     public Button() {}
 
     public void initialize(){
+        attack = new MovingBitmap(R.drawable.button_attack_normal);
+        attack_pressed = new MovingBitmap(R.drawable.button_attack_pressed);
         attack.setLocation(at_x,at_y);
         attack_pressed.setLocation(at_x, at_y);
         attack_pressed.setVisible(false);
+
+        defend = new MovingBitmap(R.drawable.button_defend_normal);
+        defend_pressed = new MovingBitmap(R.drawable.button_defend_pressed);
         defend.setLocation(df_x,df_y);
         defend_pressed.setLocation(df_x,df_y);
         defend_pressed.setVisible(false);
