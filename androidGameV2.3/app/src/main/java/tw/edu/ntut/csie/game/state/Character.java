@@ -11,6 +11,8 @@ public class Character implements GameObject {
     private Animation chRun_r;
     private Animation chAttack;
     private Animation chAttack_r;
+    private Animation chDefend;
+    private Animation chDefend_r;
 
     private int px, py;
     private boolean run = false, run_r = false;
@@ -24,6 +26,8 @@ public class Character implements GameObject {
         chRun_r = new Animation();
         chAttack = new Animation();
         chAttack_r = new Animation();
+        chDefend = new Animation();
+        chDefend_r = new Animation();
 
         px = 400; py = 200;
     }
@@ -53,7 +57,13 @@ public class Character implements GameObject {
         chAttack_r.addFrame(resId);
     }
 
-
+    //Character Defend add frame
+    public void addDefend(int resId){
+      chDefend.addFrame(resId);
+    }
+    public void addDefendReverse(int resId){
+      chDefend_r.addFrame(resId);
+    }
     public void initialize() {
         visible = true;
         visible_r = false;
@@ -63,19 +73,29 @@ public class Character implements GameObject {
         ch.setLocation(px, py);
         ch_r.setVisible(visible_r);
 
+        chRun.setDelay(2);
+        chRun_r.setDelay(2);
         chAttack.setDelay(1);
+        chAttack_r.setDelay(1);
+        chDefend.setDelay(1);
+        chDefend_r.setDelay(1);
+
         chAttack.setRepeating(false);
-        chAttack.setDelay(1);
         chAttack_r.setRepeating(false);
+        chDefend.setRepeating(false);
+        chDefend_r.setRepeating(false);
 
         chRun.setVisible(run);
-        chRun.setDelay(2);
         chRun_r.setVisible(run_r);
-        chRun_r.setDelay(2);
         chAttack.setVisible(Button.atPointerPressed);
         chAttack_r.setVisible(Button.atPointerPressed);
+        chDefend.setVisible(Button.dfPointerPressed);
+        chDefend_r.setVisible(Button.dfPointerPressed);
+
         chAttack.setCurrentFrameIndex(-1);
         chAttack_r.setCurrentFrameIndex(-1);
+        chDefend.setCurrentFrameIndex(-1);
+        chDefend_r.setCurrentFrameIndex(-1);
 
     }
 
@@ -97,6 +117,8 @@ public class Character implements GameObject {
         chRun_r.show();
         chAttack.show();
         chAttack_r.show();
+        chDefend.show();
+        chDefend_r.show();
     }
 
     @Override
@@ -105,6 +127,8 @@ public class Character implements GameObject {
         chRun_r.move();
         chAttack.move();
         chAttack_r.move();
+        chDefend.move();
+        chDefend_r.move();
 
         //Let Character move base on navigation
         if (chAttack_r.getCurrentFrameIndex() == -1 && chAttack.getCurrentFrameIndex() == -1) {
@@ -126,6 +150,9 @@ public class Character implements GameObject {
         chRun.setLocation(px, py);
         chRun_r.setLocation(px, py);
         chAttack.setLocation(px,py);
+        chDefend.setLocation(px,py);
+        chDefend_r.setLocation(px,py);
+
         if(chAttack_r.getCurrentFrameIndex() >= 0)
             chAttack_r.setLocation( (px - chAttack_r.getWidth() + ch_r.getWidth()) ,py);
         else
@@ -216,6 +243,42 @@ public class Character implements GameObject {
             ch_r.setVisible(visible_r);
         }
 
+        //Character Defend perform
+        if (Button.dfPointerPressed == true && (visible == true || run == true)){
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
+            chDefend.setVisible(Button.dfPointerPressed);
+            ch.setVisible(visible);
+            ch_r.setVisible(visible_r);
+            chRun_r.setVisible(run_r);
+            chRun.setVisible(run);
+            chDefend.reset();
+        }
+        else if (Button.dfPointerPressed == true && (visible_r == true || run_r == true)){
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
+
+            chDefend_r.setVisible(Button.dfPointerPressed);
+            ch.setVisible(visible);
+            ch_r.setVisible(visible_r);
+            chRun_r.setVisible(run_r);
+            chRun.setVisible(run);
+            chDefend_r.reset();
+        }
+
+        if ( chDefend.isLastFrame() && (visible_r == false)) {
+            visible = true;
+            ch.setVisible(visible);
+        }
+        else if ( chDefend_r.isLastFrame() ) {
+            visible_r = true;
+            ch_r.setVisible(visible_r);
+        }
+
     }
 
     @Override
@@ -226,6 +289,8 @@ public class Character implements GameObject {
         chRun_r.release();
         chAttack.release();
         chAttack_r.release();
+        chDefend.release();
+        chDefend_r.release();
 
         ch = null;
         ch_r = null;
@@ -233,5 +298,7 @@ public class Character implements GameObject {
         chRun_r = null;
         chAttack = null;
         chAttack_r = null;
+        chDefend = null;
+        chDefend_r = null;
     }
 }
