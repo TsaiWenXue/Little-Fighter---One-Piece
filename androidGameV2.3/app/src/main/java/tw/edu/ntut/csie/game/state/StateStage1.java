@@ -12,7 +12,6 @@ import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.extend.Animation;
 
 public class StateStage1 extends GameState {
-
     private Stage1BG bg;
     private Audio _music;
 
@@ -20,11 +19,12 @@ public class StateStage1 extends GameState {
     private Button button;
 
     private Character ch;
+    private Enemy en;
 
     public StateStage1(GameEngine engine) {
         super(engine);
     }
-    
+
     @Override
     public void initialize(Map<String, Object> data) {
         bg = new Stage1BG();
@@ -35,12 +35,16 @@ public class StateStage1 extends GameState {
 
         controller = new Navigation();
         button = new Button();
+        controller.initialize();
+        button.initialize();
+
         ch = new Character();
         CharacterLib.luffy(ch);
-
-        controller.initialize();
         ch.initialize();
-        button.initialize();
+
+        en = new Enemy();
+        en.loadNormal(R.drawable.marin);
+        en.initialize();
     }
 
     @Override
@@ -55,12 +59,15 @@ public class StateStage1 extends GameState {
         controller.show();
         ch.show();
         button.show();
+        en.show();
     }
 
     @Override
     public void release() {
         bg.release();
         bg = null;
+        _music.release();
+        _music = null;
 
         ch.release();
         controller.release();
@@ -68,6 +75,9 @@ public class StateStage1 extends GameState {
         ch = null;
         controller = null;
         button = null;
+
+        en.release();
+        en = null;
     }
     @Override
     public void keyPressed(int keyCode) {
