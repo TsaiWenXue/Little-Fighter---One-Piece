@@ -205,7 +205,7 @@ public class Animation implements GameObject {
      * @param index 指定的畫格
      */
     public void setCurrentFrameIndex(int index) {
-        if (index < _frames.size() - 1 && _frameIndex >= 0) {
+        if (index < _frames.size() - 1) {
             _frameIndex = index;
         }
     }

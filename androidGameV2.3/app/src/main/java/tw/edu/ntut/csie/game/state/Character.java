@@ -74,6 +74,8 @@ public class Character implements GameObject {
         chRun_r.setDelay(2);
         chAttack.setVisible(Button.atPointerPressed);
         chAttack_r.setVisible(Button.atPointerPressed);
+        chAttack.setCurrentFrameIndex(-1);
+        chAttack_r.setCurrentFrameIndex(-1);
 
     }
 
@@ -105,72 +107,79 @@ public class Character implements GameObject {
         chAttack_r.move();
 
         //Let Character move base on navigation
-        py += (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
-        if (py < -20 || py > 375)
-            py -= (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
-        if (Stage1BG.roadPx == 800 || Stage1BG.roadPx == -800)
-            px += (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
-        if (px > 750 || px < 0)
-            px -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
-        else if (Stage1BG.roadPx < 800 && px < 400)
-            px++;
-        else if (Stage1BG.roadPx > -800 && px > 400)
-            px--;
+        if (chAttack_r.getCurrentFrameIndex() == -1 && chAttack.getCurrentFrameIndex() == -1) {
+            py += (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
+            if (py < 175 || py > 375)
+                py -= (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
+            if (Stage1BG.roadPx == 800 || Stage1BG.roadPx == -800)
+                px += (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+            if (px > 750 || px < 0)
+                px -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+            else if (Stage1BG.roadPx < 800 && px < 400)
+                px++;
+            else if (Stage1BG.roadPx > -800 && px > 400)
+                px--;
+        }
+
         ch.setLocation(px, py);
         ch_r.setLocation(px, py);
         chRun.setLocation(px, py);
         chRun_r.setLocation(px, py);
-        chAttack.setLocation((px-11),(py-35));
-        chAttack_r.setLocation((px-353),(py-35));
+        chAttack.setLocation(px,py);
+        if(chAttack_r.getCurrentFrameIndex() >= 0)
+            chAttack_r.setLocation( (px - chAttack_r.getWidth() + ch_r.getWidth()) ,py);
+        else
+            chAttack_r.setLocation(px, py);
 
         //Character stop running
-        if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run_r == true) {
-            visible = false;
-            visible_r = true;
-            run = false;
-            run_r = false;
+        if (chAttack_r.getCurrentFrameIndex() == -1 && chAttack.getCurrentFrameIndex() == -1) {
+            if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run_r == true) {
+                visible = false;
+                visible_r = true;
+                run = false;
+                run_r = false;
 
-            ch.setVisible(visible);
-            chRun.setVisible(run);
-            chRun_r.setVisible(run_r);
-            ch_r.setVisible(visible_r);
+                ch.setVisible(visible);
+                chRun.setVisible(run);
+                chRun_r.setVisible(run_r);
+                ch_r.setVisible(visible_r);
+            }
+            else if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run == true) {
+                visible = true;
+                visible_r = false;
+                run = false;
+                run_r = false;
+
+                ch_r.setVisible(visible_r);
+                chRun.setVisible(run);
+                chRun_r.setVisible(run_r);
+                ch.setVisible(visible);
+            }
+
+            //decide Character face direction with Navigation
+            if (Navigation.controllerPx - Navigation.initialCtrlPx < 0) {
+                visible = false;
+                visible_r = false;
+                run_r = true;
+                run = false;
+
+                ch_r.setVisible(visible_r);
+                ch.setVisible(visible);
+                chRun.setVisible(run);
+                chRun_r.setVisible(run_r);
+            }
+            else if (Navigation.controllerPx - Navigation.initialCtrlPx > 0) {
+                visible = false;
+                visible_r = false;
+                run = true;
+                run_r = false;
+
+                ch.setVisible(visible);
+                ch_r.setVisible(visible_r);
+                chRun_r.setVisible(run_r);
+                chRun.setVisible(run);
+            }
         }
-        else if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && run == true) {
-            visible = true;
-            visible_r = false;
-            run = false;
-            run_r = false;
-
-            ch_r.setVisible(visible_r);
-            chRun.setVisible(run);
-            chRun_r.setVisible(run_r);
-            ch.setVisible(visible);
-        }
-
-        //decide Character face direction with Navigation
-        if (Navigation.controllerPx - Navigation.initialCtrlPx < 0) {
-            visible = false;
-            visible_r = false;
-            run_r = true;
-            run = false;
-
-            ch_r.setVisible(visible_r);
-            ch.setVisible(visible);
-            chRun.setVisible(run);
-            chRun_r.setVisible(run_r);
-        }
-        else if (Navigation.controllerPx - Navigation.initialCtrlPx > 0) {
-            visible = false;
-            visible_r = false;
-            run = true;
-            run_r = false;
-
-            ch.setVisible(visible);
-            ch_r.setVisible(visible_r);
-            chRun_r.setVisible(run_r);
-            chRun.setVisible(run);
-        }
-
         //Character Attack perform
         if (Button.atPointerPressed == true && (visible == true || run == true)){
             visible = false;
@@ -213,8 +222,16 @@ public class Character implements GameObject {
     public void release(){
         ch.release();
         ch_r.release();
+        chRun.release();
+        chRun_r.release();
+        chAttack.release();
+        chAttack_r.release();
 
         ch = null;
         ch_r = null;
+        chRun = null;
+        chRun_r = null;
+        chAttack = null;
+        chAttack_r = null;
     }
 }
