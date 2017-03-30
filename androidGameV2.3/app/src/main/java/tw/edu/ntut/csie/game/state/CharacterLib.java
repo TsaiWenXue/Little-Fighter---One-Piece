@@ -40,7 +40,6 @@ public class CharacterLib {
         ch.addAttackReverse(R.drawable.luffy_attack01_r);
         ch.addAttackReverse(R.drawable.luffy_attack06_r);
         ch.addAttackReverse(R.drawable.luffy_attack07_r);
-
     }
 
 

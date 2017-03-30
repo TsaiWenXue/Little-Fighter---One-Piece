@@ -43,7 +43,7 @@ public class StateStage1 extends GameState {
         ch.initialize();
 
         en = new Enemy();
-        en.loadNormal(R.drawable.marin);
+        EnemyLib.marin(en);
         en.initialize();
     }
 

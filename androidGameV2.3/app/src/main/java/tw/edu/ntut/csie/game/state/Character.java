@@ -15,6 +15,8 @@ public class Character implements GameObject {
     private int px, py;
     private boolean run = false, run_r = false;
     private boolean visible = false, visible_r = false;
+    private boolean attack = false;
+    public int[] attackArea = new int[4];
 
     public Character() {
         ch = new MovingBitmap();
@@ -27,6 +29,11 @@ public class Character implements GameObject {
 
         px = 400; py = 200;
     }
+
+    public boolean attack() {
+        return attack;
+    }
+
 
 
     //Character normal bitmap loadin
@@ -192,6 +199,7 @@ public class Character implements GameObject {
             chRun_r.setVisible(run_r);
             chRun.setVisible(run);
             chAttack.reset();
+            attack = true;
         }
         else if (Button.atPointerPressed == true && (visible_r == true || run_r == true)){
             visible = false;
@@ -205,15 +213,32 @@ public class Character implements GameObject {
             chRun_r.setVisible(run_r);
             chRun.setVisible(run);
             chAttack_r.reset();
+            attack = true;
         }
 
         if ( chAttack.isLastFrame() && (visible_r == false)) {
             visible = true;
             ch.setVisible(visible);
+            attack = false;
         }
         else if ( chAttack_r.isLastFrame() ) {
             visible_r = true;
             ch_r.setVisible(visible_r);
+            attack = false;
+        }
+
+
+        //Set Attack Area
+        if (attack) {
+            attackArea[0] = chAttack.getX();
+            attackArea[1] = chAttack.getY();
+            attackArea[2] = chAttack.getY() + chAttack.getHeight();
+            attackArea[3] = chAttack.getX() + chAttack.getWidth();
+        }
+        else {
+            for(int i = 0; i < 4; i++) {
+                attackArea[i] = 0;
+            }
         }
 
     }
