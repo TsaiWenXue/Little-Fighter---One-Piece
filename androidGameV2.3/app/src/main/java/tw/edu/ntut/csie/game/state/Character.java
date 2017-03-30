@@ -77,8 +77,8 @@ public class Character implements GameObject {
         chRun_r.setDelay(2);
         chAttack.setDelay(1);
         chAttack_r.setDelay(1);
-        chDefend.setDelay(1);
-        chDefend_r.setDelay(1);
+        chDefend.setDelay(2);
+        chDefend_r.setDelay(2);
 
         chAttack.setRepeating(false);
         chAttack_r.setRepeating(false);

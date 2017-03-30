@@ -46,6 +46,10 @@ public class CharacterLib {
         ch.addDefend(R.drawable.luffy_defend02);
         ch.addDefend(R.drawable.luffy_defend03);
         ch.addDefend(R.drawable.luffy_defend04);
+        ch.addDefendReverse(R.drawable.luffy_defend01_r);
+        ch.addDefendReverse(R.drawable.luffy_defend02_r);
+        ch.addDefendReverse(R.drawable.luffy_defend03_r);
+        ch.addDefendReverse(R.drawable.luffy_defend04_r);
     }
 
 
