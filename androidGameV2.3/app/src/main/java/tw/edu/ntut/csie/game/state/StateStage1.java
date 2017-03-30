@@ -10,6 +10,7 @@ import tw.edu.ntut.csie.game.core.Audio;
 import tw.edu.ntut.csie.game.engine.GameEngine;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.extend.Animation;
+
 public class StateStage1 extends GameState {
 
     private Stage1BG bg;
@@ -23,47 +24,7 @@ public class StateStage1 extends GameState {
     public StateStage1(GameEngine engine) {
         super(engine);
     }
-
-    public void luffy() {
-        ch.loadNormal(R.drawable.luffy);
-        ch.loadNormalReverse(R.drawable.luffy_r);
-
-        ch.addRun(R.drawable.luffy_run01);
-        ch.addRun(R.drawable.luffy_run02);
-        ch.addRun(R.drawable.luffy_run03);
-        ch.addRun(R.drawable.luffy_run02);
-        ch.addRunReverse(R.drawable.luffy_run01_r);
-        ch.addRunReverse(R.drawable.luffy_run02_r);
-        ch.addRunReverse(R.drawable.luffy_run03_r);
-        ch.addRunReverse(R.drawable.luffy_run02_r);
-
-        ch.addAttack(R.drawable.luffy_attack00);
-        ch.addAttack(R.drawable.luffy_attack01);
-        ch.addAttack(R.drawable.luffy_attack02);
-        ch.addAttack(R.drawable.luffy_attack03);
-        ch.addAttack(R.drawable.luffy_attack04);
-        ch.addAttack(R.drawable.luffy_attack05);
-        ch.addAttack(R.drawable.luffy_attack04);
-        ch.addAttack(R.drawable.luffy_attack03);
-        ch.addAttack(R.drawable.luffy_attack02);
-        ch.addAttack(R.drawable.luffy_attack01);
-        ch.addAttack(R.drawable.luffy_attack06);
-        ch.addAttack(R.drawable.luffy_attack07);
-        ch.addAttackReverse(R.drawable.luffy_attack00_r);
-        ch.addAttackReverse(R.drawable.luffy_attack01_r);
-        ch.addAttackReverse(R.drawable.luffy_attack02_r);
-        ch.addAttackReverse(R.drawable.luffy_attack03_r);
-        ch.addAttackReverse(R.drawable.luffy_attack04_r);
-        ch.addAttackReverse(R.drawable.luffy_attack05_r);
-        ch.addAttackReverse(R.drawable.luffy_attack04_r);
-        ch.addAttackReverse(R.drawable.luffy_attack03_r);
-        ch.addAttackReverse(R.drawable.luffy_attack02_r);
-        ch.addAttackReverse(R.drawable.luffy_attack01_r);
-        ch.addAttackReverse(R.drawable.luffy_attack06_r);
-        ch.addAttackReverse(R.drawable.luffy_attack07_r);
-
-    }
-
+    
     @Override
     public void initialize(Map<String, Object> data) {
         bg = new Stage1BG();
@@ -75,7 +36,7 @@ public class StateStage1 extends GameState {
         controller = new Navigation();
         button = new Button();
         ch = new Character();
-        luffy();
+        CharacterLib.luffy(ch);
 
         controller.initialize();
         ch.initialize();
