@@ -104,6 +104,8 @@ public class Button implements GameObject, PointerEventHandler {
                 atPointerPressed = false;
                 dfPointerPressed = false;
            }
+
+        }
            */
          }
         return false;
