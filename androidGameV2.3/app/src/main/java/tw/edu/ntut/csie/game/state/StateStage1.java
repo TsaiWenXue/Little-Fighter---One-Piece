@@ -51,6 +51,7 @@ public class StateStage1 extends GameState {
     public void move() {
         ch.move();
         bg.move(ch);
+        en.move(ch);
     }
 
     @Override
