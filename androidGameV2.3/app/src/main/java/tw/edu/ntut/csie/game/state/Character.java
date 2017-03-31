@@ -17,7 +17,7 @@ public class Character implements GameObject {
     private int px, py;
     private boolean run = false, run_r = false;
     private boolean visible = false, visible_r = false;
-    private boolean attack = false;
+    public boolean attack = false, attack_r = false;
     public int[] attackArea = new int[4];
 
     public Character() {
@@ -240,7 +240,7 @@ public class Character implements GameObject {
             chRun_r.setVisible(run_r);
             chRun.setVisible(run);
             chAttack_r.reset();
-            attack = true;
+            attack_r = true;
         }
 
         if ( chAttack.isLastFrame() && (visible_r == false)) {
@@ -251,7 +251,7 @@ public class Character implements GameObject {
         else if ( chAttack_r.isLastFrame() ) {
             visible_r = true;
             ch_r.setVisible(visible_r);
-            attack = false;
+            attack_r = false;
         }
 
 
@@ -261,6 +261,12 @@ public class Character implements GameObject {
             attackArea[1] = chAttack.getY();
             attackArea[2] = chAttack.getY() + chAttack.getHeight();
             attackArea[3] = chAttack.getX() + chAttack.getWidth();
+        }
+        else if (attack_r) {
+            attackArea[0] = chAttack_r.getX();
+            attackArea[1] = chAttack_r.getY();
+            attackArea[2] = chAttack_r.getY() + chAttack_r.getHeight();
+            attackArea[3] = chAttack_r.getX() + chAttack_r.getWidth();
         }
         else {
             for(int i = 0; i < 4; i++) {
