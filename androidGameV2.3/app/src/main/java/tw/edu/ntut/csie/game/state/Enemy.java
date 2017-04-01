@@ -8,6 +8,9 @@ import tw.edu.ntut.csie.game.GameObject;
 public class Enemy {
     private MovingBitmap enemy;
     private MovingBitmap enemy_r;
+    private MovingBitmap enemyDead;
+    private MovingBitmap enemyDead_r;
+
     private Animation enemyRun;
     private Animation enemyRun_r;
     private Animation enemyAttack;
@@ -24,6 +27,8 @@ public class Enemy {
     public Enemy() {
         enemy = new MovingBitmap();
         enemy_r = new MovingBitmap();
+        enemyDead = new MovingBitmap();
+        enemyDead_r = new MovingBitmap();
 
         enemyRun = new Animation();
         enemyRun_r = new Animation();
@@ -42,6 +47,12 @@ public class Enemy {
     }
     public void loadNormalReverse(int resId) {
         enemy_r.loadBitmap(resId);
+    }
+    public void loadDead(int resId) {
+        enemyDead.loadBitmap(resId);
+    }
+    public void loadDeadReverse(int resId) {
+        enemyDead_r.loadBitmap(resId);
     }
 
     //enemyaracter Run add frame
@@ -75,6 +86,8 @@ public class Enemy {
 
         enemy.setLocation(px, py);
         enemy_r.setVisible(visible_r);
+        enemyDead.setVisible(false);
+        enemyDead_r.setVisible(false);
 
         enemyAttack.setDelay(1);
         enemyAttack.setRepeating(false);
@@ -88,12 +101,12 @@ public class Enemy {
         enemyAttack.setVisible(Button.atPointerPressed);
         enemyAttack_r.setVisible(Button.atPointerPressed);
 
-        enemyHit.setVisible(getHit);
         enemyHit.setDelay(3);
         enemyHit.setRepeating(false);
-        enemyHit_r.setVisible(getHit_r);
+        enemyHit.setCurrentFrameIndex(-1);
         enemyHit_r.setDelay(3);
         enemyHit_r.setRepeating(false);
+        enemyHit_r.setCurrentFrameIndex(-1);
     }
 
     public int getX() {
@@ -112,6 +125,9 @@ public class Enemy {
         enemyAttack_r.show();
         enemyHit.show();
         enemyHit_r.show();
+        enemyDead.show();
+        enemyDead_r.show();
+
     }
 
     public void move(Character ch) {
@@ -122,8 +138,47 @@ public class Enemy {
         enemyHit.move();
         enemyHit_r.move();
 
-//        if(ch.attack())
-    //        hit(ch);
+        if (healthPoint <= 0) {
+            if (enemyHit.isLastFrame())
+                enemyDead.setVisible(true);
+            else if(enemyHit_r.isLastFrame())
+                enemyDead_r.setVisible(true);
+        }
+        else {
+            if (ch.attack) {
+                if (px <= ch.attackArea[3] && px + enemy.getWidth() >= ch.attackArea[0] &&
+                        py + enemy.getHeight() >= ch.attackArea[1] && py <= ch.attackArea[2]) {
+                    enemyHit.reset();
+                    enemy.setVisible(false);
+                    enemy_r.setVisible(false);
+                    healthPoint -= 10;
+                    getHit = true;
+                }
+            } else if (ch.attack_r) {
+                if (px + enemy.getWidth() >= ch.attackArea[0] && px <= ch.attackArea[3] &&
+                        py + enemy.getHeight() >= ch.attackArea[1] && py <= ch.attackArea[2]) {
+                    enemyHit_r.reset();
+                    enemy.setVisible(false);
+                    enemy_r.setVisible(false);
+                    healthPoint -= 10;
+                    getHit_r = true;
+                }
+            }
+            if (enemyHit.getCurrentFrameIndex() >= 0) {
+                px++;
+            } else if (enemyHit_r.getCurrentFrameIndex() >= 0) {
+                px--;
+            }
+            if (enemyHit.getCurrentFrameIndex() == -1 && enemyHit_r.getCurrentFrameIndex() == -1) {
+                if (getHit) {
+                    enemy.setVisible(true);
+                    getHit = false;
+                } else if (getHit_r) {
+                    enemy_r.setVisible(true);
+                    getHit_r = false;
+                }
+            }
+        }
 
         if (Stage1BG.roadPx < 800 && Stage1BG.roadPx > -800)
             px -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
@@ -137,48 +192,6 @@ public class Enemy {
         enemySetLocatioin(px, py);
     }
 
-    public boolean isHit(Character ch) {
-        return ( px <= ch.attackArea[3] &&
-                 (py >= ch.attackArea[1] || py + enemy.getHeight() <= ch.attackArea[2]) );
-    }
-    public boolean isHit_r(Character ch) {
-        return ( px + enemy.getWidth() >= ch.attackArea[0] &&
-                 (py >= ch.attackArea[1] || py + enemy.getHeight() <= ch.attackArea[2]) );
-    }
-
-    public void hit(Character ch) {
-        enemy.setVisible(false);
-        enemy_r.setVisible(false);
-        enemyRun.setVisible(false);
-        enemyRun_r.setVisible(false);
-        enemyAttack.setVisible(false);
-        enemyAttack_r.setVisible(false);
-        if (isHit(ch) && getHit_r == false) {
-            getHit = true;
-            enemyHit.setVisible(getHit);
-            enemyHit.reset();
-        }
-        else if (isHit_r(ch) && getHit == false){
-            getHit_r = true;
-            enemyHit_r.setVisible(getHit_r);
-            enemyHit_r.reset();
-        }
-        if (getHit) {
-            px+=2;
-        }
-        else if(getHit_r) {
-            px-=2;
-        }
-        enemySetLocatioin(px, py);
-        if (enemyHit.isLastFrame()){
-            getHit = false;
-            enemy_r.setVisible(true);
-        }
-        if (enemyHit_r.isLastFrame()){
-            getHit_r = false;
-            enemy.setVisible(true);
-        }
-    }
 
     public void release(){
         enemy.release();
@@ -205,5 +218,7 @@ public class Enemy {
         enemyAttack_r.setLocation(x, y);
         enemyHit.setLocation(x, y);
         enemyHit_r.setLocation(x, y);
+        enemyDead.setLocation(x, y);
+        enemyDead_r.setLocation(x, y);
     }
 }
