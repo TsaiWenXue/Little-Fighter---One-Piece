@@ -89,8 +89,8 @@ public class Button implements GameObject, PointerEventHandler {
                     dfPointerPressed = false;
                 }
             }
-            /*
-            if ( MovingBitmap.imageTouched(touchX, touchY, attack)) {
+
+        /*    if ( MovingBitmap.imageTouched(touchX, touchY, attack)) {
                 atPointerPressed = true;
                 attack_pressed.setVisible(true);
                 attack.setVisible(false);
@@ -105,9 +105,9 @@ public class Button implements GameObject, PointerEventHandler {
                 dfPointerPressed = false;
            }
 
-        }
-           */
-         }
+        }*/
+
+      }
         return false;
     }
 
