@@ -13,11 +13,14 @@ public class Character implements GameObject {
     private Animation chAttack_r;
     private Animation chDefend;
     private Animation chDefend_r;
+    private Animation chJump;
+    private Animation chJump_r;
 
     private int px, py;
     private boolean run = false, run_r = false;
     private boolean visible = false, visible_r = false;
     public boolean attack = false, attack_r = false;
+    public boolean jump = false, jump_r = false;
     public int[] attackArea = new int[4];
 
     public Character() {
@@ -30,6 +33,8 @@ public class Character implements GameObject {
         chAttack_r = new Animation();
         chDefend = new Animation();
         chDefend_r = new Animation();
+        chJump = new Animation();
+        chJump_r = new Animation();
 
         px = 400; py = 200;
     }
@@ -71,6 +76,14 @@ public class Character implements GameObject {
     public void addDefendReverse(int resId){
       chDefend_r.addFrame(resId);
     }
+
+    public void addJump(int resId){
+      chJump.addFrame(resId);
+    }
+    public void addJumpReverse(int resId){
+      chJump_r.addFrame(resId);
+    }
+
     public void initialize() {
         visible = true;
         visible_r = false;
@@ -86,11 +99,15 @@ public class Character implements GameObject {
         chAttack_r.setDelay(1);
         chDefend.setDelay(2);
         chDefend_r.setDelay(2);
+        chJump.setDelay(2);
+        chJump_r.setDelay(2);
 
         chAttack.setRepeating(false);
         chAttack_r.setRepeating(false);
         chDefend.setRepeating(false);
         chDefend_r.setRepeating(false);
+        chJump.setRepeating(false);
+        chJump_r.setRepeating(false);
 
         chRun.setVisible(run);
         chRun_r.setVisible(run_r);
@@ -98,11 +115,15 @@ public class Character implements GameObject {
         chAttack_r.setVisible(Button.atPointerPressed);
         chDefend.setVisible(Button.dfPointerPressed);
         chDefend_r.setVisible(Button.dfPointerPressed);
+        chJump.setVisible(Button.jpPointerPressed);
+        chJump_r.setVisible(Button.jpPointerPressed);
 
         chAttack.setCurrentFrameIndex(-1);
         chAttack_r.setCurrentFrameIndex(-1);
         chDefend.setCurrentFrameIndex(-1);
         chDefend_r.setCurrentFrameIndex(-1);
+        chJump.setCurrentFrameIndex(-1);
+        chJump_r.setCurrentFrameIndex(-1);
 
     }
 
@@ -126,6 +147,8 @@ public class Character implements GameObject {
         chAttack_r.show();
         chDefend.show();
         chDefend_r.show();
+        chJump.show();
+        chJump_r.show();
     }
 
     @Override
@@ -136,6 +159,8 @@ public class Character implements GameObject {
         chAttack_r.move();
         chDefend.move();
         chDefend_r.move();
+        chJump.move();
+        chJump_r.move();
 
         //Let Character move base on navigation
         if (chAttack_r.getCurrentFrameIndex() == -1 && chAttack.getCurrentFrameIndex() == -1) {
@@ -159,6 +184,8 @@ public class Character implements GameObject {
         chAttack.setLocation(px,py);
         chDefend.setLocation(px,py);
         chDefend_r.setLocation(px,py);
+        chJump.setLocation(px,py);
+        chJump.setLocation(px,py);
 
         if(chAttack_r.getCurrentFrameIndex() >= 0)
             chAttack_r.setLocation( (px - chAttack_r.getWidth() + ch_r.getWidth()) ,py);
@@ -309,6 +336,41 @@ public class Character implements GameObject {
             visible_r = true;
             ch_r.setVisible(visible_r);
         }
+        //character jump perform
+        if (Button.jpPointerPressed == true && (visible == true || run == true)){
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
+            chJump.setVisible(Button.jpPointerPressed);
+            ch.setVisible(visible);
+            ch_r.setVisible(visible_r);
+            chRun_r.setVisible(run_r);
+            chRun.setVisible(run);
+            chJump.reset();
+        }
+        else if (Button.jpPointerPressed == true && (visible_r == true || run_r == true)){
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
+
+            chJump_r.setVisible(Button.jpPointerPressed);
+            ch.setVisible(visible);
+            ch_r.setVisible(visible_r);
+            chRun_r.setVisible(run_r);
+            chRun.setVisible(run);
+            chJump_r.reset();
+        }
+
+        if ( chJump.isLastFrame() && (visible_r == false)) {
+            visible = true;
+            ch.setVisible(visible);
+        }
+        else if ( chJump_r.isLastFrame() ) {
+            visible_r = true;
+            ch_r.setVisible(visible_r);
+        }
 
     }
 
@@ -322,6 +384,8 @@ public class Character implements GameObject {
         chAttack_r.release();
         chDefend.release();
         chDefend_r.release();
+        chJump.release();
+        chJump_r.release();
 
         ch = null;
         ch_r = null;
@@ -331,5 +395,7 @@ public class Character implements GameObject {
         chAttack_r = null;
         chDefend = null;
         chDefend_r = null;
+        chJump = null;
+        chJump_r = null;
     }
 }
