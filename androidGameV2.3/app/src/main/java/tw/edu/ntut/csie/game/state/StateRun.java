@@ -144,11 +144,11 @@ public class StateRun extends GameState {
         luffy.release(); luffyName.release();
         zoro.release(); zoroName.release();
 
-        characterLeft.release();
-        characterRight.release();
-        stageLeft.release();
+      //  characterLeft.release();
+      //  characterRight.release();
+      //  stageLeft.release();
         stageRight.release();
-        difficultLeft.release();
+      //  difficultLeft.release();
         difficultRight.release();
 
         start.release();
@@ -163,23 +163,23 @@ public class StateRun extends GameState {
         _music = null;
         background = null;
 
-        luffy = null; luffyName = null;
-        zoro = null; zoroName = null;
+      //  luffy = null; //luffyName = null;
+      //  zoro = null; //zoroName = null;
 
-        characterLeft = null;
-        characterRight = null;
-        stageLeft = null;
+      //  characterLeft = null;
+      //  characterRight = null;
+      //  stageLeft = null;
         stageRight = null;
-        difficultLeft = null;
+      //  difficultLeft = null;
         difficultRight = null;
 
         start = null;
 
-        stage1 = null;
-        stage2 = null;
+      //  stage1 = null;
+      //  stage2 = null;
 
-        easy = null;
-        normal = null;
+        // easy = null;
+      //  normal = null;
     }
 
     @Override
