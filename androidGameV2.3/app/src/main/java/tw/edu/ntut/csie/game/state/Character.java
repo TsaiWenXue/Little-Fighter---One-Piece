@@ -17,6 +17,7 @@ public class Character implements GameObject {
     private Animation chJump_r;
 
     private int px, py;
+    private int py_jump;
     private boolean run = false, run_r = false;
     private boolean visible = false, visible_r = false;
     public boolean attack = false, attack_r = false;
@@ -37,6 +38,7 @@ public class Character implements GameObject {
         chJump_r = new Animation();
 
         px = 400; py = 200;
+        py_jump = py - 137;
     }
 
     public boolean attack() {
@@ -99,8 +101,8 @@ public class Character implements GameObject {
         chAttack_r.setDelay(1);
         chDefend.setDelay(2);
         chDefend_r.setDelay(2);
-        chJump.setDelay(2);
-        chJump_r.setDelay(2);
+      //  chJump.setDelay(1);
+      //  chJump_r.setDelay(1);
 
         chAttack.setRepeating(false);
         chAttack_r.setRepeating(false);
@@ -184,8 +186,8 @@ public class Character implements GameObject {
         chAttack.setLocation(px,py);
         chDefend.setLocation(px,py);
         chDefend_r.setLocation(px,py);
-        chJump.setLocation(px,py);
-        chJump.setLocation(px,py);
+        chJump.setLocation(px,py-137);
+        chJump_r.setLocation(px,py-137);
 
         if(chAttack_r.getCurrentFrameIndex() >= 0)
             chAttack_r.setLocation( (px - chAttack_r.getWidth() + ch_r.getWidth()) ,py);

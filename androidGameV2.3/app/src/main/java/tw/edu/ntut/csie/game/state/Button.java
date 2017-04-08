@@ -14,17 +14,17 @@ import tw.edu.ntut.csie.game.state.Navigation;
 public class Button implements GameObject, PointerEventHandler {
     private int at_x = 700;
     private int at_y = 350;
-    private int df_x = at_x - 70;
-    private int df_y = at_y - 10;
-    private int jp_x = at_x - 10;
-    private int jp_y = at_y - 70;
-    private int s_x = at_x + 5;
-    private int s_y = at_y - 150;
-    private int e_x = at_x - 115;
-    private int e_y = at_y - 65;
-    private int f_x = at_x - 150;
+    private int df_x = at_x - 80;
+    private int df_y = at_y - 20;
+    private int jp_x = at_x - 15;
+    private int jp_y = at_y - 80;
+    private int s_x = at_x + 15;
+    private int s_y = at_y - 170;
+    private int e_x = at_x - 130;
+    private int e_y = at_y - 80;
+    private int f_x = at_x - 170;
     private int f_y = at_y;
-    private int g_x = s_x - 70;
+    private int g_x = s_x - 80;
     private int g_y = s_y + 25;
 
     public static boolean atPointerPressed;
@@ -158,7 +158,10 @@ public class Button implements GameObject, PointerEventHandler {
     @Override
     public boolean pointerPressed(List<Pointer> pointers) {
         int touchX, touchY;
-        if(pointers.size() >= 1){
+     if(sPointerPressed == true){
+         touchX = 0;
+     }
+      //  if(pointers.size() >= 1){
 
             //int touchX = pointers.get(0).getX();
             //int touchY = pointers.get(0).getY();
@@ -169,54 +172,54 @@ public class Button implements GameObject, PointerEventHandler {
                     atPointerPressed = true;
                     attack_pressed.setVisible(true);
                     attack.setVisible(false);
-                    break;
+                    //break;
                 }
                 else if( MovingBitmap.imageTouched(touchX, touchY, defend) ) {
                     dfPointerPressed = true;
                     defend_pressed.setVisible(true);
                     defend.setVisible(false);
-                    break;
+                  //  break;
                 }
                 else if( MovingBitmap.imageTouched(touchX, touchY, jump) ) {
                     jpPointerPressed = true;
                     jump_pressed.setVisible(true);
                     jump.setVisible(false);
-                    break;
+                //    break;
                 }
                 else if( MovingBitmap.imageTouched(touchX, touchY, s_skill) ) {
                     sPointerPressed = true;
                     s_skill_pressed.setVisible(true);
                     s_skill.setVisible(false);
-                    break;
+                //    break;
                 }
                 else if( MovingBitmap.imageTouched(touchX, touchY, e_skill) ) {
                     ePointerPressed = true;
                     e_skill_pressed.setVisible(true);
                     e_skill.setVisible(false);
-                    break;
+                //    break;
                 }
                 else if( MovingBitmap.imageTouched(touchX, touchY, f_skill) ) {
                     fPointerPressed = true;
                     f_skill_pressed.setVisible(true);
                     f_skill.setVisible(false);
-                    break;
+                //    break;
                 }
                 else if( MovingBitmap.imageTouched(touchX, touchY, g_skill) ) {
                     gPointerPressed = true;
                     g_skill_pressed.setVisible(true);
                     g_skill.setVisible(false);
-                    break;
+                //    break;
                 }
                else{
-                    atPointerPressed = false;
+                   /* atPointerPressed = false;
                     dfPointerPressed = false;
                     jpPointerPressed = false;
                     sPointerPressed = false;
                     ePointerPressed = false;
                     fPointerPressed = false;
-                    gPointerPressed = false;
+                    gPointerPressed = false;*/
                 }
-            }
+          //  }
 
         /*    if ( MovingBitmap.imageTouched(touchX, touchY, attack)) {
                 atPointerPressed = true;
