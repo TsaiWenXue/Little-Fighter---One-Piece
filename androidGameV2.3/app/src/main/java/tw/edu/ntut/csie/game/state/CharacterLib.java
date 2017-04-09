@@ -4,8 +4,14 @@ import tw.edu.ntut.csie.game.R;
 
 public class CharacterLib {
     public static void luffy(Character ch) {
-        ch.loadNormal(R.drawable.luffy);
-        ch.loadNormalReverse(R.drawable.luffy_r);
+        ch.addNormal(R.drawable.luffy00);
+        ch.addNormal(R.drawable.luffy01);
+        ch.addNormal(R.drawable.luffy02);
+        ch.addNormal(R.drawable.luffy03);
+        ch.addNormalReverse(R.drawable.luffy00_r);
+        ch.addNormalReverse(R.drawable.luffy01_r);
+        ch.addNormalReverse(R.drawable.luffy02_r);
+        ch.addNormalReverse(R.drawable.luffy03_r);
 
         ch.addRun(R.drawable.luffy_run01);
         ch.addRun(R.drawable.luffy_run02);
@@ -81,7 +87,7 @@ public class CharacterLib {
     }
 
     public static void zoro(Character ch) {
-        ch.loadNormal(R.drawable.zoro_0);
-        ch.loadNormalReverse(R.drawable.zoro_0_r);
+       // ch.loadNormal(R.drawable.zoro);
+        //ch.loadNormalReverse(R.drawable.zoro_r);
     }
 }
