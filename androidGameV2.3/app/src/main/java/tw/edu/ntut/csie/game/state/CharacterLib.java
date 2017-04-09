@@ -40,6 +40,44 @@ public class CharacterLib {
         ch.addAttackReverse(R.drawable.luffy_attack01_r);
         ch.addAttackReverse(R.drawable.luffy_attack06_r);
         ch.addAttackReverse(R.drawable.luffy_attack07_r);
+
+        //ch.addDefend(R.drawable.luffy_defend01)
+        ch.addDefend(R.drawable.luffy_defend01);
+        ch.addDefend(R.drawable.luffy_defend02);
+        ch.addDefend(R.drawable.luffy_defend03);
+        ch.addDefend(R.drawable.luffy_defend04);
+        ch.addDefendReverse(R.drawable.luffy_defend01_r);
+        ch.addDefendReverse(R.drawable.luffy_defend02_r);
+        ch.addDefendReverse(R.drawable.luffy_defend03_r);
+        ch.addDefendReverse(R.drawable.luffy_defend04_r);
+
+        ch.addJump(R.drawable.jump00);
+        ch.addJump(R.drawable.jump01);
+        ch.addJump(R.drawable.jump02);
+        ch.addJump(R.drawable.jump03);
+        ch.addJump(R.drawable.jump04);
+        ch.addJump(R.drawable.jump05);
+        ch.addJump(R.drawable.jump06);
+        ch.addJump(R.drawable.jump06);
+        ch.addJump(R.drawable.jump05);
+        ch.addJump(R.drawable.jump04);
+        ch.addJump(R.drawable.jump03);
+        ch.addJump(R.drawable.jump02);
+        ch.addJump(R.drawable.jump01);
+        ch.addJumpReverse(R.drawable.jump00_r);
+        ch.addJumpReverse(R.drawable.jump01_r);
+        ch.addJumpReverse(R.drawable.jump02_r);
+        ch.addJumpReverse(R.drawable.jump03_r);
+        ch.addJumpReverse(R.drawable.jump04_r);
+        ch.addJumpReverse(R.drawable.jump05_r);
+        ch.addJumpReverse(R.drawable.jump06_r);
+        ch.addJumpReverse(R.drawable.jump06_r);
+        ch.addJumpReverse(R.drawable.jump05_r);
+        ch.addJumpReverse(R.drawable.jump04_r);
+        ch.addJumpReverse(R.drawable.jump03_r);
+        ch.addJumpReverse(R.drawable.jump02_r);
+        ch.addJumpReverse(R.drawable.jump01_r);
+
     }
 
     public static void zoro(Character ch) {
