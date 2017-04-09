@@ -39,7 +39,8 @@ public class StateStage1 extends GameState {
         button.initialize();
 
         ch = new Character();
-        CharacterLib.luffy(ch);
+        //CharacterLib.luffy(ch);
+        CharacterLib.zoro(ch); 
         ch.initialize();
 
         en = new Enemy();

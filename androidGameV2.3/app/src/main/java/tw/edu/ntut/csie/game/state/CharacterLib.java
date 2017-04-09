@@ -42,5 +42,8 @@ public class CharacterLib {
         ch.addAttackReverse(R.drawable.luffy_attack07_r);
     }
 
-
+    public static void zoro(Character ch) {
+        ch.loadNormal(R.drawable.zoro_0);
+        ch.loadNormalReverse(R.drawable.zoro_0_r);
+    }
 }
