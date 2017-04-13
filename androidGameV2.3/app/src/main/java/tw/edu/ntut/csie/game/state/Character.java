@@ -5,8 +5,8 @@ import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.GameObject;
 
 public class Character implements GameObject {
-    private MovingBitmap ch;
-    private MovingBitmap ch_r;
+    private Animation ch;
+    private Animation ch_r;
     private Animation chRun;
     private Animation chRun_r;
     private Animation chAttack;
@@ -29,8 +29,8 @@ public class Character implements GameObject {
     public int[] attackArea = new int[4];
 
     public Character() {
-        ch = new MovingBitmap();
-        ch_r = new MovingBitmap();
+        ch = new Animation();
+        ch_r = new Animation();
 
         chRun = new Animation();
         chRun_r = new Animation();
@@ -53,11 +53,11 @@ public class Character implements GameObject {
 
 
     //Character normal bitmap loadin
-    public void loadNormal(int resId) {
-        ch.loadBitmap(resId);
+    public void addNormal(int resId) {
+        ch.addFrame(resId);
     }
-    public void loadNormalReverse(int resId) {
-        ch_r.loadBitmap(resId);
+    public void addNormalReverse(int resId) {
+        ch_r.addFrame(resId);
     }
 
     //Character Run add frame
@@ -107,6 +107,8 @@ public class Character implements GameObject {
         ch.setLocation(px, py);
         ch_r.setVisible(visible_r);
 
+        ch.setDelay(5);
+        ch_r.setDelay(5);
         chRun.setDelay(2);
         chRun_r.setDelay(2);
         chDefend.setDelay(2);
@@ -172,6 +174,8 @@ public class Character implements GameObject {
 
     @Override
     public void move() {
+        ch.move();
+        ch_r.move();
         chRun.move();
         chRun_r.move();
         chAttack.move();

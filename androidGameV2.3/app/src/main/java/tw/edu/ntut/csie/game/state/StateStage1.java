@@ -40,6 +40,7 @@ public class StateStage1 extends GameState {
 
         ch = new Character();
         CharacterLib.luffy(ch);
+        //CharacterLib.zoro(ch);
         ch.initialize();
 
         en = new Enemy();
