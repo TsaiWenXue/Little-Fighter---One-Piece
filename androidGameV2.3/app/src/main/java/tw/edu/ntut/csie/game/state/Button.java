@@ -20,12 +20,12 @@ public class Button implements GameObject, PointerEventHandler {
     private int jp_y = at_y - 80;
     private int s_x = at_x + 15;
     private int s_y = at_y - 170;
-    private int e_x = at_x - 130;
-    private int e_y = at_y - 80;
+    private int e_x = at_x - 135;
+    private int e_y = at_y - 85;
     private int f_x = at_x - 170;
     private int f_y = at_y;
-    private int g_x = s_x - 80;
-    private int g_y = s_y + 25;
+    private int g_x = s_x - 85;
+    private int g_y = s_y + 20;
 
     public static boolean atPointerPressed;
     public static boolean dfPointerPressed;
