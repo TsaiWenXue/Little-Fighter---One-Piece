@@ -250,4 +250,8 @@ public class Animation implements GameObject {
     public void setVisible(boolean visible) {
         _visible = visible;
     }
+    public static void changeInitialPx(Animation init, Animation lastAnimation, int px, int py){
+        px = init.getX() + (lastAnimation.getWidth() - init.getWidth());
+        init.setLocation(px,py);
+    }
 }

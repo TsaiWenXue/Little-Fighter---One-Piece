@@ -102,6 +102,43 @@ public class CharacterLib {
         ch.addEskill(R.drawable.luffy_e15);
         ch.addEskill(R.drawable.luffy_e16);
 
+        ch.addGskill(R.drawable.luffy_g01);
+        ch.addGskill(R.drawable.luffy_g02);
+        ch.addGskill(R.drawable.luffy_g03);
+        ch.addGskill(R.drawable.luffy_g04);
+        ch.addGskill(R.drawable.luffy_g05);
+        ch.addGskill(R.drawable.luffy_g06);
+        ch.addGskill(R.drawable.luffy_g07);
+        ch.addGskill(R.drawable.luffy_g08);
+        ch.addGskill(R.drawable.luffy_g09);
+        ch.addGskill(R.drawable.luffy_g10);
+        ch.addGskill(R.drawable.luffy_g11);
+        ch.addGskill(R.drawable.luffy_g12);
+        ch.addGskill(R.drawable.luffy_g13);
+        ch.addGskill(R.drawable.luffy_g14);
+        ch.addGskill(R.drawable.luffy_g15);
+        ch.addGskill(R.drawable.luffy_g16);
+        ch.addGskill(R.drawable.luffy_g17);
+
+        ch.addFskill(R.drawable.luffy_f01);
+        ch.addFskill(R.drawable.luffy_f02);
+        ch.addFskill(R.drawable.luffy_f03);
+        ch.addFskill(R.drawable.luffy_f04);
+        ch.addFskill(R.drawable.luffy_f05);
+        ch.addFskill(R.drawable.luffy_f06);
+        ch.addFskill(R.drawable.luffy_f07);
+        ch.addFskill(R.drawable.luffy_f08);
+        ch.addFskill(R.drawable.luffy_f09);
+        ch.addFskill(R.drawable.luffy_f10);
+        ch.addFskill(R.drawable.luffy_f11);
+        ch.addFskill(R.drawable.luffy_f12);
+        ch.addFskill(R.drawable.luffy_f13);
+        ch.addFskill(R.drawable.luffy_f14);
+        ch.addFskill(R.drawable.luffy_f15);
+        ch.addFskill(R.drawable.luffy_f16);
+        ch.addFskill(R.drawable.luffy_f17);
+        ch.addFskill(R.drawable.luffy_f18);
+
     }
 
     public static void zoro(Character ch) {

@@ -17,6 +17,10 @@ public class Character implements GameObject {
     private Animation chJump_r;
     private Animation ch_Eskill;
     private Animation ch_Eskill_r;
+    private Animation ch_Gskill;
+    private Animation ch_Gskill_r;
+    private Animation ch_Fskill;
+    private Animation ch_Fskill_r;
 
 
     private int px, py;
@@ -26,6 +30,8 @@ public class Character implements GameObject {
     public boolean attack = false, attack_r = false;
     public boolean jump = false, jump_r = false;
     public boolean e = false, e_r = false;
+    public boolean g = false, g_r = false;
+    public boolean f = false, f_r = false;
     public int[] attackArea = new int[4];
 
     public Character() {
@@ -42,6 +48,10 @@ public class Character implements GameObject {
         chJump_r = new Animation();
         ch_Eskill = new Animation();
         ch_Eskill_r =new Animation();
+        ch_Gskill = new Animation();
+        ch_Gskill_r = new Animation();
+        ch_Fskill = new Animation();
+        ch_Fskill_r = new Animation();
 
         px = 400; py = 200;
     }
@@ -98,6 +108,19 @@ public class Character implements GameObject {
       ch_Eskill_r.addFrame(resId);
     }
 
+    public void addGskill(int resId){
+      ch_Gskill.addFrame(resId);
+    }
+    public void addGskillReverse(int resId){
+      ch_Gskill_r.addFrame(resId);
+    }
+    public void addFskill(int resId){
+      ch_Fskill.addFrame(resId);
+    }
+    public void addFskillReverse(int resId){
+      ch_Fskill_r.addFrame(resId);
+    }
+
     public void initialize() {
         visible = true;
         visible_r = false;
@@ -113,7 +136,12 @@ public class Character implements GameObject {
         chRun_r.setDelay(2);
         chDefend.setDelay(2);
         chDefend_r.setDelay(2);
-        ch_Eskill.setDelay(8);
+        ch_Eskill.setDelay(2);
+        ch_Eskill_r.setDelay(2);
+        ch_Gskill.setDelay(2);
+        ch_Gskill_r.setDelay(2);
+        ch_Fskill.setDelay(2);
+        ch_Fskill_r.setDelay(2);
 
         chAttack.setRepeating(false);
         chAttack_r.setRepeating(false);
@@ -123,6 +151,10 @@ public class Character implements GameObject {
         chJump_r.setRepeating(false);
         ch_Eskill.setRepeating(false);
         ch_Eskill_r.setRepeating(false);
+        ch_Gskill.setRepeating(false);
+        ch_Gskill_r.setRepeating(false);
+        ch_Fskill.setRepeating(false);
+        ch_Fskill_r.setRepeating(false);
 
         chRun.setVisible(run);
         chRun_r.setVisible(run_r);
@@ -134,6 +166,10 @@ public class Character implements GameObject {
         chJump_r.setVisible(Button.jpPointerPressed);
         ch_Eskill.setVisible(Button.ePointerPressed);
         ch_Eskill_r.setVisible(Button.ePointerPressed);
+        ch_Gskill.setVisible(Button.gPointerPressed);
+        ch_Gskill_r.setVisible(Button.gPointerPressed);
+        ch_Fskill.setVisible(Button.fPointerPressed);
+        ch_Fskill_r.setVisible(Button.fPointerPressed);
 
         chAttack.setCurrentFrameIndex(-1);
         chAttack_r.setCurrentFrameIndex(-1);
@@ -143,6 +179,10 @@ public class Character implements GameObject {
         chJump_r.setCurrentFrameIndex(-1);
         ch_Eskill.setCurrentFrameIndex(-1);
         ch_Eskill_r.setCurrentFrameIndex(-1);
+        ch_Gskill.setCurrentFrameIndex(-1);
+        ch_Gskill_r.setCurrentFrameIndex(-1);
+        ch_Fskill.setCurrentFrameIndex(-1);
+        ch_Fskill_r.setCurrentFrameIndex(-1);
 
     }
 
@@ -170,6 +210,10 @@ public class Character implements GameObject {
         chJump_r.show();
         ch_Eskill.show();
         ch_Eskill_r.show();
+        ch_Gskill.show();
+        ch_Gskill_r.show();
+        ch_Fskill.show();
+        ch_Fskill_r.show();
     }
 
     @Override
@@ -186,6 +230,10 @@ public class Character implements GameObject {
         chJump_r.move();
         ch_Eskill.move();
         ch_Eskill_r.move();
+        ch_Gskill.move();
+        ch_Gskill_r.move();
+        ch_Fskill.move();
+        ch_Fskill_r.move();
 
         //Let Character move base on navigation
         if (chAttack_r.getCurrentFrameIndex() == -1 && chAttack.getCurrentFrameIndex() == -1) {
@@ -213,6 +261,10 @@ public class Character implements GameObject {
         chJump_r.setLocation(px,py-137);
         ch_Eskill.setLocation(px,py);
         ch_Eskill_r.setLocation(px,py);
+        ch_Gskill.setLocation(px,py);
+        ch_Gskill_r.setLocation(px,py);
+        ch_Fskill.setLocation(px,py);
+        ch_Fskill_r.setLocation(px,py);
 
         if(chAttack_r.getCurrentFrameIndex() >= 0)
             chAttack_r.setLocation( (px - chAttack_r.getWidth() + ch_r.getWidth()) ,py);
@@ -414,7 +466,6 @@ public class Character implements GameObject {
             chRun.setVisible(run);
             ch_Eskill.reset();
 
-
         }
         else if (Button.ePointerPressed == true && (visible_r == true || run_r == true)){
             visible = false;
@@ -440,6 +491,85 @@ public class Character implements GameObject {
             ch_r.setVisible(visible_r);
         }
 
+        //character Gskill perform
+        if (Button.gPointerPressed == true && (visible == true || run == true)){
+
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
+            ch_Gskill.setVisible(Button.gPointerPressed);
+
+            ch.setVisible(visible);
+            ch_r.setVisible(visible_r);
+            chRun_r.setVisible(run_r);
+            chRun.setVisible(run);
+            ch_Gskill.reset();
+
+        }
+        else if (Button.gPointerPressed == true && (visible_r == true || run_r == true)){
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
+
+            ch_Gskill_r.setVisible(Button.gPointerPressed);
+            ch.setVisible(visible);
+            ch_r.setVisible(visible_r);
+            chRun_r.setVisible(run_r);
+            chRun.setVisible(run);
+            ch_Gskill_r.reset();
+
+        }
+
+        if ( ch_Gskill.isLastFrame() && (visible_r == false)) {
+            visible = true;
+            ch.setVisible(visible);
+        }
+        else if ( ch_Gskill_r.isLastFrame() ) {
+            visible_r = true;
+            ch_r.setVisible(visible_r);
+        }
+
+        //character Fskill perform
+        if (Button.fPointerPressed == true && (visible == true || run == true)){
+
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
+            ch_Fskill.setVisible(Button.fPointerPressed);
+
+            ch.setVisible(visible);
+            ch_r.setVisible(visible_r);
+            chRun_r.setVisible(run_r);
+            chRun.setVisible(run);
+            ch_Fskill.reset();
+
+        }
+        else if (Button.fPointerPressed == true && (visible_r == true || run_r == true)){
+            visible = false;
+            visible_r = false;
+            run = false;
+            run_r = false;
+
+            ch_Fskill_r.setVisible(Button.fPointerPressed);
+            ch.setVisible(visible);
+            ch_r.setVisible(visible_r);
+            chRun_r.setVisible(run_r);
+            chRun.setVisible(run);
+            ch_Fskill_r.reset();
+
+        }
+
+        if ( ch_Fskill.isLastFrame() && (visible_r == false)) {
+            visible = true;
+            ch.setVisible(visible);
+        }
+        else if ( ch_Fskill_r.isLastFrame() ) {
+            visible_r = true;
+            ch_r.setVisible(visible_r);
+        }
     }
 
     @Override
@@ -456,6 +586,10 @@ public class Character implements GameObject {
         chJump_r.release();
         ch_Eskill.release();
         ch_Eskill_r.release();
+        ch_Gskill.release();
+        ch_Gskill_r.release();
+        ch_Fskill.release();
+        ch_Fskill_r.release();
 
         ch = null;
         ch_r = null;
@@ -469,5 +603,9 @@ public class Character implements GameObject {
         chJump_r = null;
         ch_Eskill = null;
         ch_Eskill_r = null;
+        ch_Gskill = null;
+        ch_Gskill_r = null;
+        ch_Fskill = null;
+        ch_Fskill_r = null;
     }
 }

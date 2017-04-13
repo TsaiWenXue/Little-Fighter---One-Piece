@@ -207,7 +207,4 @@ public class MovingBitmap implements GameObject {
         return (touchX > bmp.getX() && touchX < bmp.getX() + bmp.getWidth() &&
                 touchY > bmp.getY() && touchY < bmp.getY() + bmp.getHeight());
     }
-    public static void changeInitialPx(int initX,int laterX){
-        
-    }
 }
