@@ -87,7 +87,13 @@ public class CharacterLib {
     }
 
     public static void zoro(Character ch) {
-       // ch.loadNormal(R.drawable.zoro);
-        //ch.loadNormalReverse(R.drawable.zoro_r);
+        ch.addNormal(R.drawable.zoro_00);
+        ch.addNormal(R.drawable.zoro_01);
+        ch.addNormal(R.drawable.zoro_02);
+        ch.addNormal(R.drawable.zoro_03);
+        ch.addNormalReverse(R.drawable.zoro_00_r);
+        ch.addNormalReverse(R.drawable.zoro_01_r);
+        ch.addNormalReverse(R.drawable.zoro_02_r);
+        ch.addNormalReverse(R.drawable.zoro_03_r);
     }
 }
