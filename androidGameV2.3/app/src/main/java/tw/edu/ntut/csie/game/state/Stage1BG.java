@@ -23,6 +23,10 @@ public class Stage1BG {
         initialize();
     }
 
+    public int getX() {
+        return roadPx;
+    }
+
     public void initialize() {
         px = 0; py = 0;
         _sky.setLocation(px, py);

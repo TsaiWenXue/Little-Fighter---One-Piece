@@ -3,13 +3,10 @@ package tw.edu.ntut.csie.game.state;
 import java.util.List;
 import java.util.Map;
 
-import tw.edu.ntut.csie.game.Game;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
 import tw.edu.ntut.csie.game.engine.GameEngine;
-import tw.edu.ntut.csie.game.core.MovingBitmap;
-import tw.edu.ntut.csie.game.extend.Animation;
 
 public class StateStage1 extends GameState {
     private Stage1BG bg;
@@ -39,8 +36,14 @@ public class StateStage1 extends GameState {
         button.initialize();
 
         ch = new Character();
-        CharacterLib.luffy(ch);
-        //CharacterLib.zoro(ch);
+        switch (StateRun.character) {
+            case 0:
+                CharacterLib.luffy(ch);
+                break;
+            case 1:
+                CharacterLib.zoro(ch);
+                break;
+        }
         ch.initialize();
 
         en = new Enemy();

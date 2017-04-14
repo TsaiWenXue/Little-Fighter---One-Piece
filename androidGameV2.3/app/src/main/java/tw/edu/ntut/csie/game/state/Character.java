@@ -196,7 +196,7 @@ public class Character implements GameObject {
         return ch.getY();
     }
 
-    @Override
+
     public void show(){
         ch.show();
         ch_r.show();
