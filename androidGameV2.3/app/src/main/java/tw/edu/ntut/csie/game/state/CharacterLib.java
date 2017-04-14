@@ -150,5 +150,25 @@ public class CharacterLib {
         ch.addNormalReverse(R.drawable.zoro_01_r);
         ch.addNormalReverse(R.drawable.zoro_02_r);
         ch.addNormalReverse(R.drawable.zoro_03_r);
+
+        ch.addRun(R.drawable.zoro_run00);
+        ch.addRun(R.drawable.zoro_run01);
+        ch.addRun(R.drawable.zoro_run02);
+        ch.addRun(R.drawable.zoro_run03);
+        ch.addRunReverse(R.drawable.zoro_run00_r);
+        ch.addRunReverse(R.drawable.zoro_run01_r);
+        ch.addRunReverse(R.drawable.zoro_run02_r);
+        ch.addRunReverse(R.drawable.zoro_run03_r);
+
+        ch.addAttack(R.drawable.zoro_attack00);
+        ch.addAttack(R.drawable.zoro_attack01);
+        ch.addAttack(R.drawable.zoro_attack02);
+        ch.addAttack(R.drawable.zoro_attack03);
+        ch.addAttack(R.drawable.zoro_attack04);
+        ch.addAttackReverse(R.drawable.zoro_attack00_r);
+        ch.addAttackReverse(R.drawable.zoro_attack01_r);
+        ch.addAttackReverse(R.drawable.zoro_attack02_r);
+        ch.addAttackReverse(R.drawable.zoro_attack03_r);
+        ch.addAttackReverse(R.drawable.zoro_attack04_r);
     }
 }
