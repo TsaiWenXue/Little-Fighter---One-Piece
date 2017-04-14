@@ -52,35 +52,33 @@ public class Navigation implements GameObject, PointerEventHandler {
 
     @Override
     public boolean pointerPressed(List<Pointer> pointers){
-      //  if(pointers.size() >= 1){
-          /*  int touchX, touchY;
-            for(int i = 0; i < pointers.size(); i++){
-                touchX = pointers.get(i).getX();
-                touchY = pointers.get(i).getY();
-                if (MovingBitmap.imageTouched(touchX, touchY, button_controller)) {
-                    _grab = true;
-                    break;
-                }
-               else{
-                    _grab = false;
-                }
-            }*/
           int touchX = pointers.get(0).getX();
           int touchY = pointers.get(0).getY();
           if (touchX > button_controller.getX() && touchX < button_controller.getX() + button_controller.getWidth() &&
                   touchY > button_controller.getY() && touchY < button_controller.getY() + button_controller.getHeight()) {
-              _grab = true;
-          } else {
-              _grab = false;
+                 controllerPx = pointers.get(0).getX() - button_controller.getWidth() / 2;
+                 controllerPy = pointers.get(0).getY() - button_controller.getHeight() / 2;
+                 if ((controllerPx - initialCtrlPx) * (controllerPx - initialCtrlPx) + (controllerPy - initialCtrlPy) * (controllerPy - initialCtrlPy) >=
+                    (button_controller.getWidth() / 2) * (button_controller.getWidth() / 2)) {
+                         double distant = Math.sqrt( (controllerPx - initialCtrlPx) * (controllerPx - initialCtrlPx) +
+                                                  (controllerPy - initialCtrlPy) * (controllerPy - initialCtrlPy) );
+                      controllerPx = (int)((controllerPx - initialCtrlPx) * ((button_controller.getWidth()/2) / distant) + initialCtrlPx);
+                      controllerPy = (int)((controllerPy - initialCtrlPy) * ((button_controller.getWidth()/2) / distant) + initialCtrlPy);
+                  }
+              button_controller.setLocation(controllerPx, controllerPy);
+
           }
-        
-        return true;
+     /* }/* else {
+              _grab = false;
+          }*/
+
+        return false;
     }
     @Override
     public boolean pointerMoved(List<Pointer> pointers){
-        if (_grab){
+        //if (_grab){
 
-            controllerPx = pointers.get(0).getX() - button_controller.getWidth() / 2;
+        /*    controllerPx = pointers.get(0).getX() - button_controller.getWidth() / 2;
             controllerPy = pointers.get(0).getY() - button_controller.getHeight() / 2;
             if ((controllerPx - initialCtrlPx) * (controllerPx - initialCtrlPx) + (controllerPy - initialCtrlPy) * (controllerPy - initialCtrlPy) >=
                 (button_controller.getWidth() / 2) * (button_controller.getWidth() / 2)) {
@@ -91,7 +89,7 @@ public class Navigation implements GameObject, PointerEventHandler {
                 }
             button_controller.setLocation(controllerPx, controllerPy);
 
-        }
+        }*/
         return false;
 
     }

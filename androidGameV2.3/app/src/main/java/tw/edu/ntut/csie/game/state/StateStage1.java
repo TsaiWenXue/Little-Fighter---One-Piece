@@ -112,6 +112,7 @@ public class StateStage1 extends GameState {
     @Override
     public boolean pointerMoved(List<Pointer> pointers) {
         controller.pointerMoved(pointers);
+        button.pointerMoved(pointers);
         return false;
     }
 
