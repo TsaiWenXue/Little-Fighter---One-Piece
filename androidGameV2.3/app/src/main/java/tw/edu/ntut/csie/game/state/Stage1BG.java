@@ -58,7 +58,7 @@ public class Stage1BG {
         _road3.setLocation(roadPx+800, roadPy);
     }
 
-    public void move(Character ch) {
+    public void move(int chPx) {
         _wave.move();
 
         if (roadPx < 800 && roadPx > -800)
@@ -67,8 +67,8 @@ public class Stage1BG {
             roadPx = 800;
         else if (roadPx < -800)
             roadPx = -800;
-        else if ( (roadPx == 800 && ch.getX() >= 410) ||
-                  (roadPx == -800 && ch.getX() <= 390) )
+        else if ( (roadPx == 800 && chPx >= 410) ||
+                  (roadPx == -800 && chPx <= 390) )
             roadPx -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
         _road1.setLocation(roadPx-800, roadPy);
         _road2.setLocation(roadPx, roadPy);
