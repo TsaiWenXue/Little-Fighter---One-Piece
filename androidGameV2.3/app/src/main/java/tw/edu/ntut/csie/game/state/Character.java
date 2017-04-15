@@ -320,6 +320,7 @@ public class Character implements GameObject {
                 chRun.setVisible(run);
             }
         }
+
         //Character Attack perform
         if (Button.atPointerPressed == true && (visible == true || run == true)){
             visible = false;
