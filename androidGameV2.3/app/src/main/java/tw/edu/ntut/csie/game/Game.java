@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import tw.edu.ntut.csie.game.engine.GameEngine;
 import tw.edu.ntut.csie.game.state.StateOver;
 import tw.edu.ntut.csie.game.state.StateReady;
-import tw.edu.ntut.csie.game.state.StateRun;
+import tw.edu.ntut.csie.game.state.CharacterSelectState;
 import tw.edu.ntut.csie.game.state.StateStage1;
 
 import static android.hardware.Sensor.TYPE_ACCELEROMETER;
@@ -112,7 +112,7 @@ public class Game extends Activity {
             //_engine.setDisplayRatio(1.0f);
             // TODO 註冊狀態處理者
             _engine.registerGameState(INITIAL_STATE, new StateReady(_engine));
-            _engine.registerGameState(RUNNING_STATE, new StateRun(_engine));
+            _engine.registerGameState(RUNNING_STATE, new CharacterSelectState(_engine));
             _engine.registerGameState(STAGE1_STATE, new StateStage1(_engine));
             _engine.registerGameState(OVER_STATE, new StateOver(_engine));
             _engine.setGameState(INITIAL_STATE);

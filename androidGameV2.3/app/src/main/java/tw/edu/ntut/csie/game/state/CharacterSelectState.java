@@ -9,10 +9,8 @@ import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
 import tw.edu.ntut.csie.game.engine.GameEngine;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
-import tw.edu.ntut.csie.game.extend.BitmapButton;
-import tw.edu.ntut.csie.game.extend.ButtonEventHandler;
 
-public class StateRun extends GameState {
+public class CharacterSelectState extends GameState {
     private Audio _music;
 
     private MovingBitmap background;
@@ -55,7 +53,7 @@ public class StateRun extends GameState {
     public static int stage = 0;
     public static int difficult = 0;
 
-    public StateRun(GameEngine engine) {
+    public CharacterSelectState(GameEngine engine) {
         super(engine);
     }
 
@@ -138,6 +136,7 @@ public class StateRun extends GameState {
 
     @Override
     public void release() {
+
         _music.release();
         background.release();
 
@@ -164,7 +163,7 @@ public class StateRun extends GameState {
         background = null;
 
       //  luffy = null; //luffyName = null;
-      //  zoro = null; //zoroName = null;
+      //  Zoro = null; //zoroName = null;
 
       //  characterLeft = null;
       //  characterRight = null;
@@ -180,6 +179,7 @@ public class StateRun extends GameState {
 
         // easy = null;
       //  normal = null;
+
     }
 
     @Override
