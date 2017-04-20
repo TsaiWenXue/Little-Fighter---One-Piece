@@ -3,7 +3,7 @@ package tw.edu.ntut.csie.game.state;
 import java.util.List;
 import java.util.Map;
 
-import tw.edu.ntut.csie.game.Chatacter.Luffy;
+import tw.edu.ntut.csie.game.Character.*;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
@@ -16,10 +16,10 @@ public class StateStage1 extends GameState {
     private Navigation controller;
     private Button button;
 
-    private Character ch;
+    //private Character ch;
     private Enemy en;
 
-    private Luffy luffy;
+    private CharacterObject ch;
 
     private int chPx;
 
@@ -41,12 +41,12 @@ public class StateStage1 extends GameState {
         button.initialize();
 
         /*ch = new Character();
-        switch (StateRun.character) {
+        switch (CharacterSelectState.character) {
             case 0:
                 CharacterLib.luffy(ch);
                 break;
             case 1:
-                CharacterLib.zoro(ch);
+                CharacterLib.Zoro(ch);
                 break;
         }
         ch.initialize();*/
@@ -60,8 +60,9 @@ public class StateStage1 extends GameState {
     @Override
     public void move() {
         //ch.move();
-        characterMove(bg.getX());
+//        characterMove(bg.getX());
         bg.move(chPx);
+        ch.move(bg.getX());
         //en.move(ch);
     }
 
@@ -70,8 +71,9 @@ public class StateStage1 extends GameState {
         bg.show();
         controller.show();
         //ch.show();
-        characterShow();
+//        characterShow();
         button.show();
+        ch.show();
         //en.show();
     }
 
@@ -89,7 +91,9 @@ public class StateStage1 extends GameState {
         controller = null;
         button = null;
 
-        characterRelease();
+//        characterRelease();
+        ch.release();
+        ch = null;
 
         //en.release();
         //en = null;
@@ -146,17 +150,19 @@ public class StateStage1 extends GameState {
     }
 
     public void selectCharacter() {
-        switch (StateRun.character) {
+        switch (CharacterSelectState.character) {
             case 0:
-                luffy = new Luffy();
-                luffy.initialize();
+                ch = new Luffy();
                 break;
-
+            case 1:
+                ch = new Zoro();
+                break;
         }
+        ch.initialize();
     }
-
+/*
     public void characterShow() {
-        switch (StateRun.character) {
+        switch (CharacterSelectState.character) {
             case 0:
                 luffy.show();
                 break;
@@ -164,7 +170,7 @@ public class StateStage1 extends GameState {
     }
 
     public void characterMove(int roadPx) {
-        switch (StateRun.character) {
+        switch (CharacterSelectState.character) {
             case 0:
                 luffy.move(roadPx);
                 chPx = luffy.getX();
@@ -173,12 +179,12 @@ public class StateStage1 extends GameState {
     }
 
     public void characterRelease() {
-        switch (StateRun.character) {
+        switch (CharacterSelectState.character) {
             case 0:
                 luffy.release();
                 luffy = null;
                 break;
         }
     }
-
+*/
 }

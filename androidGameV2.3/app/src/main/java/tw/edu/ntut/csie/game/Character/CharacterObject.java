@@ -1,6 +1,4 @@
-package tw.edu.ntut.csie.game.Chatacter;
-
-import tw.edu.ntut.csie.game.GameObject;
+package tw.edu.ntut.csie.game.Character;
 
 /**
  * Created by huyuxiang on 2017/4/14.

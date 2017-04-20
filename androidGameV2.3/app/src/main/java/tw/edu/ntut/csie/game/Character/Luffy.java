@@ -1,4 +1,4 @@
-package tw.edu.ntut.csie.game.Chatacter;
+package tw.edu.ntut.csie.game.Character;
 
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.extend.Animation;
