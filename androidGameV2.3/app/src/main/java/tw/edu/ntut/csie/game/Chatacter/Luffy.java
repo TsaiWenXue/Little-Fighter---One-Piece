@@ -378,7 +378,7 @@ public class Luffy implements CharacterObject {
             setVisible();
             luffyFSkill_r.setVisible(Button.fPointerPressed);
             luffyFSkill_r.reset();
-            FSkilling = true;
+            FSkilling_r = true;
         }
 
         if ( luffyFSkill.isLastFrame() && (FSkilling == true)) {
@@ -624,6 +624,23 @@ public class Luffy implements CharacterObject {
         luffyESkill.addFrame(R.drawable.luffy_e14);
         luffyESkill.addFrame(R.drawable.luffy_e15);
         luffyESkill.addFrame(R.drawable.luffy_e16);
+        luffyESkill_r.addFrame(R.drawable.luffy_e00_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e01_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e02_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e03_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e04_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e05_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e06_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e07_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e08_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e09_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e10_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e11_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e12_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e13_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e14_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e15_r);
+        luffyESkill_r.addFrame(R.drawable.luffy_e16_r);
 
         //luffy add Gskill frame
         luffyGSkill.addFrame(R.drawable.luffy_g01);
@@ -643,6 +660,23 @@ public class Luffy implements CharacterObject {
         luffyGSkill.addFrame(R.drawable.luffy_g15);
         luffyGSkill.addFrame(R.drawable.luffy_g16);
         luffyGSkill.addFrame(R.drawable.luffy_g17);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g01_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g02_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g03_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g04_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g05_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g06_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g07_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g08_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g09_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g10_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g11_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g12_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g13_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g14_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g15_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g16_r);
+        luffyGSkill_r.addFrame(R.drawable.luffy_g17_r);
 
         //luffy add Fskill frame
         luffyFSkill.addFrame(R.drawable.luffy_f01);
@@ -663,6 +697,24 @@ public class Luffy implements CharacterObject {
         luffyFSkill.addFrame(R.drawable.luffy_f16);
         luffyFSkill.addFrame(R.drawable.luffy_f17);
         luffyFSkill.addFrame(R.drawable.luffy_f18);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f01_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f02_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f03_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f04_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f05_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f06_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f07_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f08_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f09_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f10_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f11_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f12_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f13_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f14_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f15_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f16_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f17_r);
+        luffyFSkill_r.addFrame(R.drawable.luffy_f18_r);
     }
 
     //Set all luffy animations delay
