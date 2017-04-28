@@ -131,6 +131,7 @@ public class StateStage1 extends GameState {
                 ch = new Luffy();
                 break;
             case 1:
+                CharacterSelectState.character = 0;
                 ch = new Zoro();
                 break;
         }
