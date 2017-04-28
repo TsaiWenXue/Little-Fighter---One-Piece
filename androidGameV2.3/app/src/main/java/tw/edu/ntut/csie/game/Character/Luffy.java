@@ -4,6 +4,7 @@ import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.state.Button;
 import tw.edu.ntut.csie.game.state.Navigation;
+import tw.edu.ntut.csie.game.state.Stage1BG;
 
 /**
  * Created by huyuxiang on 2017/4/14.
@@ -282,7 +283,6 @@ public class Luffy implements CharacterObject {
     //E skill perform
     public void ESkill() {
         if (Button.ePointerPressed == true && (visible == true || runVisible == true)) {
-
             visible = false;
             visible_r = false;
             runVisible = false;
@@ -306,6 +306,7 @@ public class Luffy implements CharacterObject {
         }
 
         if ( luffyESkill.isLastFrame() && (ESkilling == true)) {
+        //    luffyESkill.changeInitialPx(Stage1BG.roadPx);
             visible = true;
             setVisible();
             ESkilling = false;
