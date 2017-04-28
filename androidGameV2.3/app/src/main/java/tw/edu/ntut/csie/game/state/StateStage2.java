@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import tw.edu.ntut.csie.game.Character.*;
+import tw.edu.ntut.csie.game.Enemy.EnemyObject;
+import tw.edu.ntut.csie.game.Enemy.Marin;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
@@ -16,8 +18,7 @@ public class StateStage2 extends GameState{
     private Navigation controller;
     private Button button;
 
-    //private Character ch;
-    private Enemy en;
+    private EnemyObject en;
 
     private CharacterObject ch;
 
@@ -40,12 +41,15 @@ public class StateStage2 extends GameState{
         button.initialize();
 
         selectCharacter();
+        en = new Marin();
+        en.initialize();
     }
 
     @Override
     public void move() {
         bg.move(ch.getX());
         ch.move(bg.getX());
+        en.move(ch);
     }
 
     @Override
@@ -54,6 +58,7 @@ public class StateStage2 extends GameState{
         controller.show();
         button.show();
         ch.show();
+        en.show();
     }
 
     @Override
@@ -63,6 +68,7 @@ public class StateStage2 extends GameState{
         controller.release();
         button.release();
         ch.release();
+        en.release();
     }
     @Override
     public void keyPressed(int keyCode) {
