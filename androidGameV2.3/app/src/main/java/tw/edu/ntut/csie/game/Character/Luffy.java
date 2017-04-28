@@ -32,7 +32,7 @@ public class Luffy implements CharacterObject {
     private boolean visible = true, visible_r = false;
     private boolean runVisible = false, runVisible_r = false;
 
-    private boolean attacking = false, attacking_r = false;
+    public boolean attacking = false, attacking_r = false;
     private boolean defending = false, defending_r = false;
     private boolean jumping = false, jumping_r = false;
     private boolean ESkilling = false, ESkilling_r = false;
@@ -40,8 +40,17 @@ public class Luffy implements CharacterObject {
     private boolean FSkilling = false, FSkilling_r = false;
 
 
+    public boolean isAttacking() {
+        return attacking;
+    }
+
+    public boolean isAttacking_r() {
+        return attacking_r;
+    }
+
 
     private int[] attackArea = new int[4];
+    private int damage = 0;
 
 
     public Luffy () {
@@ -81,6 +90,7 @@ public class Luffy implements CharacterObject {
     public int getY() {
         return py;
     }
+    public int getDamage() {return damage;}
 
     public int[] getAttackArea() {
         return attackArea;
@@ -123,23 +133,14 @@ public class Luffy implements CharacterObject {
     }
 
     public void release() {
-        luffy.release();            luffy_r.release();
-        luffyRun.release();         luffyRun_r.release();
-        luffyAttack.release();      luffyAttack_r.release();
-        luffyDefend.release();      luffyDefend_r.release();
-        luffyJump.release();        luffyJump_r.release();
-        luffyESkill.release();      luffyESkill_r.release();
-        luffyGSkill.release();      luffyGSkill_r.release();
-        luffyFSkill.release();      luffyFSkill_r.release();
-
-        luffy = null;               luffy_r = null;
-        luffyRun = null;            luffyRun_r = null;
-        luffyAttack = null;         luffyAttack_r = null;
-        luffyDefend = null;         luffyDefend_r = null;
-        luffyJump = null;           luffyJump_r = null;
-        luffyESkill = null;         luffyESkill_r = null;
-        luffyGSkill = null;         luffyGSkill_r = null;
-        luffyFSkill = null;         luffyFSkill_r = null;
+//        luffy.release();            luffy_r.release();
+//        luffyRun.release();         luffyRun_r.release();
+//        luffyAttack.release();      luffyAttack_r.release();
+//        luffyDefend.release();      luffyDefend_r.release();
+//        luffyJump.release();        luffyJump_r.release();
+//        luffyESkill.release();      luffyESkill_r.release();
+//        luffyGSkill.release();      luffyGSkill_r.release();
+//        luffyFSkill.release();      luffyFSkill_r.release();
     }
 
 
@@ -405,6 +406,7 @@ public class Luffy implements CharacterObject {
             luffyAttack.setVisible(Button.atPointerPressed);
             luffyAttack.reset();
             attacking = true;
+            damage = 10;
         }
         else if (Button.atPointerPressed == true && (visible_r == true || runVisible_r == true)){
             visible = false;
@@ -416,20 +418,24 @@ public class Luffy implements CharacterObject {
             luffyAttack_r.setVisible(Button.atPointerPressed);
             luffyAttack_r.reset();
             attacking_r = true;
+            damage = 10;
         }
 
         if ( luffyAttack.isLastFrame() && (attacking == true)) {
             visible = true;
             setVisible();
             attacking = false;
+            damage = 0;
         }
         else if ( luffyAttack_r.isLastFrame() && attacking_r == true) {
             visible_r = true;
             setVisible();
             attacking_r = false;
+            damage = 0;
         }
         if(attacking_r)
             luffyAttack_r.setLocation( (px - luffyAttack_r.getWidth() + luffy_r.getWidth()) ,py);
+        Button.atPointerPressed = false;
     }
 
     //Defending perform

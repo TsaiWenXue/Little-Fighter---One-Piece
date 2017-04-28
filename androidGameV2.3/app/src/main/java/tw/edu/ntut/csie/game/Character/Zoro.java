@@ -22,7 +22,15 @@ public class Zoro implements CharacterObject {
     private boolean attacking = false, attacking_r = false;
 
     private int[] attackArea = new int[4];
+    private int damage = 0;
 
+    public boolean isAttacking() {
+        return attacking;
+    }
+
+    public boolean isAttacking_r() {
+        return attacking_r;
+    }
 
     public Zoro() {
         zoro = new Animation();
@@ -51,6 +59,9 @@ public class Zoro implements CharacterObject {
     public int getY() {
         return py;
     }
+    public int getDamage() { return damage; }
+
+    public int[] getAttackArea() { return attackArea; }
 
     public void show() {
         zoro.show();           zoro_r.show();
@@ -72,7 +83,9 @@ public class Zoro implements CharacterObject {
     }
 
     public void release() {
-
+//        zoro.release();         zoro_r.release();
+//        zoroRun.release();      zoroRun_r.release();
+//        zoroAttack.release();   zoroAttack_r.release();
     }
 
 

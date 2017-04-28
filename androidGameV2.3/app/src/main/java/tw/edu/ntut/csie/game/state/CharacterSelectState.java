@@ -163,7 +163,7 @@ public class CharacterSelectState extends GameState {
         background = null;
 
       //  luffy = null; //luffyName = null;
-      //  Zoro = null; //zoroName = null;
+      //  zoro = null; //zoroName = null;
 
       //  characterLeft = null;
       //  characterRight = null;

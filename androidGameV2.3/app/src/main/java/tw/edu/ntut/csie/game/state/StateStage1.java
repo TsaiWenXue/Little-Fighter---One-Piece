@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import tw.edu.ntut.csie.game.Character.*;
+import tw.edu.ntut.csie.game.Enemy.EnemyObject;
+import tw.edu.ntut.csie.game.Enemy.Marin;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
@@ -16,12 +18,9 @@ public class StateStage1 extends GameState {
     private Navigation controller;
     private Button button;
 
-    //private Character ch;
-    private Enemy en;
 
     private CharacterObject ch;
-
-    private int chPx;
+    private EnemyObject en;
 
     public StateStage1(GameEngine engine) {
         super(engine);
@@ -40,63 +39,39 @@ public class StateStage1 extends GameState {
         controller.initialize();
         button.initialize();
 
-        /*ch = new Character();
-        switch (CharacterSelectState.character) {
-            case 0:
-                CharacterLib.luffy(ch);
-                break;
-            case 1:
-                CharacterLib.Zoro(ch);
-                break;
-        }
-        ch.initialize();*/
-        selectCharacter();
 
-        //en = new Enemy();
-        //EnemyLib.marin(en);
-        //en.initialize();
+        selectCharacter();
+        en = new Marin();
+        en.initialize();
     }
 
     @Override
     public void move() {
-        //ch.move();
-//        characterMove(bg.getX());
-        bg.move(chPx);
+        en.move(ch);
+        bg.move(ch.getX());
         ch.move(bg.getX());
-        //en.move(ch);
     }
 
     @Override
     public void show() {
         bg.show();
         controller.show();
-        //ch.show();
-//        characterShow();
         button.show();
+        en.show();
         ch.show();
-        //en.show();
     }
 
     @Override
     public void release() {
         bg.release();
-        bg = null;
         _music.release();
-        _music = null;
 
-        //ch.release();
+        ch.release();
         controller.release();
         button.release();
-        //ch = null;
-        controller = null;
-        button = null;
-
-//        characterRelease();
         ch.release();
-        ch = null;
 
-        //en.release();
-        //en = null;
+        en.release();
     }
     @Override
     public void keyPressed(int keyCode) {
@@ -161,31 +136,5 @@ public class StateStage1 extends GameState {
         }
         ch.initialize();
     }
-/*
-    public void characterShow() {
-        switch (CharacterSelectState.character) {
-            case 0:
-                luffy.show();
-                break;
-        }
-    }
 
-    public void characterMove(int roadPx) {
-        switch (CharacterSelectState.character) {
-            case 0:
-                luffy.move(roadPx);
-                chPx = luffy.getX();
-                break;
-        }
-    }
-
-    public void characterRelease() {
-        switch (CharacterSelectState.character) {
-            case 0:
-                luffy.release();
-                luffy = null;
-                break;
-        }
-    }
-*/
 }
