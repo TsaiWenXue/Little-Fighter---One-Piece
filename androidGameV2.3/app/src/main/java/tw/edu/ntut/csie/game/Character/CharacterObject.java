@@ -15,4 +15,12 @@ public interface CharacterObject {
     public void move(int roadPx) ;
 
     public void release();
+
+    public int[] getAttackArea();
+
+    public int getDamage();
+
+    public boolean isAttacking();
+    public boolean isAttacking_r();
+
 }
