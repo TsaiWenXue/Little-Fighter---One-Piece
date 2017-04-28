@@ -214,6 +214,7 @@ public class CharacterSelectState extends GameState {
                         changeState(Game.STAGE1_STATE);
                         break;
                         case 1:
+                        stage = 0;
                         changeState(Game.STAGE2_STATE);
                         break;
                 }
