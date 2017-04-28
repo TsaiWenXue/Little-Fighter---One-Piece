@@ -56,10 +56,10 @@ public class Stage2BG{
     }
 
     public void show() {
-        _sandback.show();
         _road1.show();
         _road2.show();
         _road3.show();
+        _sandback.show();
     }
 
     public void release(){
