@@ -21,7 +21,6 @@ public class StateStage2 extends GameState{
 
     private CharacterObject ch;
 
-    private int chPx;
 
     public StateStage2(GameEngine engine) {
         super(engine);
@@ -45,7 +44,7 @@ public class StateStage2 extends GameState{
 
     @Override
     public void move() {
-        bg.move(chPx);
+        bg.move(ch.getX());
         ch.move(bg.getX());
     }
 
