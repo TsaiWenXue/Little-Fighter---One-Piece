@@ -67,46 +67,7 @@ public class Marin implements EnemyObject {
                 deadVisible_r = true;
         }
         else {
-            if (ch.isAttacking_r()) {
-                if (px <= ch.getAttackArea()[3] && px + marin.getWidth() >= ch.getAttackArea()[0] &&
-                    py + marin.getHeight() >= ch.getAttackArea()[1] && py <= ch.getAttackArea()[2] &&
-                    !getHit) {
-                    marinHit.reset();
-                    visible = false;
-                    visible_r = false;
-                    hitVisible = true;
-                    healthPoint -= ch.getDamage();
-                    getHit = true;
-                }
-            } else if (ch.isAttacking()) {
-                if (px + marin.getWidth() >= ch.getAttackArea()[0] && px <= ch.getAttackArea()[3] &&
-                    py + marin.getHeight() >= ch.getAttackArea()[1] && py <= ch.getAttackArea()[2] &&
-                    !getHit_r) {
-                    marinHit_r.reset();
-                    visible = false;
-                    visible_r = false;
-                    hitVisible_r = true;
-                    healthPoint -= ch.getDamage();
-                    getHit_r = true;
-                }
-            }
-            if (marinHit.getCurrentFrameIndex() >= 0) {
-                px--;
-            } else if (marinHit_r.getCurrentFrameIndex() >= 0) {
-                px++;
-            }
-            if (marinHit.getCurrentFrameIndex() == -1 && marinHit_r.getCurrentFrameIndex() == -1) {
-                if (getHit_r) {
-                    visible_r = true;
-                    hitVisible_r = false;
-                    getHit_r = false;
-                } else if (getHit) {
-                    visible = true;
-                    hitVisible = true;
-                    getHit = false;
-                }
-            }
-
+            getHit(ch);
         }
         if (Stage1BG.roadPx < 800 && Stage1BG.roadPx > -800)
             px -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
@@ -152,35 +113,41 @@ public class Marin implements EnemyObject {
     public void getHit(CharacterObject ch) {
         if (ch.isAttacking_r()) {
             if (px <= ch.getAttackArea()[3] && px + marin.getWidth() >= ch.getAttackArea()[0] &&
-                    py + marin.getHeight() >= ch.getAttackArea()[1] && py <= ch.getAttackArea()[2]) {
+                    py + marin.getHeight() >= ch.getAttackArea()[1] && py <= ch.getAttackArea()[2] &&
+                    !getHit) {
                 marinHit.reset();
-                marin.setVisible(false);
-                marin_r.setVisible(false);
-                healthPoint -= 10;
+                visible = false;
+                visible_r = false;
+                hitVisible = true;
+                healthPoint -= ch.getDamage();
                 getHit = true;
             }
         } else if (ch.isAttacking()) {
             if (px + marin.getWidth() >= ch.getAttackArea()[0] && px <= ch.getAttackArea()[3] &&
-                    py + marin.getHeight() >= ch.getAttackArea()[1] && py <= ch.getAttackArea()[2]) {
+                    py + marin.getHeight() >= ch.getAttackArea()[1] && py <= ch.getAttackArea()[2] &&
+                    !getHit_r) {
                 marinHit_r.reset();
                 visible = false;
                 visible_r = false;
-                healthPoint -= 10;
+                hitVisible_r = true;
+                healthPoint -= ch.getDamage();
                 getHit_r = true;
             }
         }
         if (marinHit.getCurrentFrameIndex() >= 0) {
-            px++;
-        } else if (marinHit_r.getCurrentFrameIndex() >= 0) {
             px--;
+        } else if (marinHit_r.getCurrentFrameIndex() >= 0) {
+            px++;
         }
         if (marinHit.getCurrentFrameIndex() == -1 && marinHit_r.getCurrentFrameIndex() == -1) {
-            if (getHit) {
-                marin.setVisible(true);
-                getHit = false;
-            } else if (getHit_r) {
-                marin_r.setVisible(true);
+            if (getHit_r) {
+                visible_r = true;
+                hitVisible_r = false;
                 getHit_r = false;
+            } else if (getHit) {
+                visible = true;
+                hitVisible = true;
+                getHit = false;
             }
         }
 
