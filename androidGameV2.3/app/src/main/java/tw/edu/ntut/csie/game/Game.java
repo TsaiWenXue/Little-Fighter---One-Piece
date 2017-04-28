@@ -12,6 +12,7 @@ import tw.edu.ntut.csie.game.state.StateOver;
 import tw.edu.ntut.csie.game.state.StateReady;
 import tw.edu.ntut.csie.game.state.CharacterSelectState;
 import tw.edu.ntut.csie.game.state.StateStage1;
+import tw.edu.ntut.csie.game.state.StateStage2;
 
 import static android.hardware.Sensor.TYPE_ACCELEROMETER;
 import static android.hardware.Sensor.TYPE_ORIENTATION;
@@ -36,6 +37,7 @@ public class Game extends Activity {
     public static final int RUNNING_STATE = 2;
     public static final int OVER_STATE = 3;
     public static final int STAGE1_STATE = 4;
+    public static final int STAGE2_STATE = 5;
 
     /**
      * 預設的畫面更新速度，一秒約15張畫面(理想值)。
@@ -114,6 +116,7 @@ public class Game extends Activity {
             _engine.registerGameState(INITIAL_STATE, new StateReady(_engine));
             _engine.registerGameState(RUNNING_STATE, new CharacterSelectState(_engine));
             _engine.registerGameState(STAGE1_STATE, new StateStage1(_engine));
+            _engine.registerGameState(STAGE2_STATE, new StateStage2(_engine));
             _engine.registerGameState(OVER_STATE, new StateOver(_engine));
             _engine.setGameState(INITIAL_STATE);
             _view.setGameEngine(_engine);

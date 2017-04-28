@@ -209,7 +209,14 @@ public class CharacterSelectState extends GameState {
             int touchY = pointers.get(0).getY();
             if (touchX > start_X && touchX < start_X + start.getWidth() &&
                 touchY > start_Y && touchY < start_Y + start.getHeight()) {
-                    changeState(Game.STAGE1_STATE);
+                    switch(stage){
+                        case 0:
+                        changeState(Game.STAGE1_STATE);
+                        break;
+                        case 1:
+                        changeState(Game.STAGE2_STATE);
+                        break;
+                }
             }
 
             if (touchX > stageRight_X && touchX < stageRight_X + stageRight.getWidth() &&
