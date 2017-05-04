@@ -42,11 +42,15 @@ public class Luffy implements CharacterObject {
 
 
     public boolean isAttacking() {
-        return attacking;
+        if (attacking || ESkilling || FSkilling || GSkilling)
+            return true;
+        return false;
     }
 
     public boolean isAttacking_r() {
-        return attacking_r;
+        if (attacking_r || ESkilling_r || FSkilling_r || GSkilling_r)
+            return true;
+        return false;
     }
 
 
@@ -129,8 +133,9 @@ public class Luffy implements CharacterObject {
         GSkill();
         FSkill();
 
-
-        setAttackArea();
+        if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
+               GSkilling || GSkilling_r || FSkilling || FSkilling_r) )
+            setAttackArea();
     }
 
     public void release() {
@@ -261,23 +266,15 @@ public class Luffy implements CharacterObject {
      ***********************/
 
     //Set Attack Area
+    public void setAttackArea(Animation skill) {
+        attackArea[0] = skill.getX();
+        attackArea[1] = skill.getY();
+        attackArea[2] = skill.getY() + skill.getHeight();
+        attackArea[3] = skill.getX() + skill.getWidth();
+    }
     public void setAttackArea() {
-        if (attacking) {
-            attackArea[0] = luffyAttack.getX();
-            attackArea[1] = luffyAttack.getY();
-            attackArea[2] = luffyAttack.getY() + luffyAttack.getHeight();
-            attackArea[3] = luffyAttack.getX() + luffyAttack.getWidth();
-        }
-        else if(attacking_r) {
-            attackArea[0] = luffyAttack_r.getX();
-            attackArea[1] = luffyAttack_r.getY();
-            attackArea[2] = luffyAttack_r.getY() + luffyAttack_r.getHeight();
-            attackArea[3] = luffyAttack_r.getX() + luffyAttack_r.getWidth();
-        }
-        else {
-            for(int i = 0; i < 4; i++) {
-                attackArea[i] = 0;
-            }
+        for(int i = 0; i < 4; i++) {
+            attackArea[i] = 0;
         }
     }
 
@@ -293,6 +290,7 @@ public class Luffy implements CharacterObject {
             luffyESkill.setVisible(Button.ePointerPressed);
             luffyESkill.reset();
             ESkilling = true;
+            damage = 10;
         }
         else if (Button.ePointerPressed == true && (visible_r == true || runVisible_r == true)) {
             visible = false;
@@ -304,19 +302,28 @@ public class Luffy implements CharacterObject {
             luffyESkill_r.setVisible(Button.ePointerPressed);
             luffyESkill_r.reset();
             ESkilling_r = true;
+            damage = 10;
         }
 
         if ( luffyESkill.isLastFrame() && (ESkilling == true)) {
-        //    luffyESkill.changeInitialPx(Stage1BG.roadPx);
             visible = true;
             setVisible();
             ESkilling = false;
+            damage = 0;
         }
         else if ( luffyESkill_r.isLastFrame() && (ESkilling_r == true)) {
             visible_r = true;
             setVisible();
             ESkilling_r = false;
+            damage = 0;
         }
+        if (ESkilling_r)
+            luffyESkill_r.setLocation( (px - luffyESkill_r.getWidth() + luffy_r.getWidth()) ,py);
+
+        if(ESkilling)
+            setAttackArea(luffyESkill);
+        else if (ESkilling_r)
+            setAttackArea(luffyESkill_r);
     }
 
     //G skill perform
@@ -332,6 +339,7 @@ public class Luffy implements CharacterObject {
             luffyGSkill.setVisible(Button.gPointerPressed);
             luffyGSkill.reset();
             GSkilling = true;
+            damage = 25;
         }
         else if (Button.gPointerPressed == true && (visible_r == true || runVisible_r == true)){
             visible = false;
@@ -343,18 +351,31 @@ public class Luffy implements CharacterObject {
             luffyGSkill_r.setVisible(Button.gPointerPressed);
             luffyGSkill_r.reset();
             GSkilling_r = true;
+            damage = 25;
         }
 
         if ( luffyGSkill.isLastFrame() && (GSkilling == true)) {
             visible = true;
             setVisible();
             GSkilling = false;
+            damage = 0;
         }
         else if ( luffyGSkill_r.isLastFrame() && (GSkilling_r == true)) {
             visible_r = true;
             setVisible();
             GSkilling_r = false;
+            damage = 0;
         }
+
+        if (GSkilling)
+            luffyGSkill.setLocation(px, py - luffyGSkill.getHeight() + luffy.getHeight());
+        else if (GSkilling_r)
+            luffyGSkill_r.setLocation(px, py - luffyGSkill_r.getHeight() + luffy_r.getHeight());
+
+        if(GSkilling)
+            setAttackArea(luffyGSkill);
+        else if (GSkilling_r)
+            setAttackArea(luffyGSkill_r);
     }
 
     //F skill perform
@@ -370,6 +391,7 @@ public class Luffy implements CharacterObject {
             luffyFSkill.setVisible(Button.fPointerPressed);
             luffyFSkill.reset();
             FSkilling = true;
+            damage = 40;
         }
         else if (Button.fPointerPressed == true && (visible_r == true || runVisible_r == true)){
             visible = false;
@@ -381,18 +403,34 @@ public class Luffy implements CharacterObject {
             luffyFSkill_r.setVisible(Button.fPointerPressed);
             luffyFSkill_r.reset();
             FSkilling_r = true;
+            damage = 40;
         }
 
         if ( luffyFSkill.isLastFrame() && (FSkilling == true)) {
             visible = true;
             setVisible();
             FSkilling = false;
+            damage = 0;
         }
         else if ( luffyFSkill_r.isLastFrame() && (FSkilling_r == true)) {
             visible_r = true;
             setVisible();
             FSkilling_r = false;
+            damage = 0;
         }
+
+        if (FSkilling_r)
+            luffyFSkill_r.setLocation(px - luffyFSkill_r.getWidth() + luffy_r.getWidth(), py);
+
+//        if (FSkilling)
+//            luffyFSkill.setLocation(px - luffyFSkill.getWidth() + luffy.getWidth(), py);
+
+
+
+        if(FSkilling)
+            setAttackArea(luffyFSkill);
+        else if (FSkilling_r)
+            setAttackArea(luffyFSkill_r);
     }
 
     //Luffy attacking perform
@@ -437,6 +475,11 @@ public class Luffy implements CharacterObject {
         if(attacking_r)
             luffyAttack_r.setLocation( (px - luffyAttack_r.getWidth() + luffy_r.getWidth()) ,py);
         Button.atPointerPressed = false;
+
+        if(attacking)
+            setAttackArea(luffyAttack);
+        else if (attacking_r)
+            setAttackArea(luffyAttack_r);
     }
 
     //Defending perform

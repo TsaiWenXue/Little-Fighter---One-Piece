@@ -15,7 +15,8 @@ public interface EnemyObject {
 
     public void show();
 
-    public void move(CharacterObject ch) ;
+    public void move(CharacterObject ch);
 
     public void release();
+    public void editLocation(int x, int y);
 }
