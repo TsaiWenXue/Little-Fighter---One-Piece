@@ -307,7 +307,6 @@ public class Luffy implements CharacterObject {
         }
 
         if ( luffyESkill.isLastFrame() && (ESkilling == true)) {
-        //    luffyESkill.changeInitialPx(Stage1BG.roadPx);
             visible = true;
             setVisible();
             ESkilling = false;

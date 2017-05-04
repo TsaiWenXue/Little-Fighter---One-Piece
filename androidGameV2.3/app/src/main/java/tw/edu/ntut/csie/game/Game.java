@@ -104,7 +104,7 @@ public class Game extends Activity {
         requestWindowFeature(FEATURE_NO_TITLE);
         getWindow().setFlags(FLAG_FULLSCREEN, FLAG_FULLSCREEN);
         setContentView(R.layout.main);
-        
+
 
         // 取得遊戲畫面持有者與感應器管理員
         _view = (GameView) findViewById(R.id.GameView);
