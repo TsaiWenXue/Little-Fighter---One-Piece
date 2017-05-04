@@ -7,10 +7,10 @@ import tw.edu.ntut.csie.game.state.Navigation;
 import tw.edu.ntut.csie.game.state.Stage1BG;
 
 /**
- * Created by huyuxiang on 2017/4/21.
+ * Created by huyuxiang on 2017/5/4.
  */
 
-public class Marin implements EnemyObject {
+public class MarinAI {
     private Animation marin;
     private Animation marin_r;
     private Animation marinDead;
@@ -27,7 +27,7 @@ public class Marin implements EnemyObject {
 
     private int healthPoint = 100;
 
-    public Marin() {
+    public MarinAI() {
         marin = new Animation();        marin_r = new Animation();
         marinDead = new Animation();    marinDead_r = new Animation();
         marinHit = new Animation();     marinHit_r = new Animation();
@@ -46,10 +46,6 @@ public class Marin implements EnemyObject {
 
     public int getX() {return px;}
     public int getY() {return py;}
-    public void editLocation(int x, int y) {
-        px = x;
-        py = y;
-    }
 
     public void show() {
         marin.show();           marin_r.show();
@@ -72,7 +68,8 @@ public class Marin implements EnemyObject {
         }
         else {
             getHit(ch);
-            moving(ch);
+            if (!getHit && !getHit_r)
+                moving(ch);
         }
         if (Stage1BG.roadPx < 800 && Stage1BG.roadPx > -800)
             px -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
@@ -96,6 +93,22 @@ public class Marin implements EnemyObject {
     }
 
 
+    /********************
+     * AI Function Area *
+     ********************/
+
+    public void moving(CharacterObject ch) {
+        switch ((int)Math.random() * 3) {
+            case 0:
+                move1(ch);
+                break;
+        }
+    }
+
+    public void move1(CharacterObject ch) {
+
+    }
+
 
     /************************
      * Move Function Area *
@@ -115,17 +128,7 @@ public class Marin implements EnemyObject {
         marinDead.setVisible(deadVisible);        marinDead_r.setVisible(deadVisible_r);
     }
 
-    public void moving(CharacterObject ch) {
-        switch ((int)Math.random() * 3) {
-            case 0:
-                move1();
-                break;
-        }
-    }
 
-    public void move1() {
-
-    }
 
     public void getHit(CharacterObject ch) {
         if (ch.isAttacking_r()) {
