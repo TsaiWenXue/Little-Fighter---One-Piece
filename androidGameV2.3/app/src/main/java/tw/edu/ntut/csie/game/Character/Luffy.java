@@ -123,16 +123,17 @@ public class Luffy implements CharacterObject {
         luffyFSkill.move();     luffyFSkill_r.move();
 
         if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
-               GSkilling || GSkilling_r || FSkilling || FSkilling_r) ){
+               GSkilling || GSkilling_r || FSkilling || FSkilling_r ||
+               jumping || jumping_r || defending || defending_r) ){
                running(roadPx);
-               jump();
-               defend();
            }
 
         setLocation(px, py);
         stopRunning();
 
         attack();
+        jump();
+        defend();
 
         ESkill();
         GSkill();

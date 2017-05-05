@@ -160,52 +160,42 @@ public class Button implements GameObject, PointerEventHandler {
         int touchX, touchY;
                 touchX = pointers.get(0).getX();
                 touchY = pointers.get(0).getY();
-                if (MovingBitmap.imageTouched(touchX, touchY, attack)) {
+                if ( imageTouched(touchX, touchY, attack)) {
                     atPointerPressed = true;
                     attack_pressed.setVisible(true);
                     attack.setVisible(false);
                 }
-                else if( MovingBitmap.imageTouched(touchX, touchY, defend) ) {
+                else if( imageTouched(touchX, touchY, defend) ) {
                     dfPointerPressed = true;
                     defend_pressed.setVisible(true);
                     defend.setVisible(false);
                 }
-                else if( MovingBitmap.imageTouched(touchX, touchY, jump) ) {
+                else if( imageTouched(touchX, touchY, jump) ) {
                     jpPointerPressed = true;
                     jump_pressed.setVisible(true);
                     jump.setVisible(false);
                 }
-                else if( MovingBitmap.imageTouched(touchX, touchY, s_skill) ) {
+                else if( imageTouched(touchX, touchY, s_skill) ) {
                     sPointerPressed = true;
                     s_skill_pressed.setVisible(true);
                     s_skill.setVisible(false);
                 }
-                else if( MovingBitmap.imageTouched(touchX, touchY, e_skill) ) {
+                else if( imageTouched(touchX, touchY, e_skill) ) {
                     ePointerPressed = true;
                     e_skill_pressed.setVisible(true);
                     e_skill.setVisible(false);
                 }
-                else if( MovingBitmap.imageTouched(touchX, touchY, f_skill) ) {
+                else if( imageTouched(touchX, touchY, f_skill) ) {
                     fPointerPressed = true;
                     f_skill_pressed.setVisible(true);
                     f_skill.setVisible(false);
                 }
-                else if( MovingBitmap.imageTouched(touchX, touchY, g_skill) ) {
+                else if( imageTouched(touchX, touchY, g_skill) ) {
                     gPointerPressed = true;
                     g_skill_pressed.setVisible(true);
                     g_skill.setVisible(false);
                 }
-               else{
-                   /* atPointerPressed = false;
-                    dfPointerPressed = false;
-                    jpPointerPressed = false;
-                    sPointerPressed = false;
-                    ePointerPressed = false;
-                    fPointerPressed = false;
-                    gPointerPressed = false;*/
-                //}
 
-      }
         return false;
     }
 
@@ -216,44 +206,44 @@ public class Button implements GameObject, PointerEventHandler {
         for(int i = 1; i < pointers.size(); i++){
             touchX = pointers.get(i).getX();
             touchY = pointers.get(i).getY();
-            if (MovingBitmap.imageTouched(touchX, touchY, attack)) {
+            if ( imageTouched(touchX, touchY, attack)) {
                 atPointerPressed = true;
                 attack_pressed.setVisible(true);
                 attack.setVisible(false);
             }
-            else if( MovingBitmap.imageTouched(touchX, touchY, defend) ) {
+            else if( imageTouched(touchX, touchY, defend) ) {
                 dfPointerPressed = true;
                 defend_pressed.setVisible(true);
                 defend.setVisible(false);
             }
-            else if( MovingBitmap.imageTouched(touchX, touchY, jump) ) {
+            else if( imageTouched(touchX, touchY, jump) ) {
                 jpPointerPressed = true;
                 jump_pressed.setVisible(true);
                 jump.setVisible(false);
             }
-            else if( MovingBitmap.imageTouched(touchX, touchY, s_skill) ) {
+            else if( imageTouched(touchX, touchY, s_skill) ) {
                 sPointerPressed = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
             }
-            else if( MovingBitmap.imageTouched(touchX, touchY, e_skill) ) {
+            else if( imageTouched(touchX, touchY, e_skill) ) {
                 ePointerPressed = true;
                 e_skill_pressed.setVisible(true);
                 e_skill.setVisible(false);
             }
-            else if( MovingBitmap.imageTouched(touchX, touchY, f_skill) ) {
+            else if( imageTouched(touchX, touchY, f_skill) ) {
                 fPointerPressed = true;
                 f_skill_pressed.setVisible(true);
                 f_skill.setVisible(false);
             }
-            else if( MovingBitmap.imageTouched(touchX, touchY, g_skill) ) {
+            else if( imageTouched(touchX, touchY, g_skill) ) {
                 gPointerPressed = true;
                 g_skill_pressed.setVisible(true);
                 g_skill.setVisible(false);
             }
         }
     }
-    return true;
+    return false;
 }
 
     @Override
@@ -287,6 +277,11 @@ public class Button implements GameObject, PointerEventHandler {
         g_skill_pressed.setVisible(false);
 
         return false;
+    }
+
+    public static boolean imageTouched(int touchX, int touchY, MovingBitmap bmp) {
+        return (touchX > bmp.getX() && touchX < bmp.getX() + bmp.getWidth() &&
+                touchY > bmp.getY() && touchY < bmp.getY() + bmp.getHeight());
     }
 
 }

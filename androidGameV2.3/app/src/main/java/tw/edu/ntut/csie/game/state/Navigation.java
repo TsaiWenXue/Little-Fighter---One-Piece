@@ -54,8 +54,7 @@ public class Navigation implements GameObject, PointerEventHandler {
     public boolean pointerPressed(List<Pointer> pointers){
           int touchX = pointers.get(0).getX();
           int touchY = pointers.get(0).getY();
-          if (touchX > button_controller.getX() && touchX < button_controller.getX() + button_controller.getWidth() &&
-                  touchY > button_controller.getY() && touchY < button_controller.getY() + button_controller.getHeight()) {
+          if (Button.imageTouched(touchX, touchY, button_controller)) {
                  _grab = true;
           }
           else {
