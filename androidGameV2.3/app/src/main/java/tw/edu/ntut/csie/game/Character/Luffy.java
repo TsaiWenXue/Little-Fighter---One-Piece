@@ -95,6 +95,12 @@ public class Luffy implements CharacterObject {
     public int getY() {
         return py;
     }
+    public int getWidth() {
+        return luffy.getWidth();
+    }
+    public int getHeight() {
+        return  luffy.getHeight();
+    }
     public int getDamage() {return damage;}
 
     public int[] getAttackArea() {
