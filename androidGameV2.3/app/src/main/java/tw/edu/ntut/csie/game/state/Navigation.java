@@ -66,7 +66,7 @@ public class Navigation implements GameObject, PointerEventHandler {
     }
     @Override
     public boolean pointerMoved(List<Pointer> pointers){
-        if (_grab){
+        if(_grab){
 
             controllerPx = pointers.get(0).getX() - button_controller.getWidth() / 2;
             controllerPy = pointers.get(0).getY() - button_controller.getHeight() / 2;
