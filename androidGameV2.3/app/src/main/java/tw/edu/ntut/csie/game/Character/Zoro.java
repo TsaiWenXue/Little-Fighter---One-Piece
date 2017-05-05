@@ -59,6 +59,12 @@ public class Zoro implements CharacterObject {
     public int getY() {
         return py;
     }
+    public int getWidth() {
+        return zoro.getWidth();
+    }
+    public int getHeight() {
+        return zoro.getHeight();
+    }
     public int getDamage() { return damage; }
 
     public int[] getAttackArea() { return attackArea; }

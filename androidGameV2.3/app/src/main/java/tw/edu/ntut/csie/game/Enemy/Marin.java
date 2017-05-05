@@ -46,10 +46,6 @@ public class Marin implements EnemyObject {
 
     public int getX() {return px;}
     public int getY() {return py;}
-    public void editLocation(int x, int y) {
-        px = x;
-        py = y;
-    }
 
     public void show() {
         marin.show();           marin_r.show();

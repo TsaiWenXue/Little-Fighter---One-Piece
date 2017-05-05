@@ -10,22 +10,26 @@ import tw.edu.ntut.csie.game.state.Stage1BG;
  * Created by huyuxiang on 2017/5/4.
  */
 
-public class MarinAI {
+public class MarinAI implements EnemyObject {
     private Animation marin;
     private Animation marin_r;
     private Animation marinDead;
     private Animation marinDead_r;
     private Animation marinHit;
     private Animation marinHit_r;
+    private Animation marinRun;
+    private Animation marinRun_r;
     private int px, py;
 
     private boolean visible = false, visible_r = true;
     private boolean hitVisible = false, hitVisible_r = false;
     private boolean deadVisible = false, deadVisible_r = false;
+    private boolean runVisible = false, runVisible_r = false;
 
     private boolean getHit = false, getHit_r = false;
 
-    private int healthPoint = 100;
+    private final int maxHealthPoint = 100;
+    private int healthPoint = maxHealthPoint;
 
     public MarinAI() {
         marin = new Animation();        marin_r = new Animation();
@@ -59,6 +63,7 @@ public class MarinAI {
         marinHit.move();        marinHit_r.move();
         marinDead.move();       marinDead_r.move();
 
+
         if (healthPoint <= 0) {
             if (marinHit.isLastFrame())
                 deadVisible = true;
@@ -80,6 +85,7 @@ public class MarinAI {
         else if ( (Stage1BG.roadPx == 800 && ch.getX() >= 410) ||
                 (Stage1BG.roadPx == -800 && ch.getX() <= 390) )
             px -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+
         setVisible();
         setLocation(px, py);
 
@@ -98,15 +104,84 @@ public class MarinAI {
      ********************/
 
     public void moving(CharacterObject ch) {
-        switch ((int)Math.random() * 3) {
-            case 0:
-                move1(ch);
-                break;
-        }
+        approachPlayer(ch);
+        if (healthPoint <= maxHealthPoint * 0.3)
+            escape(ch);
     }
 
-    public void move1(CharacterObject ch) {
+    public void escape(CharacterObject ch) {
+        if (py > ch.getY() + ch.getHeight() && py < 375) {
+            py -= 2;
+            if (px > ch.getX()) {
+                runVisible = true;
+//                visible = false;
+//                visible_r = false;
+            }
+            else {
+                runVisible_r = true;
+//                visible = false;
+//                visible_r = false;
+            }
+        }
+        else if (py + marin.getHeight() < ch.getY() && py > 175) {
+            py += 2;
+            if (px > ch.getX()) {
+                runVisible = true;
+//                visible = false;
+//                visible_r = false;
+            }
+            else {
+                runVisible_r = true;
+//                visible = false;
+//                visible_r = false;
+            }
+        }
 
+    }
+
+    public void approachPlayer(CharacterObject ch) {
+        if (py + marin.getWidth() < ch.getY() + ch.getHeight()*3/4) {
+            py += 2;
+            if (px < ch.getX()) {
+                runVisible = true;
+//                visible = false;
+//                visible_r = false;
+            }
+            else {
+                runVisible_r = true;
+//                visible = false;
+//                visible_r = false;
+            }
+        }
+        else if (py > ch.getY() + ch.getHeight()/4) {
+            py -= 2;
+//            visible = false;
+//            visible_r = false;
+            if (px < ch.getX())
+                runVisible = true;
+            else
+                runVisible_r = true;
+        }
+        if (px + marin.getWidth() < ch.getX()) {
+//            visible = false;
+//            visible_r = false;
+            runVisible = true;
+            px += 4;
+        }
+        else if(px > ch.getX() + ch.getWidth()) {
+//            visible = false;
+//            visible_r = false;
+            runVisible_r = true;
+            px -= 4;
+        }
+        else {
+//            if(px < ch.getX() + ch.getWidth()/2) {
+//                visible = true;
+//            }
+//            else {
+//                visible_r = true;
+//            }
+        }
     }
 
 
@@ -131,6 +206,8 @@ public class MarinAI {
 
 
     public void getHit(CharacterObject ch) {
+        runVisible = false;
+        runVisible_r = false;
         if (ch.isAttacking_r()) {
             if (px <= ch.getAttackArea()[3] && px + marin.getWidth() >= ch.getAttackArea()[0] &&
                     py + marin.getHeight() >= ch.getAttackArea()[1] && py <= ch.getAttackArea()[2] &&

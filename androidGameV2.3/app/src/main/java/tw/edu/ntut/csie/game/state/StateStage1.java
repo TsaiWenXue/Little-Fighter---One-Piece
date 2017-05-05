@@ -5,7 +5,7 @@ import java.util.Map;
 
 import tw.edu.ntut.csie.game.Character.*;
 import tw.edu.ntut.csie.game.Enemy.EnemyObject;
-import tw.edu.ntut.csie.game.Enemy.Marin;
+import tw.edu.ntut.csie.game.Enemy.MarinAI;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
@@ -41,7 +41,7 @@ public class StateStage1 extends GameState {
 
 
         selectCharacter();
-        en = new Marin();
+        en = new MarinAI();
         en.initialize();
     }
 
