@@ -233,19 +233,17 @@ public class Luffy implements CharacterObject {
 
     //Let all luffy move according to Navigation location
     public void moving(int roadPx) {
-        if (luffyAttack_r.getCurrentFrameIndex() == -1 && luffyAttack.getCurrentFrameIndex() == -1) {
-            py += (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
-            if (py < 175 || py > 375)
-                py -= (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
-            if (roadPx == 800 || roadPx == -800)
-                px += (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
-            if (px > 750 || px < 0)
-                px -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
-            else if (roadPx < 800 && px < 400)
-                px++;
-            else if (roadPx > -800 && px > 400)
-                px--;
-        }
+        py += (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
+        if (py < 175 || py > 375)
+            py -= (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
+        if (roadPx == 800 || roadPx == -800)
+            px += (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+        if (px > 750 || px < 0)
+            px -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+        else if (roadPx < 800 && px < 400)
+            px++;
+        else if (roadPx > -800 && px > 400)
+            px--;
     }
 
     //Set all luffy visible
