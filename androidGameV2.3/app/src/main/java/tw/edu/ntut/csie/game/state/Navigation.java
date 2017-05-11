@@ -17,6 +17,8 @@ public class Navigation implements GameObject, PointerEventHandler {
     public static int initialCtrlPx = 40, initialCtrlPy = 300;
     public static int controllerPx, controllerPy;
 
+    public static boolean _grab;
+
     public Navigation() {
         button_controller = new MovingBitmap(R.drawable.button_direction);
         button_background = new MovingBitmap(R.drawable.button_background);
@@ -47,16 +49,23 @@ public class Navigation implements GameObject, PointerEventHandler {
 
     @Override
     public boolean pointerPressed(List<Pointer> pointers){
+        int touchX = pointers.get(0).getX();
+        int touchY = pointers.get(0).getY();
+        if(button_controller.imageTouched(touchX,touchY)){
+            _grab = true;
+        }
+        else{
+            _grab = false;
+        }
         return false;
     }
     @Override
     public boolean pointerMoved(List<Pointer> pointers){
-            for(int i = 0 ; i < pointers.size(); i++){
-                int touchX = pointers.get(i).getX();
-                int touchY = pointers.get(i).getY();
-                if(button_controller.imageTouched(touchX, touchY)){
-                    controllerPx = pointers.get(i).getX() - button_controller.getWidth() / 2;
-                    controllerPy = pointers.get(i).getY() - button_controller.getHeight() / 2;
+            if(_grab){
+                int touchX = pointers.get(0).getX();
+                int touchY = pointers.get(0).getY();
+                    controllerPx = pointers.get(0).getX() - button_controller.getWidth() / 2;
+                    controllerPy = pointers.get(0).getY() - button_controller.getHeight() / 2;
                     if ((controllerPx - initialCtrlPx) * (controllerPx - initialCtrlPx) + (controllerPy - initialCtrlPy) * (controllerPy - initialCtrlPy) >=
                     (button_controller.getWidth() / 2) * (button_controller.getWidth() / 2)) {
                         double distant = Math.sqrt( (controllerPx - initialCtrlPx) * (controllerPx - initialCtrlPx) +
@@ -65,8 +74,25 @@ public class Navigation implements GameObject, PointerEventHandler {
                         controllerPy = (int)((controllerPy - initialCtrlPy) * ((button_controller.getWidth()/2) / distant) + initialCtrlPy);
                 }
             button_controller.setLocation(controllerPx, controllerPy);
-
             }
+            else if (pointers.size() > 1){
+                for(int j = 1 ; j < pointers.size(); j++){
+                    int touchX = pointers.get(j).getX();
+                    int touchY = pointers.get(j).getY();
+                    if(button_controller.imageTouched(touchX,touchY)){
+                        controllerPx = pointers.get(j).getX() - button_controller.getWidth() / 2;
+                        controllerPy = pointers.get(j).getY() - button_controller.getHeight() / 2;
+                        if ((controllerPx - initialCtrlPx) * (controllerPx - initialCtrlPx) + (controllerPy - initialCtrlPy) * (controllerPy - initialCtrlPy) >=
+                        (button_controller.getWidth() / 2) * (button_controller.getWidth() / 2)) {
+                            double distant = Math.sqrt( (controllerPx - initialCtrlPx) * (controllerPx - initialCtrlPx) +
+                            (controllerPy - initialCtrlPy) * (controllerPy - initialCtrlPy) );
+                            controllerPx = (int)((controllerPx - initialCtrlPx) * ((button_controller.getWidth()/2) / distant) + initialCtrlPx);
+                            controllerPy = (int)((controllerPy - initialCtrlPy) * ((button_controller.getWidth()/2) / distant) + initialCtrlPy);
+                    }
+                button_controller.setLocation(controllerPx, controllerPy);
+                    }
+                }
+            
         }
 
         return false;
@@ -74,6 +100,7 @@ public class Navigation implements GameObject, PointerEventHandler {
     }
     @Override
     public boolean pointerReleased(List<Pointer> pointers) {
+        _grab = false;
         controllerPx = initialCtrlPx;
         controllerPy = initialCtrlPy;
         button_controller.setLocation(controllerPx, controllerPy);

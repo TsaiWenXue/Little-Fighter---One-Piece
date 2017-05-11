@@ -193,6 +193,9 @@ public class Button implements GameObject, PointerEventHandler {
                 sPointerPressed = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
+                s_cd = true;
+                s_skill_cd.setVisible(s_cd);
+                s_skill_cd.reset();
             }
             else if( e_skill.imageTouched(touchX, touchY) && !e_cd) {
                 ePointerPressed = true;
@@ -202,20 +205,38 @@ public class Button implements GameObject, PointerEventHandler {
                 e_skill_cd.setVisible(e_cd);
                 e_skill_cd.reset();
             }
-            else if( f_skill.imageTouched(touchX, touchY) ) {
+            else if( f_skill.imageTouched(touchX, touchY) && !f_cd) {
                 fPointerPressed = true;
                 f_skill_pressed.setVisible(true);
                 f_skill.setVisible(false);
+                f_cd = true;
+                f_skill_cd.setVisible(f_cd);
+                f_skill_cd.reset();
             }
-            else if( g_skill.imageTouched(touchX, touchY) ) {
+            else if( g_skill.imageTouched(touchX, touchY) && !g_cd) {
                 gPointerPressed = true;
                 g_skill_pressed.setVisible(true);
                 g_skill.setVisible(false);
+                g_cd = true;
+                g_skill_cd.setVisible(g_cd);
+                g_skill_cd.reset();
             }
-            if(e_skill_cd.isLastFrame()){
+            if(e_skill_cd.getCurrentFrameIndex() == -1){
             e_cd = false;
             e_skill_cd.setVisible(e_cd);
-    }
+            }
+            if(s_skill_cd.getCurrentFrameIndex() == -1){
+            s_cd = false;
+            s_skill_cd.setVisible(s_cd);
+            }
+            if(f_skill_cd.getCurrentFrameIndex() == -1){
+            f_cd = false;
+            f_skill_cd.setVisible(f_cd);
+            }
+            if(g_skill_cd.getCurrentFrameIndex() == -1){
+            g_cd = false;
+            g_skill_cd.setVisible(g_cd);
+            }
         return false;
     }
 
@@ -239,10 +260,13 @@ public class Button implements GameObject, PointerEventHandler {
                 jump_pressed.setVisible(true);
                 jump.setVisible(false);
             }
-            else if( s_skill.imageTouched(touchX, touchY) ) {
+            else if( s_skill.imageTouched(touchX, touchY) && !s_cd) {
                 sPointerPressed = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
+                s_cd = true;
+                s_skill_cd.setVisible(s_cd);
+                s_skill_cd.reset();
             }
             else if( e_skill.imageTouched(touchX, touchY) && !e_cd) {
                 ePointerPressed = true;
@@ -252,20 +276,38 @@ public class Button implements GameObject, PointerEventHandler {
                 e_skill_cd.setVisible(e_cd);
                 e_skill_cd.reset();
             }
-            else if( f_skill.imageTouched(touchX, touchY) ) {
+            else if( f_skill.imageTouched(touchX, touchY) && !f_cd) {
                 fPointerPressed = true;
                 f_skill_pressed.setVisible(true);
                 f_skill.setVisible(false);
+                f_cd = true;
+                f_skill_cd.setVisible(f_cd);
+                f_skill_cd.reset();
             }
-            else if( g_skill.imageTouched(touchX, touchY) ) {
+            else if( g_skill.imageTouched(touchX, touchY) && !g_cd) {
                 gPointerPressed = true;
                 g_skill_pressed.setVisible(true);
                 g_skill.setVisible(false);
+                g_cd = true;
+                g_skill_cd.setVisible(g_cd);
+                g_skill_cd.reset();
             }
-            if(e_skill_cd.isLastFrame()){
+            if(e_skill_cd.getCurrentFrameIndex() == -1){
             e_cd = false;
             e_skill_cd.setVisible(e_cd);
-    }
+            }
+            if(s_skill_cd.getCurrentFrameIndex() == -1){
+            s_cd = false;
+            s_skill_cd.setVisible(s_cd);
+            }
+            if(f_skill_cd.getCurrentFrameIndex() == -1){
+            f_cd = false;
+            f_skill_cd.setVisible(f_cd);
+            }
+            if(g_skill_cd.getCurrentFrameIndex() == -1){
+            g_cd = false;
+            g_skill_cd.setVisible(g_cd);
+            }
         }
 
     return false;
@@ -301,10 +343,10 @@ public class Button implements GameObject, PointerEventHandler {
         g_skill.setVisible(true);
         g_skill_pressed.setVisible(false);
 
-//         if(e_skill_cd.isLastFrame() && e_cd){
-//         e_cd = false;
-//         e_skill_cd.setVisible(e_cd);
-// }
+ //        if(e_skill_cd.isLastFrame() && e_cd){
+ //         e_cd = false;
+ //         e_skill_cd.setVisible(e_cd);
+ // }
         return false;
     }
 

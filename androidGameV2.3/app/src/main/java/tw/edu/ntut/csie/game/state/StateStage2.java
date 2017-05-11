@@ -50,6 +50,7 @@ public class StateStage2 extends GameState{
         bg.move(ch.getX());
         ch.move(bg.getX());
         en.move(ch);
+        button.move();
     }
 
     @Override
