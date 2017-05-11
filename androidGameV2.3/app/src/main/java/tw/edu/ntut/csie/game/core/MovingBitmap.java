@@ -202,9 +202,9 @@ public class MovingBitmap implements GameObject {
         _visible = visible;
     }
 
-
-    public static boolean imageTouched(int touchX, int touchY, MovingBitmap bmp) {
-        return (touchX > bmp.getX() && touchX < bmp.getX() + bmp.getWidth() &&
-                touchY > bmp.getY() && touchY < bmp.getY() + bmp.getHeight());
+    public boolean imageTouched(int touchX, int touchY) {
+        return (touchX > this.getX() && touchX < this.getX() + this.getWidth() &&
+                touchY > this.getY() && touchY < this.getY() + this.getHeight());
     }
+
 }

@@ -129,16 +129,17 @@ public class Luffy implements CharacterObject {
         luffyFSkill.move();     luffyFSkill_r.move();
 
         if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
-               GSkilling || GSkilling_r || FSkilling || FSkilling_r) ){
+               GSkilling || GSkilling_r || FSkilling || FSkilling_r ||
+               jumping || jumping_r || defending || defending_r) ){
                running(roadPx);
-               jump();
-               defend();
            }
 
         setLocation(px, py);
         stopRunning();
 
         attack();
+        jump();
+        defend();
 
         ESkill();
         GSkill();
@@ -244,6 +245,18 @@ public class Luffy implements CharacterObject {
             px++;
         else if (roadPx > -800 && px > 400)
             px--;
+            py += (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
+            if (py < 175 || py > 375)
+                py -= (Navigation.controllerPy - Navigation.initialCtrlPy)/10;
+            if (roadPx == 800 || roadPx == -800)
+                px += (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+            if (px > 750 || px < 0)
+                px -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+            else if (roadPx < 800 && px < 400)
+                px++;
+            else if (roadPx > -800 && px > 400)
+                px--;
+
     }
 
     //Set all luffy visible

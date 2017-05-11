@@ -2,6 +2,7 @@ package tw.edu.ntut.csie.game.extend;
 
 import java.util.ArrayList;
 
+import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.GameObject;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
 
@@ -249,5 +250,49 @@ public class Animation implements GameObject {
      */
     public void setVisible(boolean visible) {
         _visible = visible;
+    }
+
+    public void cdTimeInit(int value, int _x, int _y){
+        switch(value){
+            case 9:
+                this.addFrame(R.drawable.cd_9);
+                this.addFrame(R.drawable.cd_8);
+                this.addFrame(R.drawable.cd_7);
+                this.addFrame(R.drawable.cd_6);
+                this.addFrame(R.drawable.cd_5);
+                this.addFrame(R.drawable.cd_4);
+                this.addFrame(R.drawable.cd_3);
+                this.addFrame(R.drawable.cd_2);
+                this.addFrame(R.drawable.cd_1);
+                this.addFrame(R.drawable.cd_0);
+                break;
+            case 5:
+                this.addFrame(R.drawable.cd_5);
+                this.addFrame(R.drawable.cd_4);
+                this.addFrame(R.drawable.cd_3);
+                this.addFrame(R.drawable.cd_2);
+                this.addFrame(R.drawable.cd_1);
+                this.addFrame(R.drawable.cd_0);
+                break;
+            case 4:
+                this.addFrame(R.drawable.cd_4);
+                this.addFrame(R.drawable.cd_3);
+                this.addFrame(R.drawable.cd_2);
+                this.addFrame(R.drawable.cd_1);
+                this.addFrame(R.drawable.cd_0);
+                break;
+            case 3:
+                this.addFrame(R.drawable.cd_3);
+                this.addFrame(R.drawable.cd_2);
+                this.addFrame(R.drawable.cd_1);
+                this.addFrame(R.drawable.cd_0);
+                break;
+        }
+
+        this.setLocation(_x, _y);
+        this.setDelay(28);
+        this.setRepeating(false);
+        this.setVisible(false);
+        this.setCurrentFrameIndex(-1);
     }
 }
