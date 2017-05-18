@@ -862,4 +862,13 @@ public class Luffy implements CharacterObject {
         luffyFSkill_r.setCurrentFrameIndex(index);
     }
 
+    // public boolean Isperforming(){
+    //     return ((luffyAttack.getCurrentFrameIndex()==-1)&&(luffyAttack_r.getCurrentFrameIndex()==-1)
+    //     &&(luffyDefend.getCurrentFrameIndex()==-1)&&(luffyDefend_r.getCurrentFrameIndex()==-1)
+    //     &&(luffyJump.getCurrentFrameIndex()==-1)&&(luffyJump_r.getCurrentFrameIndex()==-1)
+    //     &&(luffyESkill.getCurrentFrameIndex()==-1)&&(luffyESkill_r.getCurrentFrameIndex()==-1)
+    //     &&(luffyGSkill.getCurrentFrameIndex()==-1)&&(luffyGSkill_r.getCurrentFrameIndex()==-1)
+    //     &&(luffyFSkill.getCurrentFrameIndex()==-1)&&(luffyFSkill_r.getCurrentFrameIndex()==-1));
+    // }
+
 }
