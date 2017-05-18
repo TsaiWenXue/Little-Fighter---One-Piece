@@ -6,6 +6,7 @@ import java.util.Map;
 import tw.edu.ntut.csie.game.Character.*;
 import tw.edu.ntut.csie.game.Enemy.EnemyObject;
 import tw.edu.ntut.csie.game.Enemy.MarinAI;
+import tw.edu.ntut.csie.game.Game;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
@@ -20,7 +21,7 @@ public class StateStage1 extends GameState {
 
 
     private CharacterObject ch;
-    private EnemyObject en;
+    private EnemyObject en01;
 
     public StateStage1(GameEngine engine) {
         super(engine);
@@ -41,13 +42,16 @@ public class StateStage1 extends GameState {
 
 
         selectCharacter();
-        en = new MarinAI();
-        en.initialize();
+        en01 = new MarinAI();
+        en01.initialize();
     }
 
     @Override
     public void move() {
-        en.move(ch);
+        if (noEnemy()) {
+            changeState(Game.STAGE2_STATE);
+        }
+        en01.move(ch);
         bg.move(ch.getX());
         ch.move(bg.getX());
         button.move();
@@ -58,7 +62,7 @@ public class StateStage1 extends GameState {
         bg.show();
         controller.show();
         button.show();
-        en.show();
+        en01.show();
         ch.show();
     }
 
@@ -72,7 +76,7 @@ public class StateStage1 extends GameState {
         button.release();
         ch.release();
 
-        en.release();
+        en01.release();
     }
     @Override
     public void keyPressed(int keyCode) {
@@ -137,6 +141,12 @@ public class StateStage1 extends GameState {
                 break;
         }
         ch.initialize();
+    }
+
+    public boolean noEnemy() {
+        if (en01.isDead())
+            return true;
+        return false;
     }
 
 }

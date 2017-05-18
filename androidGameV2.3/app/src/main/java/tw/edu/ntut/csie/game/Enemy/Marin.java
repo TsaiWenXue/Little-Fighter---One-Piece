@@ -46,6 +46,11 @@ public class Marin implements EnemyObject {
 
     public int getX() {return px;}
     public int getY() {return py;}
+    public boolean isDead() {
+        if (healthPoint <= 0)
+            return true;
+        return false;
+    }
 
     public void show() {
         marin.show();           marin_r.show();
