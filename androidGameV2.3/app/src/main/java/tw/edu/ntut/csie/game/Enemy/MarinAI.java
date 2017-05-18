@@ -48,6 +48,12 @@ public class MarinAI implements EnemyObject {
         setCurrentIndex();
     }
 
+    public boolean isDead() {
+        if (healthPoint <= 0 && (deadVisible||deadVisible_r))
+            return true;
+        return false;
+    }
+
     public int getX() {return px;}
     public int getY() {return py;}
 

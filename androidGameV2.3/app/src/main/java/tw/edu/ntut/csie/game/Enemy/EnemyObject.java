@@ -18,4 +18,5 @@ public interface EnemyObject {
     public void move(CharacterObject ch) ;
 
     public void release();
+    public boolean isDead();
 }
