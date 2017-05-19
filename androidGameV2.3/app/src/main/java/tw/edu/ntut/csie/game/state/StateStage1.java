@@ -101,7 +101,7 @@ public class StateStage1 extends GameState {
     @Override
     public boolean pointerPressed(List<Pointer> pointers) {
         controller.pointerPressed(pointers);
-        button.pointerPressed(pointers);
+        button.pointerPressed(pointers, ch);
         return true;
 
     }
@@ -109,7 +109,7 @@ public class StateStage1 extends GameState {
     @Override
     public boolean pointerMoved(List<Pointer> pointers) {
         controller.pointerMoved(pointers);
-        button.pointerMoved(pointers);
+        button.pointerMoved(pointers, ch);
         return false;
     }
 

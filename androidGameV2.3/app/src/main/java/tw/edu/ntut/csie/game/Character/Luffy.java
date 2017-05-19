@@ -40,7 +40,6 @@ public class Luffy implements CharacterObject {
     private boolean GSkilling = false, GSkilling_r = false;
     private boolean FSkilling = false, FSkilling_r = false;
 
-
     public boolean isAttacking() {
         if (attacking || ESkilling || FSkilling || GSkilling)
             return true;
@@ -333,12 +332,14 @@ public class Luffy implements CharacterObject {
             visible = true;
             setVisible();
             ESkilling = false;
+            luffyESkill.setCurrentFrameIndex(-1);
             damage = 0;
         }
         else if ( luffyESkill_r.isLastFrame() && (ESkilling_r == true)) {
             visible_r = true;
             setVisible();
             ESkilling_r = false;
+            luffyESkill_r.setCurrentFrameIndex(-1);
             damage = 0;
         }
         if (ESkilling_r)
@@ -386,12 +387,14 @@ public class Luffy implements CharacterObject {
             visible = true;
             setVisible();
             GSkilling = false;
+            luffyGSkill.setCurrentFrameIndex(-1);
             damage = 0;
         }
         else if ( luffyGSkill_r.isLastFrame() && (GSkilling_r == true)) {
             visible_r = true;
             setVisible();
             GSkilling_r = false;
+            luffyGSkill_r.setCurrentFrameIndex(-1);
             damage = 0;
         }
 
@@ -442,12 +445,14 @@ public class Luffy implements CharacterObject {
             visible = true;
             setVisible();
             FSkilling = false;
+            luffyFSkill.setCurrentFrameIndex(-1);
             damage = 0;
         }
         else if ( luffyFSkill_r.isLastFrame() && (FSkilling_r == true)) {
             visible_r = true;
             setVisible();
             FSkilling_r = false;
+            luffyFSkill_r.setCurrentFrameIndex(-1);
             damage = 0;
         }
 
@@ -500,12 +505,14 @@ public class Luffy implements CharacterObject {
             visible = true;
             setVisible();
             attacking = false;
+            luffyAttack.setCurrentFrameIndex(-1);
             damage = 0;
         }
         else if ( luffyAttack_r.isLastFrame() && attacking_r == true) {
             visible_r = true;
             setVisible();
             attacking_r = false;
+            luffyAttack_r.setCurrentFrameIndex(-1);
             damage = 0;
         }
         if(attacking_r)
@@ -552,11 +559,13 @@ public class Luffy implements CharacterObject {
             visible = true;
             setVisible();
             defending = false;
+            luffyDefend.setCurrentFrameIndex(-1);
         }
         else if ( luffyDefend_r.isLastFrame() && (defending_r == true)) {
             visible_r = true;
             setVisible();
             defending_r = false;
+            luffyDefend_r.setCurrentFrameIndex(-1);
         }
         Button.dfPointerPressed = false;
     }
@@ -592,11 +601,13 @@ public class Luffy implements CharacterObject {
             visible = true;
             setVisible();
             jumping = false;
+            luffyJump.setCurrentFrameIndex(-1);
         }
         else if ( luffyJump_r.isLastFrame() && (jumping_r == true)) {
             visible_r = true;
             setVisible();
             jumping_r = false;
+            luffyJump_r.setCurrentFrameIndex(-1);
         }
 
         if(jumping) {
@@ -862,13 +873,13 @@ public class Luffy implements CharacterObject {
         luffyFSkill_r.setCurrentFrameIndex(index);
     }
 
-    // public boolean Isperforming(){
-    //     return ((luffyAttack.getCurrentFrameIndex()==-1)&&(luffyAttack_r.getCurrentFrameIndex()==-1)
-    //     &&(luffyDefend.getCurrentFrameIndex()==-1)&&(luffyDefend_r.getCurrentFrameIndex()==-1)
-    //     &&(luffyJump.getCurrentFrameIndex()==-1)&&(luffyJump_r.getCurrentFrameIndex()==-1)
-    //     &&(luffyESkill.getCurrentFrameIndex()==-1)&&(luffyESkill_r.getCurrentFrameIndex()==-1)
-    //     &&(luffyGSkill.getCurrentFrameIndex()==-1)&&(luffyGSkill_r.getCurrentFrameIndex()==-1)
-    //     &&(luffyFSkill.getCurrentFrameIndex()==-1)&&(luffyFSkill_r.getCurrentFrameIndex()==-1));
-    // }
+    public boolean isPerforming(){
+         return ((luffyAttack.getCurrentFrameIndex()==-1)&&(luffyAttack_r.getCurrentFrameIndex()==-1)
+        &&(luffyDefend.getCurrentFrameIndex()==-1)&&(luffyDefend_r.getCurrentFrameIndex()==-1)
+        &&(luffyJump.getCurrentFrameIndex()==-1)&&(luffyJump_r.getCurrentFrameIndex()==-1)
+        &&(luffyESkill.getCurrentFrameIndex()==-1)&&(luffyESkill_r.getCurrentFrameIndex()==-1)
+        &&(luffyGSkill.getCurrentFrameIndex()==-1)&&(luffyGSkill_r.getCurrentFrameIndex()==-1)
+        &&(luffyFSkill.getCurrentFrameIndex()==-1)&&(luffyFSkill_r.getCurrentFrameIndex()==-1));
+    }
 
 }

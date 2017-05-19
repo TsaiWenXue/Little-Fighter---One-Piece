@@ -25,4 +25,5 @@ public interface CharacterObject {
     public boolean isAttacking();
     public boolean isAttacking_r();
 
+    public boolean isPerforming();
 }

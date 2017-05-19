@@ -317,5 +317,6 @@ public class Zoro implements CharacterObject {
          zoroAttack_r.setCurrentFrameIndex(index);
      }
 
+     public boolean isPerforming(){return false;}
 
 }
