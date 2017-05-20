@@ -79,6 +79,8 @@ public class Button implements GameObject, PointerEventHandler {
     private Animation g_skill_cd;
     private Animation f_skill_cd;
 
+    private Animation s_trigger;
+
     public Button() {}
 
     public void initialize(){
@@ -134,6 +136,18 @@ public class Button implements GameObject, PointerEventHandler {
         g_skill_cd = new Animation();
         g_skill_cd.cdTimeInit(4, g_x, g_y);
 
+        s_trigger = new Animation();
+        s_trigger.addFrame(R.drawable.s_trigger01);
+        s_trigger.addFrame(R.drawable.s_trigger02);
+        s_trigger.addFrame(R.drawable.s_trigger03);
+        s_trigger.addFrame(R.drawable.s_trigger04);
+        s_trigger.addFrame(R.drawable.s_trigger03);
+        s_trigger.addFrame(R.drawable.s_trigger02);
+        s_trigger.addFrame(R.drawable.s_trigger01);
+        s_trigger.setLocation(s_x, s_y);
+        s_trigger.setCurrentFrameIndex(-1);
+        s_trigger.setVisible(false);
+
         S_frameInit();
         SframeSetLocation(s_frame_x, s_frame_y);
       }
@@ -159,6 +173,7 @@ public class Button implements GameObject, PointerEventHandler {
         e_skill_cd.show();
         f_skill_cd.show();
         g_skill_cd.show();
+        s_trigger.show();
         SframeShow();
     }
 
@@ -169,6 +184,11 @@ public class Button implements GameObject, PointerEventHandler {
         f_skill_cd.move();
         g_skill_cd.move();
         SframeSetVisible();
+        if(s_frame_bool){
+            s_trigger.setVisible(s_frame_bool);
+            s_trigger.move();
+        }
+
     }
 
     public void release() {
@@ -191,6 +211,7 @@ public class Button implements GameObject, PointerEventHandler {
         e_skill_cd.release();
         f_skill_cd.release();
         g_skill_cd.release();
+        s_trigger.release();
         SframeRelease();
     }
 
@@ -219,9 +240,11 @@ public class Button implements GameObject, PointerEventHandler {
                 sPointerPressed = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
-                s_cd = true;
-                s_skill_cd.setVisible(s_cd);
-                s_skill_cd.reset();
+                // s_cd = true;
+                // s_skill_cd.setVisible(s_cd);
+                // s_skill_cd.reset();
+                s_frame_bool = false;
+                s_trigger.setVisible(s_frame_bool);
             }
             else if( e_skill.imageTouched(touchX, touchY)
             && !e_cd && ch.isPerforming ()) {
@@ -298,9 +321,11 @@ public class Button implements GameObject, PointerEventHandler {
                 sPointerPressed = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
-                s_cd = true;
-                s_skill_cd.setVisible(s_cd);
-                s_skill_cd.reset();
+                // s_cd = true;
+                // s_skill_cd.setVisible(s_cd);
+                // s_skill_cd.reset();
+                s_frame_bool = false;
+                s_trigger.setVisible(s_frame_bool);
             }
             else if( e_skill.imageTouched(touchX, touchY)
             && !e_cd && ch.isPerforming()) {
@@ -412,6 +437,7 @@ public class Button implements GameObject, PointerEventHandler {
         s_frame10.setLocation(_x, _y);
     }
     public void SframeSetVisible(){
+    if(!s_frame_bool){
         switch(s_frame_count){
             case(0):
                 s_frame00.setVisible(true);
@@ -556,7 +582,22 @@ public class Button implements GameObject, PointerEventHandler {
                 s_frame09.setVisible(false);
                 s_frame10.setVisible(true);
                 s_frame_count = 0;
+                s_frame_bool = true;
                 break;
+            }
+        }
+        else{
+            s_frame00.setVisible(false);
+            s_frame01.setVisible(false);
+            s_frame02.setVisible(false);
+            s_frame03.setVisible(false);
+            s_frame04.setVisible(false);
+            s_frame05.setVisible(false);
+            s_frame06.setVisible(false);
+            s_frame07.setVisible(false);
+            s_frame08.setVisible(false);
+            s_frame09.setVisible(false);
+            s_frame10.setVisible(false);
         }
     }
     public void SframeShow(){
