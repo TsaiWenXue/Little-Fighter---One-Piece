@@ -48,6 +48,8 @@ public class StateStage1 extends GameState {
 
     @Override
     public void move() {
+        if (ch.getHp() <= 0)
+            changeState(Game.OVER_STATE);
         if (noEnemy()) {
             changeState(Game.STAGE2_STATE);
         }

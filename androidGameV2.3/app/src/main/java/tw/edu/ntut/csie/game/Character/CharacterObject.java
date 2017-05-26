@@ -1,18 +1,28 @@
 package tw.edu.ntut.csie.game.Character;
 
+import java.util.ArrayList;
+
+import tw.edu.ntut.csie.game.R;
+import tw.edu.ntut.csie.game.core.MovingBitmap;
+
 /**
  * Created by huyuxiang on 2017/4/14.
  */
 
 public interface CharacterObject {
+    public ArrayList<MovingBitmap> hp = new ArrayList<MovingBitmap>();
+    public MovingBitmap hpBg = new MovingBitmap(R.drawable.healthpoint_bg);
+
     public void initialize() ;
 
     public int getX();
     public int getY();
     public int getWidth();
     public int getHeight();
+    public int getHp();
 
-    public void show();
+
+        public void show();
 
     public void move(int roadPx) ;
 

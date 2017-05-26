@@ -209,8 +209,6 @@ public class MarinAI implements EnemyObject {
         marinDead.setVisible(deadVisible);        marinDead_r.setVisible(deadVisible_r);
     }
 
-
-
     public void getHit(CharacterObject ch) {
         runVisible = false;
         runVisible_r = false;
@@ -253,8 +251,6 @@ public class MarinAI implements EnemyObject {
                 getHit = false;
             }
         }
-
-
     }
 
     public boolean isInAttackArea(int[] attackArea) {

@@ -1,6 +1,7 @@
 package tw.edu.ntut.csie.game.Character;
 
 import tw.edu.ntut.csie.game.R;
+import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.state.Button;
 import tw.edu.ntut.csie.game.state.Navigation;
@@ -29,6 +30,8 @@ public class Luffy implements CharacterObject {
     private Animation luffyFSkill_r;
 
     private int px, py;
+    private final int maxHp = 200;
+    private int healthPoint = maxHp;
 
     private boolean visible = true, visible_r = false;
     private boolean runVisible = false, runVisible_r = false;
@@ -75,6 +78,11 @@ public class Luffy implements CharacterObject {
         luffyGSkill_r = new Animation();
         luffyFSkill = new Animation();
         luffyFSkill_r = new Animation();
+        for (int i = 0 ; i < 100; i++) {
+            hp.add(new MovingBitmap(R.drawable.healthpoint));
+            hp.get(i).setLocation(50 + i, 50);
+        }
+        hpBg.setLocation(49, 50);
 
         px = 400; py = 200;
     }
@@ -86,6 +94,8 @@ public class Luffy implements CharacterObject {
         setVisible();
         setCurrentIndex(-1);
         setLocation(px, py);
+
+
     }
 
     public int getX() {
@@ -101,6 +111,9 @@ public class Luffy implements CharacterObject {
         return  luffy.getHeight();
     }
     public int getDamage() {return damage;}
+    public int getHp() {
+        return healthPoint;
+    }
 
     public int[] getAttackArea() {
         return attackArea;
@@ -115,9 +128,15 @@ public class Luffy implements CharacterObject {
         luffyESkill.show();     luffyESkill_r.show();
         luffyGSkill.show();     luffyGSkill_r.show();
         luffyFSkill.show();     luffyFSkill_r.show();
+
+        hpBg.show();
+        for (int i = 0; i < 100; i++) {
+            hp.get(i).show();
+        }
     }
 
     public void move(int roadPx) {
+
         luffy.move();           luffy_r.move();
         luffyRun.move();        luffyRun_r.move();
         luffyAttack.move();     luffyAttack_r.move();
@@ -126,6 +145,13 @@ public class Luffy implements CharacterObject {
         luffyESkill.move();     luffyESkill_r.move();
         luffyGSkill.move();     luffyGSkill_r.move();
         luffyFSkill.move();     luffyFSkill_r.move();
+
+        for (int i = 0; i < 100; i++) {
+            if (i < 100*healthPoint/maxHp)
+                hp.get(i).setVisible(true);
+            else
+                hp.get(i).setVisible(false);
+        }
 
         if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
                GSkilling || GSkilling_r || FSkilling || FSkilling_r ||
@@ -334,6 +360,7 @@ public class Luffy implements CharacterObject {
             ESkilling = false;
             luffyESkill.setCurrentFrameIndex(-1);
             damage = 0;
+            healthPoint -= 50;
         }
         else if ( luffyESkill_r.isLastFrame() && (ESkilling_r == true)) {
             visible_r = true;
@@ -341,6 +368,7 @@ public class Luffy implements CharacterObject {
             ESkilling_r = false;
             luffyESkill_r.setCurrentFrameIndex(-1);
             damage = 0;
+            healthPoint -= 40;
         }
         if (ESkilling_r)
             luffyESkill_r.setLocation( (px - luffyESkill_r.getWidth() + luffy_r.getWidth()) ,py);
@@ -389,6 +417,7 @@ public class Luffy implements CharacterObject {
             GSkilling = false;
             luffyGSkill.setCurrentFrameIndex(-1);
             damage = 0;
+            healthPoint += 50;
         }
         else if ( luffyGSkill_r.isLastFrame() && (GSkilling_r == true)) {
             visible_r = true;
@@ -396,6 +425,8 @@ public class Luffy implements CharacterObject {
             GSkilling_r = false;
             luffyGSkill_r.setCurrentFrameIndex(-1);
             damage = 0;
+            healthPoint += 40;
+
         }
 
         if (GSkilling)

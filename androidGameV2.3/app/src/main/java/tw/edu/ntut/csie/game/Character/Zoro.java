@@ -23,6 +23,7 @@ public class Zoro implements CharacterObject {
 
     private int[] attackArea = new int[4];
     private int damage = 0;
+    private int healthPoint = 100;
 
     public boolean isAttacking() {
         return attacking;
@@ -66,8 +67,12 @@ public class Zoro implements CharacterObject {
         return zoro.getHeight();
     }
     public int getDamage() { return damage; }
+    public int getHp() {
+        return healthPoint;
+    }
 
-    public int[] getAttackArea() { return attackArea; }
+
+        public int[] getAttackArea() { return attackArea; }
 
     public void show() {
         zoro.show();           zoro_r.show();
