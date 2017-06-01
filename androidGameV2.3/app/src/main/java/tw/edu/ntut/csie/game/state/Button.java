@@ -45,6 +45,7 @@ public class Button implements GameObject, PointerEventHandler {
     public static boolean f_cd = false;
     public static boolean g_cd = false;
     public static boolean s_frame_bool = false;
+    public static boolean fire_bool = false;
 
     private MovingBitmap attack;
     private MovingBitmap attack_pressed;
@@ -80,6 +81,8 @@ public class Button implements GameObject, PointerEventHandler {
     private Animation f_skill_cd;
 
     private Animation s_trigger;
+
+    private Animation fire;
 
     public Button() {}
 
@@ -150,6 +153,27 @@ public class Button implements GameObject, PointerEventHandler {
 
         S_frameInit();
         SframeSetLocation(s_frame_x, s_frame_y);
+
+        fire = new Animation();
+        fire.addFrame(R.drawable.fire_01);
+        fire.addFrame(R.drawable.fire_02);
+        fire.addFrame(R.drawable.fire_03);
+        fire.addFrame(R.drawable.fire_04);
+        fire.addFrame(R.drawable.fire_05);
+        fire.addFrame(R.drawable.fire_06);
+        fire.addFrame(R.drawable.fire_07);
+        fire.addFrame(R.drawable.fire_08);
+        fire.addFrame(R.drawable.fire_09);
+        fire.addFrame(R.drawable.fire_10);
+        fire.addFrame(R.drawable.fire_11);
+        fire.addFrame(R.drawable.fire_12);
+        fire.addFrame(R.drawable.fire_13);
+        fire.addFrame(R.drawable.fire_14);
+        fire.addFrame(R.drawable.fire_15);
+        fire.addFrame(R.drawable.fire_16);
+        fire.setLocation(49, 5);
+        fire.setCurrentFrameIndex(-1);
+        fire.setVisible(false);
       }
 
     @Override
@@ -175,6 +199,7 @@ public class Button implements GameObject, PointerEventHandler {
         g_skill_cd.show();
         s_trigger.show();
         SframeShow();
+        fire.show();
     }
 
     @Override
@@ -187,6 +212,10 @@ public class Button implements GameObject, PointerEventHandler {
         if(s_frame_bool){
             s_trigger.setVisible(s_frame_bool);
             s_trigger.move();
+        }
+        if(fire_bool){
+            fire.move();
+            fire.setVisible(fire_bool);
         }
 
     }
@@ -213,6 +242,7 @@ public class Button implements GameObject, PointerEventHandler {
         g_skill_cd.release();
         s_trigger.release();
         SframeRelease();
+        fire.release();
     }
 
     @Override
@@ -245,6 +275,7 @@ public class Button implements GameObject, PointerEventHandler {
                 // s_skill_cd.reset();
                 s_frame_bool = false;
                 s_trigger.setVisible(s_frame_bool);
+                fire_bool = true;
             }
             else if( e_skill.imageTouched(touchX, touchY)
             && !e_cd && ch.isPerforming ()) {
@@ -326,6 +357,7 @@ public class Button implements GameObject, PointerEventHandler {
                 // s_skill_cd.reset();
                 s_frame_bool = false;
                 s_trigger.setVisible(s_frame_bool);
+                fire_bool = true;
             }
             else if( e_skill.imageTouched(touchX, touchY)
             && !e_cd && ch.isPerforming()) {
@@ -437,7 +469,7 @@ public class Button implements GameObject, PointerEventHandler {
         s_frame10.setLocation(_x, _y);
     }
     public void SframeSetVisible(){
-    if(!s_frame_bool){
+    if(!s_frame_bool && !fire_bool){
         switch(s_frame_count){
             case(0):
                 s_frame00.setVisible(true);

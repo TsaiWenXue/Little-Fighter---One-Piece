@@ -22,7 +22,7 @@ public interface CharacterObject {
     public int getHp();
 
 
-        public void show();
+    public void show();
 
     public void move(int roadPx) ;
 

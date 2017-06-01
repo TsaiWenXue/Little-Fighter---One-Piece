@@ -29,11 +29,17 @@ public class Luffy implements CharacterObject {
     private Animation luffyFSkill;
     private Animation luffyFSkill_r;
 
+    private Animation luffy_sec;
+    private Animation luffy_sec_r;
+
+    private MovingBitmap luffy_small;
+
     private int px, py;
     private final int maxHp = 200;
     private int healthPoint = maxHp;
 
     private boolean visible = true, visible_r = false;
+    private boolean sec_visible = false, sec_visible_r = false;
     private boolean runVisible = false, runVisible_r = false;
 
     public boolean attacking = false, attacking_r = false;
@@ -61,6 +67,9 @@ public class Luffy implements CharacterObject {
 
 
     public Luffy () {
+        luffy_small = new MovingBitmap(R.drawable.luffy_s);
+        luffy_small.setLocation(9, 18);
+
         luffy = new Animation();
         luffy_r = new Animation();
 
@@ -84,6 +93,9 @@ public class Luffy implements CharacterObject {
         }
         hpBg.setLocation(49, 50);
 
+        luffy_sec = new Animation();
+        luffy_sec_r = new Animation();
+
         px = 400; py = 200;
     }
 
@@ -94,8 +106,6 @@ public class Luffy implements CharacterObject {
         setVisible();
         setCurrentIndex(-1);
         setLocation(px, py);
-
-
     }
 
     public int getX() {
@@ -129,14 +139,15 @@ public class Luffy implements CharacterObject {
         luffyGSkill.show();     luffyGSkill_r.show();
         luffyFSkill.show();     luffyFSkill_r.show();
 
-        hpBg.show();
+        hpBg.show();    luffy_small.show();
+        luffy_sec.show();     luffy_sec_r.show();
         for (int i = 0; i < 100; i++) {
             hp.get(i).show();
         }
     }
 
     public void move(int roadPx) {
-
+        if(!Button.fire_bool){
         luffy.move();           luffy_r.move();
         luffyRun.move();        luffyRun_r.move();
         luffyAttack.move();     luffyAttack_r.move();
@@ -145,6 +156,8 @@ public class Luffy implements CharacterObject {
         luffyESkill.move();     luffyESkill_r.move();
         luffyGSkill.move();     luffyGSkill_r.move();
         luffyFSkill.move();     luffyFSkill_r.move();
+
+
 
         for (int i = 0; i < 100; i++) {
             if (i < 100*healthPoint/maxHp)
@@ -173,6 +186,13 @@ public class Luffy implements CharacterObject {
         if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
                GSkilling || GSkilling_r || FSkilling || FSkilling_r) )
             setAttackArea();
+
+        }
+            else if(Button.fire_bool){
+                sec_visible = true; 
+                secSetVisible();
+                luffy_sec.move();     luffy_sec_r.move();
+            }
     }
 
     public void release() {
@@ -201,6 +221,8 @@ public class Luffy implements CharacterObject {
         luffyESkill.setLocation(x, y);      luffyESkill_r.setLocation(x, y);
         luffyGSkill.setLocation(x, y);      luffyGSkill_r.setLocation(x, y);
         luffyFSkill.setLocation(x, y);      luffyFSkill_r.setLocation(x, y);
+
+        luffy_sec.setLocation(x, y);      luffy_sec_r.setLocation(x, y);
     }
 
     //Let luffy run according to Navigarion
@@ -286,8 +308,10 @@ public class Luffy implements CharacterObject {
 
     //Set all luffy visible
     public void setVisible() {
+
         luffy.setVisible(visible);
         luffy_r.setVisible(visible_r);
+
         luffyRun.setVisible(runVisible);
         luffyRun_r.setVisible(runVisible_r);
         luffyAttack.setVisible(false);
@@ -302,9 +326,33 @@ public class Luffy implements CharacterObject {
         luffyGSkill_r.setVisible(false);
         luffyFSkill.setVisible(false);
         luffyFSkill_r.setVisible(false);
+
+        luffy_sec.setVisible(sec_visible);
+        luffy_sec_r.setVisible(sec_visible_r);
     }
 
+    public void secSetVisible() {
 
+        luffy.setVisible(false);
+        luffy_r.setVisible(false);
+        luffyRun.setVisible(false);
+        luffyRun_r.setVisible(false);
+        luffyAttack.setVisible(false);
+        luffyAttack_r.setVisible(false);
+        luffyDefend.setVisible(false);
+        luffyDefend_r.setVisible(false);
+        luffyJump.setVisible(false);
+        luffyJump_r.setVisible(false);
+        luffyESkill.setVisible(false);
+        luffyESkill_r.setVisible(false);
+        luffyGSkill.setVisible(false);
+        luffyGSkill_r.setVisible(false);
+        luffyFSkill.setVisible(false);
+        luffyFSkill_r.setVisible(false);
+
+        luffy_sec.setVisible(sec_visible);
+        luffy_sec_r.setVisible(sec_visible_r);
+    }
 
 
 
@@ -850,6 +898,15 @@ public class Luffy implements CharacterObject {
         luffyFSkill_r.addFrame(R.drawable.luffy_f16_r);
         luffyFSkill_r.addFrame(R.drawable.luffy_f17_r);
         luffyFSkill_r.addFrame(R.drawable.luffy_f18_r);
+        //Luffy second
+        luffy_sec.addFrame(R.drawable.luffy_sec_n01);
+        luffy_sec.addFrame(R.drawable.luffy_sec_n02);
+        luffy_sec.addFrame(R.drawable.luffy_sec_n03);
+        //Luffy second reverse
+        luffy_sec_r.addFrame(R.drawable.luffy_sec_nr01);
+        luffy_sec_r.addFrame(R.drawable.luffy_sec_nr02);
+        luffy_sec_r.addFrame(R.drawable.luffy_sec_nr03);
+
     }
 
     //Set all luffy animations delay
@@ -870,6 +927,10 @@ public class Luffy implements CharacterObject {
         luffyGSkill_r.setDelay(2);
         luffyFSkill.setDelay(2);
         luffyFSkill_r.setDelay(2);
+
+        luffy_sec.setDelay(4);
+        luffy_sec_r.setDelay(4);
+
     }
 
     //Set all luffy animations repeating
