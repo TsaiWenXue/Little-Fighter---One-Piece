@@ -1,5 +1,6 @@
 package tw.edu.ntut.csie.game.state;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,10 @@ public class StateStage1 extends GameState {
 
     private CharacterObject ch;
     private EnemyObject en01;
+    private ArrayList<EnemyObject> marins = new ArrayList<EnemyObject>();
+
+    private final static int enemyQuantity = 1;
+    private int deadEnemiesQuantity = 0;
 
     public StateStage1(GameEngine engine) {
         super(engine);
@@ -44,6 +49,10 @@ public class StateStage1 extends GameState {
         selectCharacter();
         en01 = new MarinAI();
         en01.initialize();
+        for (int i = 0; i < enemyQuantity; i++) {
+            marins.add(new MarinAI());
+            marins.get(i).initialize();
+        }
     }
 
     @Override
@@ -52,6 +61,9 @@ public class StateStage1 extends GameState {
             changeState(Game.OVER_STATE);
         if (noEnemy()) {
             changeState(Game.STAGE2_STATE);
+        }
+        for (EnemyObject en : marins) {
+            en.move(ch);
         }
         en01.move(ch);
         bg.move(ch.getX());
@@ -64,8 +76,11 @@ public class StateStage1 extends GameState {
         bg.show();
         controller.show();
         button.show();
-        en01.show();
+//        en01.show();
         ch.show();
+        for (EnemyObject en : marins) {
+            en.show();
+        }
     }
 
     @Override
@@ -79,6 +94,8 @@ public class StateStage1 extends GameState {
         ch.release();
 
         en01.release();
+        for (EnemyObject en : marins)
+            en.release();
     }
     @Override
     public void keyPressed(int keyCode) {
@@ -146,7 +163,11 @@ public class StateStage1 extends GameState {
     }
 
     public boolean noEnemy() {
-        if (en01.isDead())
+        deadEnemiesQuantity = 0;
+        for (EnemyObject en : marins)
+            if (en.isDead())
+                deadEnemiesQuantity++;
+        if (deadEnemiesQuantity == enemyQuantity)
             return true;
         return false;
     }
