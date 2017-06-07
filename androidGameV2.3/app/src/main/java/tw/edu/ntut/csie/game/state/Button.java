@@ -266,8 +266,9 @@ public class Button implements GameObject, PointerEventHandler {
                 jump.setVisible(false);
             }
             else if( s_skill.imageTouched(touchX, touchY)
-            && !s_cd && s_frame_bool) {
+            && !s_cd && s_frame_bool && ch.isPerforming()) {
                 sPointerPressed = true;
+                Luffy.sec_visible = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
                 // s_cd = true;
@@ -348,8 +349,9 @@ public class Button implements GameObject, PointerEventHandler {
                 jump.setVisible(false);
             }
             else if( s_skill.imageTouched(touchX, touchY)
-            && !s_cd && s_frame_bool) {
+            && !s_cd && s_frame_bool && ch.isPerforming()) {
                 sPointerPressed = true;
+                Luffy.sec_visible = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
                 // s_cd = true;
