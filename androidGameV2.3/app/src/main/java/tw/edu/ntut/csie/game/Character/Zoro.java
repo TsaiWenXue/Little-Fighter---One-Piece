@@ -323,5 +323,6 @@ public class Zoro implements CharacterObject {
      }
 
      public boolean isPerforming(){return false;}
+     public void setSecondModelVisible(){};
 
 }

@@ -39,6 +39,15 @@ public class Luffy implements CharacterObject {
     private Animation sluffyDefend_r;
     private Animation sluffyJump;
     private Animation sluffyJump_r;
+    private Animation sluffyESkill;
+    private Animation sluffyESkill_r;
+    private Animation sluffyGSkill;
+    private Animation sluffyGSkill_r;
+    private Animation sluffyFSkill;
+    private Animation sluffyFSkill_r;
+    private Animation sluffySSkill;
+    private Animation sluffySSkill_r;
+
 
     private MovingBitmap luffy_small;
 
@@ -47,7 +56,8 @@ public class Luffy implements CharacterObject {
     private int healthPoint = maxHp;
 
     private boolean visible = true, visible_r = false;
-    public static boolean sec_visible = false;
+    private boolean sec_visible = false;
+    private boolean first_S_touch = false;
     private boolean sec_visible_r = false;
     private boolean runVisible = false, runVisible_r = false;
 
@@ -57,15 +67,16 @@ public class Luffy implements CharacterObject {
     private boolean ESkilling = false, ESkilling_r = false;
     private boolean GSkilling = false, GSkilling_r = false;
     private boolean FSkilling = false, FSkilling_r = false;
+    private boolean SSkilling = false, SSkilling_r = false;
 
     public boolean isAttacking() {
-        if (attacking || ESkilling || FSkilling || GSkilling)
+        if (attacking || ESkilling || FSkilling || GSkilling || SSkilling)
             return true;
         return false;
     }
 
     public boolean isAttacking_r() {
-        if (attacking_r || ESkilling_r || FSkilling_r || GSkilling_r)
+        if (attacking_r || ESkilling_r || FSkilling_r || GSkilling_r || SSkilling_r)
             return true;
         return false;
     }
@@ -96,6 +107,8 @@ public class Luffy implements CharacterObject {
         luffyGSkill_r = new Animation();
         luffyFSkill = new Animation();
         luffyFSkill_r = new Animation();
+
+
         for (int i = 0 ; i < 100; i++) {
             hp.add(new MovingBitmap(R.drawable.healthpoint));
             hp.get(i).setLocation(50 + i, 50);
@@ -113,6 +126,14 @@ public class Luffy implements CharacterObject {
         sluffyDefend_r = new Animation();
         sluffyJump = new Animation();
         sluffyJump_r = new Animation();
+        sluffyESkill = new Animation();
+        sluffyESkill_r =new Animation();
+        sluffyGSkill = new Animation();
+        sluffyGSkill_r = new Animation();
+        sluffyFSkill = new Animation();
+        sluffyFSkill_r = new Animation();
+        sluffySSkill = new Animation();
+        sluffySSkill_r = new Animation();
 
         px = 400; py = 200;
     }
@@ -169,6 +190,11 @@ public class Luffy implements CharacterObject {
         sluffyAttack.show();     sluffyAttack_r.show();
         sluffyDefend.show();     sluffyDefend_r.show();
         sluffyJump.show();       sluffyJump_r.show();
+        sluffyESkill.show();     sluffyESkill_r.show();
+        sluffyGSkill.show();     sluffyGSkill_r.show();
+        sluffyFSkill.show();     sluffyFSkill_r.show();
+        sluffySSkill.show();     sluffySSkill_r.show();
+
 
         hpBg.show();    luffy_small.show();
         for (int i = 0; i < 100; i++) {
@@ -224,6 +250,10 @@ public class Luffy implements CharacterObject {
                 sluffyAttack.move();     sluffyAttack_r.move();
                 sluffyDefend.move();     sluffyDefend_r.move();
                 sluffyJump.move();       sluffyJump_r.move();
+                sluffyESkill.move();     sluffyESkill_r.move();
+                sluffyGSkill.move();     sluffyGSkill_r.move();
+                sluffyFSkill.move();     sluffyFSkill_r.move();
+                sluffySSkill.move();     sluffySSkill_r.move();
 
                 for (int i = 0; i < 100; i++) {
                     if (i < 100*healthPoint/maxHp)
@@ -244,6 +274,11 @@ public class Luffy implements CharacterObject {
                 secAttack();
                 secJump();
                 secDefend();
+
+                secESkill();
+                secGSkill();
+                secFSkill();
+                secSSkill();
 
                 if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
                        GSkilling || GSkilling_r || FSkilling || FSkilling_r) )
@@ -286,6 +321,10 @@ public class Luffy implements CharacterObject {
         sluffyAttack.setLocation(x, y);      sluffyAttack_r.setLocation(x, y);
         sluffyDefend.setLocation(x, y);      sluffyDefend_r.setLocation(x, y);
         sluffyJump.setLocation(x, y);        sluffyJump_r.setLocation(x, y);
+        sluffyESkill.setLocation(x, y);      sluffyESkill_r.setLocation(x, y);
+        sluffyGSkill.setLocation(x, y);      sluffyGSkill_r.setLocation(x, y);
+        sluffyFSkill.setLocation(x, y);      sluffyFSkill_r.setLocation(x, y);
+        sluffySSkill.setLocation(x, y);      sluffySSkill_r.setLocation(x, y);
     }
 
     //Let luffy run according to Navigarion
@@ -475,6 +514,14 @@ public class Luffy implements CharacterObject {
         sluffyDefend_r.setVisible(false);
         sluffyJump.setVisible(false);
         sluffyJump_r.setVisible(false);
+        sluffyESkill.setVisible(false);
+        sluffyESkill_r.setVisible(false);
+        sluffyGSkill.setVisible(false);
+        sluffyGSkill_r.setVisible(false);
+        sluffyFSkill.setVisible(false);
+        sluffyFSkill_r.setVisible(false);
+        sluffySSkill.setVisible(false);
+        sluffySSkill_r.setVisible(false);
     }
 
 
@@ -541,13 +588,68 @@ public class Luffy implements CharacterObject {
             damage = 0;
             healthPoint -= 40;
         }
-        if (ESkilling_r)
-            luffyESkill_r.setLocation( (px - luffyESkill_r.getWidth() + luffy_r.getWidth()) ,py);
 
         if(ESkilling)
             setAttackArea(luffyESkill);
-        else if (ESkilling_r)
+        else if (ESkilling_r){
+            luffyESkill_r.setLocation( (px - luffyESkill_r.getWidth() + luffy_r.getWidth()) ,py);
             setAttackArea(luffyESkill_r);
+            }
+        Button.ePointerPressed = false;
+    }
+
+    //Sec_E skill perform
+    public void secESkill() {
+        if (Button.ePointerPressed == true && (sec_visible == true || runVisible == true)) {
+            sec_visible = false;
+            sec_visible_r = false;
+            runVisible = false;
+            runVisible_r = false;
+
+            secSetVisible();
+            sluffyESkill.setVisible(Button.ePointerPressed);
+            sluffyESkill.reset();
+            ESkilling = true;
+            damage = 20;
+
+        }
+        else if (Button.ePointerPressed == true && (sec_visible_r == true || runVisible_r == true)) {
+            sec_visible = false;
+            sec_visible_r = false;
+            runVisible = false;
+            runVisible_r = false;
+
+            secSetVisible();
+            sluffyESkill_r.setVisible(Button.ePointerPressed);
+            sluffyESkill_r.reset();
+            ESkilling_r = true;
+            damage = 20;
+
+        }
+
+        if ( sluffyESkill.isLastFrame() && (ESkilling == true)) {
+            sec_visible = true;
+            secSetVisible();
+            ESkilling = false;
+            sluffyESkill.setCurrentFrameIndex(-1);
+            damage = 0;
+        }
+        else if ( sluffyESkill_r.isLastFrame() && (ESkilling_r == true)) {
+            sec_visible_r = true;
+            secSetVisible();
+            ESkilling_r = false;
+            sluffyESkill_r.setCurrentFrameIndex(-1);
+            damage = 0;
+        }
+
+        if(ESkilling){
+            sluffyESkill.setLocation((px - 74) , py);
+            setAttackArea(sluffyESkill);
+        }
+        else if (ESkilling_r){
+            sluffyESkill_r.setLocation( (px - sluffyESkill_r.getWidth() + sluffy_r.getWidth() + 74) ,py);
+            setAttackArea(sluffyESkill_r);
+        }
 
         Button.ePointerPressed = false;
     }
@@ -600,15 +702,69 @@ public class Luffy implements CharacterObject {
 
         }
 
-        if (GSkilling)
+        if(GSkilling){
             luffyGSkill.setLocation(px, py - luffyGSkill.getHeight() + luffy.getHeight());
-        else if (GSkilling_r)
+            setAttackArea(luffyGSkill);
+        }
+        else if (GSkilling_r){
+            setAttackArea(luffyGSkill_r);
             luffyGSkill_r.setLocation(px, py - luffyGSkill_r.getHeight() + luffy_r.getHeight());
+        }
+
+        Button.gPointerPressed = false;
+    }
+
+    //Sec_G skill perform
+    public void secGSkill() {
+        if (Button.gPointerPressed == true && (sec_visible == true || runVisible == true)){
+
+            sec_visible = false;
+            sec_visible_r = false;
+            runVisible = false;
+            runVisible_r = false;
+
+            secSetVisible();
+            sluffyGSkill.setVisible(Button.gPointerPressed);
+            sluffyGSkill.reset();
+            GSkilling = true;
+            damage = 40;
+
+        }
+        else if (Button.gPointerPressed == true && (sec_visible_r == true || runVisible_r == true)){
+            sec_visible = false;
+            sec_visible_r = false;
+            runVisible = false;
+            runVisible_r = false;
+
+            secSetVisible();
+            sluffyGSkill_r.setVisible(Button.gPointerPressed);
+            sluffyGSkill_r.reset();
+            GSkilling_r = true;
+            damage = 40;
+
+        }
+
+        if ( sluffyGSkill.isLastFrame() && (GSkilling == true)) {
+            sec_visible = true;
+            secSetVisible();
+            GSkilling = false;
+            sluffyGSkill.setCurrentFrameIndex(-1);
+            damage = 0;
+        }
+        else if ( sluffyGSkill_r.isLastFrame() && (GSkilling_r == true)) {
+            sec_visible_r = true;
+            secSetVisible();
+            GSkilling_r = false;
+            sluffyGSkill_r.setCurrentFrameIndex(-1);
+            damage = 0;
+        }
 
         if(GSkilling)
-            setAttackArea(luffyGSkill);
-        else if (GSkilling_r)
-            setAttackArea(luffyGSkill_r);
+            setAttackArea(sluffyGSkill);
+        else if (GSkilling_r){
+            sluffyGSkill_r.setLocation((px - sluffyGSkill_r.getWidth() + sluffy_r.getWidth()), py);
+            setAttackArea(sluffyGSkill_r);
+        }
 
         Button.gPointerPressed = false;
     }
@@ -658,22 +814,130 @@ public class Luffy implements CharacterObject {
             damage = 0;
         }
 
-        if (FSkilling_r)
-            luffyFSkill_r.setLocation(px - luffyFSkill_r.getWidth() + luffy_r.getWidth(), py);
-
-//        if (FSkilling)
-//            luffyFSkill.setLocation(px - luffyFSkill.getWidth() + luffy.getWidth(), py);
-
-
-
         if(FSkilling)
             setAttackArea(luffyFSkill);
-        else if (FSkilling_r)
+        else if (FSkilling_r){
+            luffyFSkill_r.setLocation(px - luffyFSkill_r.getWidth() + luffy_r.getWidth(), py);
             setAttackArea(luffyFSkill_r);
-
+        }
         Button.fPointerPressed = false;
     }
 
+    //Sec_F skill perform
+    public void secFSkill() {
+        if (Button.fPointerPressed == true && (sec_visible == true || runVisible == true)){
+
+            sec_visible = false;
+            sec_visible_r = false;
+            runVisible = false;
+            runVisible_r = false;
+
+            secSetVisible();
+            sluffyFSkill.setVisible(Button.fPointerPressed);
+            sluffyFSkill.reset();
+            FSkilling = true;
+            damage = 45;
+
+        }
+        else if (Button.fPointerPressed == true && (sec_visible_r == true || runVisible_r == true)){
+            sec_visible = false;
+            sec_visible_r = false;
+            runVisible = false;
+            runVisible_r = false;
+
+            secSetVisible();
+            sluffyFSkill_r.setVisible(Button.fPointerPressed);
+            sluffyFSkill_r.reset();
+            FSkilling_r = true;
+            damage = 45;
+
+        }
+
+        if ( sluffyFSkill.isLastFrame() && (FSkilling == true)) {
+            sec_visible = true;
+            secSetVisible();
+            FSkilling = false;
+            sluffyFSkill.setCurrentFrameIndex(-1);
+            damage = 0;
+        }
+        else if ( sluffyFSkill_r.isLastFrame() && (FSkilling_r == true)) {
+            sec_visible_r = true;
+            secSetVisible();
+            FSkilling_r = false;
+            sluffyFSkill_r.setCurrentFrameIndex(-1);
+            damage = 0;
+        }
+
+        if (FSkilling){
+            sluffyFSkill.setLocation(px - 60, py - sluffyFSkill.getWidth() + sluffy.getWidth());
+            setAttackArea(sluffyFSkill);
+        }
+        else if (FSkilling_r){
+            sluffyFSkill_r.setLocation(px - sluffyFSkill_r.getWidth() + sluffy_r.getWidth() + 60,
+            py - sluffyFSkill_r.getWidth() + sluffy_r.getWidth());
+            setAttackArea(sluffyFSkill_r);
+        }
+        Button.fPointerPressed = false;
+    }
+
+    //sec_S perform
+    public void secSSkill(){
+        if (Button.sPointerPressed == true && (sec_visible == true || runVisible == true)
+            && Button.fire_bool && first_S_touch){
+
+            sec_visible = false;
+            sec_visible_r = false;
+            runVisible = false;
+            runVisible_r = false;
+
+            secSetVisible();
+            sluffySSkill.setVisible(Button.sPointerPressed);
+            sluffySSkill.reset();
+            SSkilling = true;
+            damage = 50;
+
+        }
+        else if (Button.sPointerPressed == true && (sec_visible_r == true || runVisible_r == true)
+                && first_S_touch){
+            sec_visible = false;
+            sec_visible_r = false;
+            runVisible = false;
+            runVisible_r = false;
+
+            secSetVisible();
+            sluffySSkill_r.setVisible(Button.sPointerPressed);
+            sluffySSkill_r.reset();
+            SSkilling_r = true;
+            damage = 50;
+
+        }
+
+        if ( sluffySSkill.isLastFrame() && (SSkilling == true)) {
+            sec_visible = true;
+            secSetVisible();
+            SSkilling = false;
+            sluffySSkill.setCurrentFrameIndex(-1);
+            damage = 0;
+        }
+        else if ( sluffySSkill_r.isLastFrame() && (SSkilling_r == true)) {
+            sec_visible_r = true;
+            secSetVisible();
+            SSkilling_r = false;
+            sluffySSkill_r.setCurrentFrameIndex(-1);
+            damage = 0;
+        }
+
+        if (SSkilling){
+            sluffySSkill.setLocation(px - 110, py);
+            setAttackArea(sluffySSkill);
+        }
+        else if (SSkilling_r){
+            sluffySSkill_r.setLocation(px - sluffySSkill_r.getWidth() + sluffy_r.getWidth() + 110, py);
+            setAttackArea(sluffySSkill_r);
+        }
+
+        Button.sPointerPressed = false;
+    }
     //Luffy attacking perform
     public void attack() {
         if (Button.atPointerPressed == true && (visible == true || runVisible == true)){
@@ -1217,6 +1481,94 @@ public class Luffy implements CharacterObject {
         sluffyDefend_r.addFrame(R.drawable.sluffy_defend03_r);
         sluffyDefend_r.addFrame(R.drawable.sluffy_defend04_r);
         sluffyDefend_r.addFrame(R.drawable.sluffy_defend05_r);
+        //Sec_Luffy Eskill
+        sluffyESkill.addFrame(R.drawable.sluffy_e01);
+        sluffyESkill.addFrame(R.drawable.sluffy_e02);
+        sluffyESkill.addFrame(R.drawable.sluffy_e03);
+        sluffyESkill.addFrame(R.drawable.sluffy_e04);
+        sluffyESkill.addFrame(R.drawable.sluffy_e05);
+        sluffyESkill.addFrame(R.drawable.sluffy_e06);
+        sluffyESkill.addFrame(R.drawable.sluffy_e07);
+        sluffyESkill.addFrame(R.drawable.sluffy_e08);
+        sluffyESkill.addFrame(R.drawable.sluffy_e09);
+        sluffyESkill.addFrame(R.drawable.sluffy_e10);
+        sluffyESkill.addFrame(R.drawable.sluffy_e11);
+        sluffyESkill.addFrame(R.drawable.sluffy_e12);
+        sluffyESkill.addFrame(R.drawable.sluffy_e13);
+        sluffyESkill.addFrame(R.drawable.sluffy_e14);
+        sluffyESkill.addFrame(R.drawable.sluffy_e15);
+        sluffyESkill.addFrame(R.drawable.sluffy_e16);
+        //Sec_Luffy Eskill reverse
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e01_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e02_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e03_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e04_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e05_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e06_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e07_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e08_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e09_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e10_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e11_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e12_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e13_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e14_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e15_r);
+        sluffyESkill_r.addFrame(R.drawable.sluffy_e16_r);
+        //Sec_Luffy Fskill
+        sluffyFSkill.addFrame(R.drawable.sluffy_f01);
+        sluffyFSkill.addFrame(R.drawable.sluffy_f02);
+        sluffyFSkill.addFrame(R.drawable.sluffy_f03);
+        sluffyFSkill.addFrame(R.drawable.sluffy_f04);
+        sluffyFSkill.addFrame(R.drawable.sluffy_f05);
+        sluffyFSkill.addFrame(R.drawable.sluffy_f06);
+        sluffyFSkill.addFrame(R.drawable.sluffy_f07);
+        sluffyFSkill.addFrame(R.drawable.sluffy_f08);
+        //Sec_Luffy Fskill reverse
+        sluffyFSkill_r.addFrame(R.drawable.sluffy_f01_r);
+        sluffyFSkill_r.addFrame(R.drawable.sluffy_f02_r);
+        sluffyFSkill_r.addFrame(R.drawable.sluffy_f03_r);
+        sluffyFSkill_r.addFrame(R.drawable.sluffy_f04_r);
+        sluffyFSkill_r.addFrame(R.drawable.sluffy_f05_r);
+        sluffyFSkill_r.addFrame(R.drawable.sluffy_f06_r);
+        sluffyFSkill_r.addFrame(R.drawable.sluffy_f07_r);
+        sluffyFSkill_r.addFrame(R.drawable.sluffy_f08_r);
+        //Sec_Luffy Gskill
+        sluffyGSkill.addFrame(R.drawable.sluffy_g01);
+        sluffyGSkill.addFrame(R.drawable.sluffy_g02);
+        sluffyGSkill.addFrame(R.drawable.sluffy_g03);
+        sluffyGSkill.addFrame(R.drawable.sluffy_g04);
+        sluffyGSkill.addFrame(R.drawable.sluffy_g05);
+        //Sec_Luffy Gskill reverse
+        sluffyGSkill_r.addFrame(R.drawable.sluffy_g01_r);
+        sluffyGSkill_r.addFrame(R.drawable.sluffy_g02_r);
+        sluffyGSkill_r.addFrame(R.drawable.sluffy_g03_r);
+        sluffyGSkill_r.addFrame(R.drawable.sluffy_g04_r);
+        sluffyGSkill_r.addFrame(R.drawable.sluffy_g05_r);
+        //Sec_Luffy Sskill
+        sluffySSkill.addFrame(R.drawable.sluffy_s01);
+        sluffySSkill.addFrame(R.drawable.sluffy_s02);
+        sluffySSkill.addFrame(R.drawable.sluffy_s03);
+        sluffySSkill.addFrame(R.drawable.sluffy_s04);
+        sluffySSkill.addFrame(R.drawable.sluffy_s05);
+        sluffySSkill.addFrame(R.drawable.sluffy_s06);
+        sluffySSkill.addFrame(R.drawable.sluffy_s07);
+        sluffySSkill.addFrame(R.drawable.sluffy_s08);
+        sluffySSkill.addFrame(R.drawable.sluffy_s09);
+        sluffySSkill.addFrame(R.drawable.sluffy_s10);
+        sluffySSkill.addFrame(R.drawable.sluffy_s11);
+        //Sec_Luffy Sskill reverse
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s01_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s02_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s03_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s04_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s05_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s06_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s07_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s08_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s09_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s10_r);
+        sluffySSkill_r.addFrame(R.drawable.sluffy_s11_r);
     }
 
     //Set all luffy animations delay
@@ -1250,6 +1602,14 @@ public class Luffy implements CharacterObject {
         sluffyDefend_r.setDelay(2);
         sluffyJump.setDelay(2);
         sluffyJump_r.setDelay(2);
+        sluffyESkill.setDelay(2);
+        sluffyESkill_r.setDelay(2);
+        sluffyGSkill.setDelay(2);
+        sluffyGSkill_r.setDelay(2);
+        sluffyFSkill.setDelay(2);
+        sluffyFSkill_r.setDelay(2);
+        sluffySSkill.setDelay(2);
+        sluffySSkill_r.setDelay(2);
     }
 
     //Set all luffy animations repeating
@@ -1274,6 +1634,14 @@ public class Luffy implements CharacterObject {
         sluffyDefend_r.setRepeating(false);
         sluffyJump.setRepeating(false);
         sluffyJump_r.setRepeating(false);
+        sluffyESkill.setRepeating(false);
+        sluffyESkill_r.setRepeating(false);
+        sluffyGSkill.setRepeating(false);
+        sluffyGSkill_r.setRepeating(false);
+        sluffyFSkill.setRepeating(false);
+        sluffyFSkill_r.setRepeating(false);
+        sluffySSkill.setRepeating(false);
+        sluffySSkill_r.setRepeating(false);
     }
 
     //Set all luffy animation current index
@@ -1298,6 +1666,14 @@ public class Luffy implements CharacterObject {
         sluffyDefend_r.setCurrentFrameIndex(index);
         sluffyJump.setCurrentFrameIndex(index);
         sluffyJump_r.setCurrentFrameIndex(index);
+        sluffyESkill.setCurrentFrameIndex(index);
+        sluffyESkill_r.setCurrentFrameIndex(index);
+        sluffyGSkill.setCurrentFrameIndex(index);
+        sluffyGSkill_r.setCurrentFrameIndex(index);
+        sluffyFSkill.setCurrentFrameIndex(index);
+        sluffyFSkill_r.setCurrentFrameIndex(index);
+        sluffySSkill.setCurrentFrameIndex(index);
+        sluffySSkill_r.setCurrentFrameIndex(index);
     }
 
     public boolean isPerforming(){
@@ -1306,7 +1682,18 @@ public class Luffy implements CharacterObject {
         &&(luffyJump.getCurrentFrameIndex()==-1)&&(luffyJump_r.getCurrentFrameIndex()==-1)
         &&(luffyESkill.getCurrentFrameIndex()==-1)&&(luffyESkill_r.getCurrentFrameIndex()==-1)
         &&(luffyGSkill.getCurrentFrameIndex()==-1)&&(luffyGSkill_r.getCurrentFrameIndex()==-1)
-        &&(luffyFSkill.getCurrentFrameIndex()==-1)&&(luffyFSkill_r.getCurrentFrameIndex()==-1));
+        &&(luffyFSkill.getCurrentFrameIndex()==-1)&&(luffyFSkill_r.getCurrentFrameIndex()==-1)
+        &&(sluffyAttack.getCurrentFrameIndex()==-1)&&(sluffyAttack_r.getCurrentFrameIndex()==-1)
+       &&(sluffyDefend.getCurrentFrameIndex()==-1)&&(sluffyDefend_r.getCurrentFrameIndex()==-1)
+       &&(sluffyJump.getCurrentFrameIndex()==-1)&&(sluffyJump_r.getCurrentFrameIndex()==-1)
+       &&(sluffyESkill.getCurrentFrameIndex()==-1)&&(sluffyESkill_r.getCurrentFrameIndex()==-1)
+       &&(sluffyGSkill.getCurrentFrameIndex()==-1)&&(sluffyGSkill_r.getCurrentFrameIndex()==-1)
+       &&(sluffyFSkill.getCurrentFrameIndex()==-1)&&(sluffyFSkill_r.getCurrentFrameIndex()==-1)
+       &&(sluffySSkill.getCurrentFrameIndex()==-1)&&(sluffySSkill_r.getCurrentFrameIndex()==-1));
+    }
+    public void setSecondModelVisible(){
+        sec_visible = true;
+        first_S_touch = true;
     }
 
 }

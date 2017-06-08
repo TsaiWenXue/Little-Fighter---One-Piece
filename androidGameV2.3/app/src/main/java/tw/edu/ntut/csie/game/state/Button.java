@@ -266,9 +266,10 @@ public class Button implements GameObject, PointerEventHandler {
                 jump.setVisible(false);
             }
             else if( s_skill.imageTouched(touchX, touchY)
-            && !s_cd && s_frame_bool && ch.isPerforming()) {
+            && !s_cd && (s_frame_bool || fire_bool) && ch.isPerforming()) {
                 sPointerPressed = true;
-                Luffy.sec_visible = true;
+                if(s_frame_bool)
+                    ch.setSecondModelVisible();
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
                 // s_cd = true;
@@ -276,7 +277,8 @@ public class Button implements GameObject, PointerEventHandler {
                 // s_skill_cd.reset();
                 s_frame_bool = false;
                 s_trigger.setVisible(s_frame_bool);
-                fire_bool = true;
+                if(!fire_bool)
+                    fire_bool = true;
             }
             else if( e_skill.imageTouched(touchX, touchY)
             && !e_cd && ch.isPerforming ()) {
@@ -349,9 +351,10 @@ public class Button implements GameObject, PointerEventHandler {
                 jump.setVisible(false);
             }
             else if( s_skill.imageTouched(touchX, touchY)
-            && !s_cd && s_frame_bool && ch.isPerforming()) {
+            && !s_cd && (s_frame_bool || fire_bool) && ch.isPerforming()) {
                 sPointerPressed = true;
-                Luffy.sec_visible = true;
+                if(s_frame_bool)
+                    ch.setSecondModelVisible();
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
                 // s_cd = true;
@@ -359,7 +362,8 @@ public class Button implements GameObject, PointerEventHandler {
                 // s_skill_cd.reset();
                 s_frame_bool = false;
                 s_trigger.setVisible(s_frame_bool);
-                fire_bool = true;
+                if(!fire_bool)
+                    fire_bool = true;
             }
             else if( e_skill.imageTouched(touchX, touchY)
             && !e_cd && ch.isPerforming()) {
