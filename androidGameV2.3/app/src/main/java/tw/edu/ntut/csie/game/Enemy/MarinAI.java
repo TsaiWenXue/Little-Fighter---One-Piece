@@ -159,8 +159,8 @@ public class MarinAI implements EnemyObject {
     }
 
     public void moving(CharacterObject ch) {
-//        attackVisible = false;
-//        attackVisible_r = false;
+        attackVisible = false;
+        attackVisible_r = false;
         approachPlayer(ch);
         if (marinAttack.getCurrentFrameIndex()==-1 && marinAttack_r.getCurrentFrameIndex() == -1) {
             setAttackArea();

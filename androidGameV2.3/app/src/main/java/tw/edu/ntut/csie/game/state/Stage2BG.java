@@ -50,6 +50,11 @@ public class Stage2BG{
         else if ( (roadPx == 800 && chPx >= 410) ||
                   (roadPx == -800 && chPx <= 390) )
             roadPx -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+
+        if (roadPx != -800 && roadPx != 800 &&
+                (chPx >= 410 || chPx <= 390)) {
+            roadPx -= chPx - 400;
+        }
         _road1.setLocation(roadPx-800, roadPy);
         _road2.setLocation(roadPx, roadPy);
         _road3.setLocation(roadPx+800, roadPy);

@@ -164,10 +164,9 @@ public class StateStage1 extends GameState {
 
     @Override
     public boolean pointerReleased(List<Pointer> pointers) {
-        if (ch.getHp() > 0 && !ch.getHitting()) {
             controller.pointerReleased(pointers);
             button.pointerReleased(pointers);
-        }
+
         return false;
     }
 

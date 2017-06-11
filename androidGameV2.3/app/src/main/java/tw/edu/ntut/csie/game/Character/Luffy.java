@@ -348,10 +348,6 @@ public class Luffy implements CharacterObject {
            * Get Hit Function Area           *
            *************************/
      public void getHit(ArrayList<AttackObject> attacks, int roadPx) {
-//         if (luffyHit.getCurrentFrameIndex() == -1)
-//             hitVisible = false;
-//         if (luffyHit_r.getCurrentFrameIndex() == -1)
-//             hitVisible_r = false;
          luffyHit.move();        luffyHit_r.move();
          if (!hitVisible && !hitVisible_r)
              for (AttackObject at : attacks) {
@@ -366,7 +362,7 @@ public class Luffy implements CharacterObject {
 
                      break;
                  }
-                 else if (at.isAttacking_r() && isInAttackArea(at.getAttackArea())) {
+                 if (at.isAttacking_r() && isInAttackArea(at.getAttackArea())) {
                      healthPoint -= at.damage;
                      setInvisible();
                      hitVisible = true;
@@ -395,8 +391,10 @@ public class Luffy implements CharacterObject {
          if ((hitVisible || hitVisible_r) && luffyHit.getCurrentFrameIndex() == -1 && luffyHit_r.getCurrentFrameIndex() == -1) {
              if (hitVisible) {
                  visible = true;
+                 visible_r = false;
                  hitVisible = false;
              } else if (hitVisible_r) {
+                 visible = false;
                  visible_r = true;
                  hitVisible_r = false;
              }
@@ -1709,8 +1707,8 @@ public class Luffy implements CharacterObject {
         luffyGSkill_r.setDelay(2);
         luffyFSkill.setDelay(2);
         luffyFSkill_r.setDelay(2);
-        luffyHit.setDelay(3);
-        luffyHit_r.setDelay(3);
+        luffyHit.setDelay(4);
+        luffyHit_r.setDelay(4);
     }
 
     public void secFrameDelay(){
