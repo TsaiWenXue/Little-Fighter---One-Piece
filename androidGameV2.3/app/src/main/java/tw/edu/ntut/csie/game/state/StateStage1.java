@@ -69,14 +69,14 @@ public class StateStage1 extends GameState {
 
     @Override
     public void move() {
-        if (ch.isDead()) {
-            failed.setVisible(true);
-            ok.setVisible(true);
-        }
-        else if (noEnemy()) {
-            changeState(Game.STAGE2_STATE);
-        }
-        else {
+//        if (ch.isDead()) {
+//            failed.setVisible(true);
+//            ok.setVisible(true);
+//        }
+//        else if (noEnemy()) {
+//            changeState(Game.STAGE2_STATE);
+//        }
+//        else {
             attacks = new ArrayList<>();
 
             for (EnemyObject en : marins) {
@@ -88,7 +88,7 @@ public class StateStage1 extends GameState {
                 ch.move(bg.getX());
             ch.getHit(attacks, bg.getX());
             button.move();
-        }
+//        }
     }
 
     @Override
@@ -155,8 +155,10 @@ public class StateStage1 extends GameState {
 
     @Override
     public boolean pointerMoved(List<Pointer> pointers) {
-        controller.pointerMoved(pointers);
-        button.pointerMoved(pointers, ch);
+        if (ch.getHp() > 0) {
+            controller.pointerMoved(pointers);
+            button.pointerMoved(pointers, ch);
+        }
         return false;
     }
 
