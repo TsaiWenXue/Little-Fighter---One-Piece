@@ -24,6 +24,8 @@ public class Navigation implements GameObject, PointerEventHandler {
         button_background = new MovingBitmap(R.drawable.button_background);
         controllerPx = initialCtrlPx;
         controllerPy = initialCtrlPy;
+        initialize();
+
     }
 
     public void initialize(){

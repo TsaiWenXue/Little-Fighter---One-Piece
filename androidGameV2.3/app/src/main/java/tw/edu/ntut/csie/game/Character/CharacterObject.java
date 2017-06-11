@@ -11,8 +11,6 @@ import tw.edu.ntut.csie.game.core.MovingBitmap;
  */
 
 public interface CharacterObject {
-    public ArrayList<MovingBitmap> hp = new ArrayList<MovingBitmap>();
-    public MovingBitmap hpBg = new MovingBitmap(R.drawable.healthpoint_bg);
 
     public void initialize() ;
 

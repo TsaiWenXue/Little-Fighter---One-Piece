@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import tw.edu.ntut.csie.game.Character.*;
-import tw.edu.ntut.csie.game.Enemy.AttackObject;
-import tw.edu.ntut.csie.game.Enemy.EnemyObject;
-import tw.edu.ntut.csie.game.Enemy.MarinAI;
+import tw.edu.ntut.csie.game.Enemy.*;
 import tw.edu.ntut.csie.game.Game;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
@@ -20,6 +18,7 @@ public class StateStage1 extends GameState {
     private Stage1BG bg;
     private Audio _music;
     private MovingBitmap failed;
+    private MovingBitmap clear;
     private BitmapButton ok;
 
     private Navigation controller;
@@ -41,10 +40,11 @@ public class StateStage1 extends GameState {
     public void initialize(Map<String, Object> data) {
         bg = new Stage1BG();
         failed = new MovingBitmap(R.drawable.failed);
+        clear = new MovingBitmap(R.drawable.stage_clear);
         ok = new BitmapButton(R.drawable.ok);
         failed.setVisible(false);
+        clear.setVisible(false);
         ok.setVisible(false);
-        ok.setLocation(350, 300);
 
         _music = new Audio(R.raw.onepiece_op1);
         _music.setRepeating(true);
@@ -52,15 +52,12 @@ public class StateStage1 extends GameState {
 
         controller = new Navigation();
         button = new Button();
-        controller.initialize();
-        button.initialize();
 
 
         selectCharacter();
         marins = new ArrayList<EnemyObject>();
         for (int i = 0; i < enemyQuantity; i++) {
             marins.add(new MarinAI());
-            marins.get(i).initialize();
         }
     }
 
@@ -68,10 +65,13 @@ public class StateStage1 extends GameState {
     public void move() {
         if (ch.isDead()) {
             failed.setVisible(true);
+            ok.setLocation(350, 300);
             ok.setVisible(true);
         }
         else if (noEnemy()) {
-            changeState(Game.STAGE2_STATE);
+            clear.setVisible(true);
+            ok.setLocation(500, 330);
+            ok.setVisible(true);
         }
         else {
             attacks = new ArrayList<>();
@@ -94,12 +94,12 @@ public class StateStage1 extends GameState {
         bg.show();
         controller.show();
         button.show();
-//        en01.show();
         ch.show();
         for (EnemyObject en : marins) {
             en.show();
         }
         failed.show();
+        clear.show();
         ok.show();
     }
 
@@ -108,13 +108,12 @@ public class StateStage1 extends GameState {
         bg.release();
         _music.release();
         failed.release();
+        clear.release();
         ok.release();
-        failed = null;
-        ok = null;
 
-        ch.release();
         controller.release();
         button.release();
+        ch.release();
         for (EnemyObject en : marins)
             en.release();
     }
@@ -144,8 +143,12 @@ public class StateStage1 extends GameState {
             controller.pointerPressed(pointers);
             button.pointerPressed(pointers, ch);
         }
-        if (ok.pointerPressed(pointers))
-            changeState(Game.OVER_STATE);
+        if (ok.pointerPressed(pointers)) {
+            if (ch.isDead())
+                changeState(Game.OVER_STATE);
+            if (noEnemy())
+                changeState(Game.STAGE2_STATE);
+        }
         return true;
 
     }
@@ -188,7 +191,6 @@ public class StateStage1 extends GameState {
                 ch = new Zoro();
                 break;
         }
-        ch.initialize();
     }
 
     public boolean noEnemy() {

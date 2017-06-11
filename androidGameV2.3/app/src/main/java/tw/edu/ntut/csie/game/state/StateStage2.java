@@ -1,15 +1,18 @@
 package tw.edu.ntut.csie.game.state;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import tw.edu.ntut.csie.game.Character.*;
-import tw.edu.ntut.csie.game.Enemy.EnemyObject;
-import tw.edu.ntut.csie.game.Enemy.Marin;
+import tw.edu.ntut.csie.game.Enemy.*;
+import tw.edu.ntut.csie.game.Game;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.Audio;
+import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.engine.GameEngine;
+import tw.edu.ntut.csie.game.extend.BitmapButton;
 
 public class StateStage2 extends GameState{
     private Stage2BG bg;

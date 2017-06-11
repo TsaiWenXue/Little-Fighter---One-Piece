@@ -94,11 +94,6 @@ public class Stage1BG {
         _road1.release();
         _road2.release();
         _road3.release();
-        _sky = null;
-        _wave = null;
-        _road1 = null;
-        _road2 = null;
-        _road3 = null;
     }
 
 
