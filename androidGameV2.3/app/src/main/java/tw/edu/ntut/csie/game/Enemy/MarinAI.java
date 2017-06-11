@@ -34,7 +34,7 @@ public class MarinAI implements EnemyObject {
 
     private final int maxHealthPoint = 100;
     private int healthPoint = maxHealthPoint;
-    private int damage = 50;
+    private int damage = 10;
     private int[] attackArea = new int[4];
 
     public MarinAI() {
@@ -44,7 +44,7 @@ public class MarinAI implements EnemyObject {
         marinRun = new Animation();     marinRun_r = new Animation();
         marinAttack = new Animation();  marinAttack_r = new Animation();
 
-        px = 450; py = 200;
+        px = 600; py = 200;
     }
 
     public void initialize() {

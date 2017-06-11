@@ -21,7 +21,6 @@ public class StateStage1 extends GameState {
     private Audio _music;
     private MovingBitmap failed;
     private BitmapButton ok;
-    private boolean okPressed = false;
 
     private Navigation controller;
     private Button button;
@@ -58,8 +57,6 @@ public class StateStage1 extends GameState {
 
 
         selectCharacter();
-//        en01 = new MarinAI();
-//        en01.initialize();
         marins = new ArrayList<EnemyObject>();
         for (int i = 0; i < enemyQuantity; i++) {
             marins.add(new MarinAI());
@@ -117,7 +114,6 @@ public class StateStage1 extends GameState {
         ch.release();
         controller.release();
         button.release();
-
         for (EnemyObject en : marins)
             en.release();
     }
@@ -155,8 +151,10 @@ public class StateStage1 extends GameState {
 
     @Override
     public boolean pointerMoved(List<Pointer> pointers) {
-        controller.pointerMoved(pointers);
-        button.pointerMoved(pointers, ch);
+        if (ch.getHp() > 0) {
+            controller.pointerMoved(pointers);
+            button.pointerMoved(pointers, ch);
+        }
         return false;
     }
 
@@ -199,5 +197,4 @@ public class StateStage1 extends GameState {
             return true;
         return false;
     }
-
 }

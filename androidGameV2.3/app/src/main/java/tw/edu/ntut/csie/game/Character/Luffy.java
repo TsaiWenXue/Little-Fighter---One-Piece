@@ -232,6 +232,7 @@ public class Luffy implements CharacterObject {
             luffyGSkill.move();     luffyGSkill_r.move();
             luffyFSkill.move();     luffyFSkill_r.move();
 
+            //To appear the health point line
             for (int i = 0; i < 100; i++) {
                 if (i < 100*healthPoint/maxHp)
                     hp.get(i).setVisible(true);
@@ -239,6 +240,7 @@ public class Luffy implements CharacterObject {
                     hp.get(i).setVisible(false);
             }
 
+            //If not attacking, than luffy can run
             if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
                    GSkilling || GSkilling_r || FSkilling || FSkilling_r ||
                    jumping || jumping_r || defending || defending_r) ){
@@ -248,10 +250,10 @@ public class Luffy implements CharacterObject {
             setLocation(px, py);
             stopRunning();
 
+            // Perform each skills.
             attack();
             jump();
             defend();
-
             ESkill();
             GSkill();
             FSkill();
@@ -335,8 +337,8 @@ public class Luffy implements CharacterObject {
     }
 
      /*************************
-      * Get Hit Function Area *
-      *************************/
+           * Get Hit Function Area           *
+           *************************/
      public void getHit(ArrayList<AttackObject> attacks, int roadPx) {
 //         if (luffyHit.getCurrentFrameIndex() == -1)
 //             hitVisible = false;
@@ -372,17 +374,17 @@ public class Luffy implements CharacterObject {
          if (roadPx != 800 && roadPx != -800 && px != 400)
              px = 400;
          if (luffyHit.getCurrentFrameIndex() >= 0) {
-             px -= 40;
+             px -= 10;
              if (px < 0)
                  px = 0;
              setLocation(px, py);
          } else if (luffyHit_r.getCurrentFrameIndex() >= 0) {
-             px += 40;
+             px += 10;
              if (px > 800 - luffy.getWidth())
                  px = 800 - luffy.getWidth();
              setLocation(px, py);
          }
-         if (luffyHit.getCurrentFrameIndex() == -1 && luffyHit_r.getCurrentFrameIndex() == -1) {
+         if ((hitVisible || hitVisible_r) && luffyHit.getCurrentFrameIndex() == -1 && luffyHit_r.getCurrentFrameIndex() == -1) {
              if (hitVisible) {
                  visible = true;
                  hitVisible = false;
@@ -633,8 +635,8 @@ public class Luffy implements CharacterObject {
 
 
     /***********************
-     * Skill Function Area *
-     ***********************/
+         * Skill Function Area           *
+         ***********************/
 
     //Set Attack Area
     public void setAttackArea(Animation skill) {
@@ -685,7 +687,6 @@ public class Luffy implements CharacterObject {
             ESkilling = false;
             luffyESkill.setCurrentFrameIndex(-1);
             damage = 0;
-            healthPoint -= 50;
         }
         else if ( luffyESkill_r.isLastFrame() && (ESkilling_r == true)) {
             visible_r = true;
@@ -693,7 +694,6 @@ public class Luffy implements CharacterObject {
             ESkilling_r = false;
             luffyESkill_r.setCurrentFrameIndex(-1);
             damage = 0;
-            healthPoint -= 40;
         }
 
         if(ESkilling)
@@ -1701,6 +1701,8 @@ public class Luffy implements CharacterObject {
         luffyGSkill_r.setDelay(2);
         luffyFSkill.setDelay(2);
         luffyFSkill_r.setDelay(2);
+        luffyHit.setDelay(3);
+        luffyHit_r.setDelay(3);
     }
 
     public void secFrameDelay(){
