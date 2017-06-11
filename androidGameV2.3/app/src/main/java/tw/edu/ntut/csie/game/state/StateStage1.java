@@ -81,9 +81,9 @@ public class StateStage1 extends GameState {
                 attacks.add(new AttackObject(en));
             }
             bg.move(ch.getX());
+            ch.getHit(attacks, bg.getX());
             if (!ch.getHitting())
                 ch.move(bg.getX());
-            ch.getHit(attacks, bg.getX());
             button.move();
         }
     }
@@ -139,7 +139,7 @@ public class StateStage1 extends GameState {
 
     @Override
     public boolean pointerPressed(List<Pointer> pointers) {
-        if (ch.getHp() > 0) {
+        if (ch.getHp() > 0 && !ch.getHitting()) {
             controller.pointerPressed(pointers);
             button.pointerPressed(pointers, ch);
         }
@@ -151,7 +151,7 @@ public class StateStage1 extends GameState {
 
     @Override
     public boolean pointerMoved(List<Pointer> pointers) {
-        if (ch.getHp() > 0) {
+        if (ch.getHp() > 0 && !ch.getHitting()) {
             controller.pointerMoved(pointers);
             button.pointerMoved(pointers, ch);
         }
@@ -160,8 +160,10 @@ public class StateStage1 extends GameState {
 
     @Override
     public boolean pointerReleased(List<Pointer> pointers) {
-        controller.pointerReleased(pointers);
-        button.pointerReleased(pointers);
+        if (ch.getHp() > 0 && !ch.getHitting()) {
+            controller.pointerReleased(pointers);
+            button.pointerReleased(pointers);
+        }
         return false;
     }
 

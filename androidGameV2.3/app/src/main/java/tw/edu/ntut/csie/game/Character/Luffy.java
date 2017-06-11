@@ -184,7 +184,7 @@ public class Luffy implements CharacterObject {
         return attackArea;
     }
     public boolean getHitting() {
-        return !(luffyHit.getCurrentFrameIndex() == -1 && luffyHit_r.getCurrentFrameIndex() == -1);
+        return (hitVisible || hitVisible_r);
     }
 
     public void show() {
