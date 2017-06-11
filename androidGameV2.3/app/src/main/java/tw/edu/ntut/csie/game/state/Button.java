@@ -28,7 +28,7 @@ public class Button implements GameObject, PointerEventHandler {
     private int s_frame_x = s_x + 10;
     private int s_frame_y = s_y + 15;
 
-    public static int s_frame_count = 0;
+    private int s_frame_count = 0;
 
     public static boolean atPointerPressed;
     public static boolean dfPointerPressed;
@@ -44,9 +44,6 @@ public class Button implements GameObject, PointerEventHandler {
     public static boolean g_cd = false;
     public static boolean s_frame_bool = false;
     public static boolean fire_bool = false;
-
-    private boolean secModel_cd_bool = false;
-    long sec_cd = 0;
 
     private MovingBitmap attack;
     private MovingBitmap attack_pressed;
@@ -74,7 +71,16 @@ public class Button implements GameObject, PointerEventHandler {
     private MovingBitmap s_frame08;
     private MovingBitmap s_frame09;
     private MovingBitmap s_frame10;
-
+    private MovingBitmap s_frame01s;
+    private MovingBitmap s_frame02s;
+    private MovingBitmap s_frame03s;
+    private MovingBitmap s_frame04s;
+    private MovingBitmap s_frame05s;
+    private MovingBitmap s_frame06s;
+    private MovingBitmap s_frame07s;
+    private MovingBitmap s_frame08s;
+    private MovingBitmap s_frame09s;
+    private MovingBitmap s_frame10s;
 
     private Animation s_skill_cd;
     private Animation e_skill_cd;
@@ -206,20 +212,24 @@ public class Button implements GameObject, PointerEventHandler {
     }
 
     @Override
-    public void move(){
+    public void move(){}
+    public void move(CharacterObject ch){
         s_skill_cd.move();
         e_skill_cd.move();
         f_skill_cd.move();
         g_skill_cd.move();
-        SframeSetVisible();
+        if(fire_bool){
+            fire.move();
+            fire.setVisible(fire_bool);
+            SframeSetVisibleBack(ch);
+        }
+        else
+            SframeSetVisible();
         if(s_frame_bool){
             s_trigger.setVisible(s_frame_bool);
             s_trigger.move();
         }
-        if(fire_bool){
-            fire.move();
-            fire.setVisible(fire_bool);
-        }
+
 
     }
 
@@ -275,12 +285,12 @@ public class Button implements GameObject, PointerEventHandler {
                 s_skill.setVisible(false);
                 if(!fire_bool){
                     fire_bool = true;
-                    secModel_cd_bool = true;
                 }
                 else if(fire_bool){
                     s_cd = true;
                     s_skill_cd.setVisible(s_cd);
                     s_skill_cd.reset();
+                    s_frame_count--;
                 }
                 if(s_frame_bool){
                     ch.setSecondModelVisible();
@@ -296,7 +306,10 @@ public class Button implements GameObject, PointerEventHandler {
                 e_cd = true;
                 e_skill_cd.setVisible(e_cd);
                 e_skill_cd.reset();
-                s_frame_count++;
+                if(!fire_bool)
+                    s_frame_count++;
+                else
+                    s_frame_count--;
             }
             else if( f_skill.imageTouched(touchX, touchY)
             && !f_cd && ch.isNotPerforming()) {
@@ -306,7 +319,10 @@ public class Button implements GameObject, PointerEventHandler {
                 f_cd = true;
                 f_skill_cd.setVisible(f_cd);
                 f_skill_cd.reset();
-                s_frame_count++;
+                if(!fire_bool)
+                    s_frame_count++;
+                else
+                    s_frame_count--;
             }
             else if( g_skill.imageTouched(touchX, touchY)
             && !g_cd && ch.isNotPerforming()) {
@@ -316,7 +332,10 @@ public class Button implements GameObject, PointerEventHandler {
                 g_cd = true;
                 g_skill_cd.setVisible(g_cd);
                 g_skill_cd.reset();
-                s_frame_count++;
+                if(!fire_bool)
+                    s_frame_count++;
+                else
+                    s_frame_count--;
             }
             if(e_skill_cd.getCurrentFrameIndex() == -1){
             e_cd = false;
@@ -370,6 +389,7 @@ public class Button implements GameObject, PointerEventHandler {
                     s_cd = true;
                     s_skill_cd.setVisible(s_cd);
                     s_skill_cd.reset();
+                    s_frame_count--;
                 }
                 if(s_frame_bool){
                     ch.setSecondModelVisible();
@@ -385,7 +405,10 @@ public class Button implements GameObject, PointerEventHandler {
                 e_cd = true;
                 e_skill_cd.setVisible(e_cd);
                 e_skill_cd.reset();
-                s_frame_count++;
+                if(!fire_bool)
+                    s_frame_count++;
+                else
+                    s_frame_count--;
             }
             else if( f_skill.imageTouched(touchX, touchY)
             && !f_cd && ch.isNotPerforming()) {
@@ -395,7 +418,10 @@ public class Button implements GameObject, PointerEventHandler {
                 f_cd = true;
                 f_skill_cd.setVisible(f_cd);
                 f_skill_cd.reset();
-                s_frame_count++;
+                if(!fire_bool)
+                    s_frame_count++;
+                else
+                    s_frame_count--;
             }
             else if( g_skill.imageTouched(touchX, touchY)
             && !g_cd && ch.isNotPerforming()) {
@@ -405,7 +431,10 @@ public class Button implements GameObject, PointerEventHandler {
                 g_cd = true;
                 g_skill_cd.setVisible(g_cd);
                 g_skill_cd.reset();
-                s_frame_count++;
+                if(!fire_bool)
+                    s_frame_count++;
+                else
+                    s_frame_count--;
             }
             if(e_skill_cd.getCurrentFrameIndex() == -1){
             e_cd = false;
@@ -472,6 +501,16 @@ public class Button implements GameObject, PointerEventHandler {
          s_frame08 = new MovingBitmap(R.drawable.s_frame08);
          s_frame09 = new MovingBitmap(R.drawable.s_frame09);
          s_frame10 = new MovingBitmap(R.drawable.s_frame10);
+         s_frame01s = new MovingBitmap(R.drawable.s_frame01s);
+         s_frame02s = new MovingBitmap(R.drawable.s_frame02s);
+         s_frame03s = new MovingBitmap(R.drawable.s_frame03s);
+         s_frame04s = new MovingBitmap(R.drawable.s_frame04s);
+         s_frame05s = new MovingBitmap(R.drawable.s_frame05s);
+         s_frame06s = new MovingBitmap(R.drawable.s_frame06s);
+         s_frame07s = new MovingBitmap(R.drawable.s_frame07s);
+         s_frame08s = new MovingBitmap(R.drawable.s_frame08s);
+         s_frame09s = new MovingBitmap(R.drawable.s_frame09s);
+         s_frame10s = new MovingBitmap(R.drawable.s_frame10s);
     }
     public void SframeSetLocation(int _x, int _y){
         s_frame00.setLocation(_x, _y);
@@ -485,6 +524,16 @@ public class Button implements GameObject, PointerEventHandler {
         s_frame08.setLocation(_x, _y);
         s_frame09.setLocation(_x, _y);
         s_frame10.setLocation(_x, _y);
+        s_frame01s.setLocation(_x, _y);
+        s_frame02s.setLocation(_x, _y);
+        s_frame03s.setLocation(_x, _y);
+        s_frame04s.setLocation(_x, _y);
+        s_frame05s.setLocation(_x, _y);
+        s_frame06s.setLocation(_x, _y);
+        s_frame07s.setLocation(_x, _y);
+        s_frame08s.setLocation(_x, _y);
+        s_frame09s.setLocation(_x, _y);
+        s_frame10s.setLocation(_x, _y);
     }
     public void SframeSetVisible(){
     if(!s_frame_bool && !fire_bool){
@@ -632,24 +681,179 @@ public class Button implements GameObject, PointerEventHandler {
                 s_frame09.setVisible(false);
                 s_frame10.setVisible(true);
                 s_frame_bool = true;
-                s_frame_count = 0;
                 break;
             }
         }
-        else{
-            s_frame00.setVisible(false);
-            s_frame01.setVisible(false);
-            s_frame02.setVisible(false);
-            s_frame03.setVisible(false);
-            s_frame04.setVisible(false);
-            s_frame05.setVisible(false);
-            s_frame06.setVisible(false);
-            s_frame07.setVisible(false);
-            s_frame08.setVisible(false);
-            s_frame09.setVisible(false);
-            s_frame10.setVisible(false);
-        }
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
     }
+public void SframeSetVisibleBack(CharacterObject ch){
+    switch(s_frame_count){
+        case(0):
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
+            if(ch.isNotPerforming())
+                fire_bool = false;
+            break;
+        case(1):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(true);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
+            break;
+        case(2):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(true);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
+            break;
+        case(3):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(true);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
+            break;
+        case(4):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(true);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
+            break;
+        case(5):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(true);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
+            break;
+        case(6):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(true);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
+            break;
+        case(7):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(true);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
+            break;
+        case(8):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(true);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(false);
+            break;
+        case(9):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(true);
+            s_frame10s.setVisible(false);
+            break;
+        case(10):
+            s_frame00.setVisible(false);
+            s_frame01s.setVisible(false);
+            s_frame02s.setVisible(false);
+            s_frame03s.setVisible(false);
+            s_frame04s.setVisible(false);
+            s_frame05s.setVisible(false);
+            s_frame06s.setVisible(false);
+            s_frame07s.setVisible(false);
+            s_frame08s.setVisible(false);
+            s_frame09s.setVisible(false);
+            s_frame10s.setVisible(true);
+            break;
+        }
+        s_frame01.setVisible(false);
+        s_frame02.setVisible(false);
+        s_frame03.setVisible(false);
+        s_frame04.setVisible(false);
+        s_frame05.setVisible(false);
+        s_frame06.setVisible(false);
+        s_frame07.setVisible(false);
+        s_frame08.setVisible(false);
+        s_frame09.setVisible(false);
+        s_frame10.setVisible(false);
+
+}
     public void SframeShow(){
 
         s_frame00.show();
@@ -663,6 +867,16 @@ public class Button implements GameObject, PointerEventHandler {
         s_frame08.show();
         s_frame09.show();
         s_frame10.show();
+        s_frame01s.show();
+        s_frame02s.show();
+        s_frame03s.show();
+        s_frame04s.show();
+        s_frame05s.show();
+        s_frame06s.show();
+        s_frame07s.show();
+        s_frame08s.show();
+        s_frame09s.show();
+        s_frame10s.show();
     }
     public void SframeRelease(){
         s_frame00.release();
@@ -676,5 +890,15 @@ public class Button implements GameObject, PointerEventHandler {
         s_frame08.release();
         s_frame09.release();
         s_frame10.release();
+        s_frame01s.release();
+        s_frame02s.release();
+        s_frame03s.release();
+        s_frame04s.release();
+        s_frame05s.release();
+        s_frame06s.release();
+        s_frame07s.release();
+        s_frame08s.release();
+        s_frame09s.release();
+        s_frame10s.release();
     }
 }
