@@ -143,10 +143,22 @@ public class StateStage2 extends GameState{
             button.pointerPressed(pointers, ch);
         }
         if (ok.pointerPressed(pointers)) {
-            if (ch.isDead())
-                changeState(Game.OVER_STATE);
-            if (noEnemy())
-                changeState(Game.STAGE2_STATE);
+            if (ch.isDead()) {
+                Record.calTime();
+                for (EnemyObject en : marins) {
+                    if (en.isDead())
+                        Record.killed++;
+                }
+                changeState(Game.OVER_DEFEAT_STAGE);
+            }
+            if (noEnemy()) {
+                Record.calTime();
+                for (EnemyObject en : marins) {
+                    if (en.isDead())
+                        Record.killed++;
+                }
+                changeState(Game.OVER_VICTORY_STATE);
+            }
         }
         return true;
 

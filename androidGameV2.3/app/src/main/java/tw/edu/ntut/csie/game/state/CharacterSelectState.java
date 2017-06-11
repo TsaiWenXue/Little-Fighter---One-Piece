@@ -3,6 +3,7 @@ package tw.edu.ntut.csie.game.state;
 import java.util.List;
 import java.util.Map;
 
+import tw.edu.ntut.csie.game.Character.Record;
 import tw.edu.ntut.csie.game.Game;
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
@@ -209,14 +210,15 @@ public class CharacterSelectState extends GameState {
             int touchY = pointers.get(0).getY();
             if (touchX > start_X && touchX < start_X + start.getWidth() &&
                 touchY > start_Y && touchY < start_Y + start.getHeight()) {
-                    switch(stage){
-                        case 0:
-                        changeState(Game.STAGE1_STATE);
-                        break;
-                        case 1:
-                        stage = 0;
-                        changeState(Game.STAGE2_STATE);
-                        break;
+                Record.reset();
+                switch(stage){
+                    case 0:
+                    changeState(Game.STAGE1_STATE);
+                    break;
+                    case 1:
+                    stage = 0;
+                    changeState(Game.STAGE2_STATE);
+                    break;
                 }
             }
 

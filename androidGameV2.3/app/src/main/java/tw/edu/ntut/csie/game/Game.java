@@ -13,6 +13,8 @@ import tw.edu.ntut.csie.game.state.StateReady;
 import tw.edu.ntut.csie.game.state.CharacterSelectState;
 import tw.edu.ntut.csie.game.state.StateStage1;
 import tw.edu.ntut.csie.game.state.StateStage2;
+import tw.edu.ntut.csie.game.state.StateVictory;
+import tw.edu.ntut.csie.game.state.StateDefeat;
 
 import static android.hardware.Sensor.TYPE_ACCELEROMETER;
 import static android.hardware.Sensor.TYPE_ORIENTATION;
@@ -121,7 +123,8 @@ public class Game extends Activity {
             _engine.registerGameState(STAGE1_STATE, new StateStage1(_engine));
             _engine.registerGameState(STAGE2_STATE, new StateStage2(_engine));
             _engine.registerGameState(OVER_STATE, new StateOver(_engine));
-//            _engine.registerGameState(OVER_VICTORY_STATE, new StateVictory(_engine));
+            _engine.registerGameState(OVER_VICTORY_STATE, new StateVictory(_engine));
+            _engine.registerGameState(OVER_DEFEAT_STAGE, new StateDefeat(_engine));
             _engine.setGameState(INITIAL_STATE);
             _view.setGameEngine(_engine);
         }

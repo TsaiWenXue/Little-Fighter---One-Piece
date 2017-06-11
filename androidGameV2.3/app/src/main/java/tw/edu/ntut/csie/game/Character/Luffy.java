@@ -273,7 +273,7 @@ public class Luffy implements CharacterObject {
         else if(Button.fire_bool){
             setInvisible();
             sluffy.setVisible(sec_visible);
-            sluffy.move();     sluffy_r.move();
+            sluffy.move();           sluffy_r.move();
             sluffyRun.move();        sluffyRun_r.move();
             sluffyAttack.move();     sluffyAttack_r.move();
             sluffyDefend.move();     sluffyDefend_r.move();

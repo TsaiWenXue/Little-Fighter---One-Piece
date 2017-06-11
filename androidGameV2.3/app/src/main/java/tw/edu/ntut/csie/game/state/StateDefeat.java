@@ -1,7 +1,6 @@
 package tw.edu.ntut.csie.game.state;
 
 import java.util.Map;
-import java.util.Objects;
 
 import tw.edu.ntut.csie.game.Character.Record;
 import tw.edu.ntut.csie.game.Game;
@@ -12,10 +11,10 @@ import tw.edu.ntut.csie.game.extend.BitmapButton;
 import tw.edu.ntut.csie.game.extend.ButtonEventHandler;
 
 /**
- * Created by Hsiang on 2017/6/11.
+ * Created by Hsiang on 2017/6/12.
  */
 
-public class StateVictory extends AbstractGameState {
+public class StateDefeat extends AbstractGameState {
     private BitmapButton continueButton;
     private MovingBitmap minTen;
     private MovingBitmap min;
@@ -24,13 +23,13 @@ public class StateVictory extends AbstractGameState {
 
     private MovingBitmap one, ten, hund;
 
-    public StateVictory (GameEngine engine) {
+    public StateDefeat (GameEngine engine) {
         super(engine);
     }
 
     @Override
     public void initialize(Map<String, Object> data) {
-        addGameObject(new MovingBitmap(R.drawable.victory));
+        addGameObject(new MovingBitmap(R.drawable.defeat));
         int seconds = (int)(Record.time / 1000);
         int minutes = seconds/60;
         seconds = seconds % 60;
@@ -67,7 +66,8 @@ public class StateVictory extends AbstractGameState {
         addGameObject(hund);
         addGameObject(ten);
         addGameObject(one);
-        continueButton = new BitmapButton(R.drawable.ok, R.drawable.ok_pressed, 350, 300);
+
+        continueButton = new BitmapButton(R.drawable.ok, R.drawable.ok_pressed, 350, 400);
         continueButton.addButtonEventHandler(new ButtonEventHandler() {
             @Override
             public void perform(BitmapButton button) {
@@ -76,19 +76,6 @@ public class StateVictory extends AbstractGameState {
         });
         addGameObject(continueButton);
         addPointerEventHandler(continueButton);
-    }
-
-    @Override
-    public void move() {
-        super.move();
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
     }
 
     public MovingBitmap getNum(int num) {
@@ -116,5 +103,18 @@ public class StateVictory extends AbstractGameState {
             default:
                 return null;
         }
+    }
+
+    @Override
+    public void move() {
+        super.move();
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
     }
 }

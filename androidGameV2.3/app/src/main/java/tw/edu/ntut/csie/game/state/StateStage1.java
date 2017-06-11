@@ -28,7 +28,7 @@ public class StateStage1 extends GameState {
     private CharacterObject ch;
     private ArrayList<EnemyObject> marins;
 
-    private final static int enemyQuantity = 1;
+    private final static int enemyQuantity = 10;
     private int deadEnemiesQuantity = 0;
     private ArrayList<AttackObject> attacks;
 
@@ -76,9 +76,9 @@ public class StateStage1 extends GameState {
         else {
             attacks = new ArrayList<>();
 
-            for (EnemyObject en : marins) {
-                en.move(ch, bg.getX());
-                attacks.add(new AttackObject(en));
+            for (int i = 0; i < marins.size(); i++) {
+                marins.get(i).move(ch, bg.getX());
+                attacks.add(new AttackObject(marins.get(i)));
             }
             bg.move(ch.getX());
             if (!ch.getHitting())
@@ -95,8 +95,8 @@ public class StateStage1 extends GameState {
         controller.show();
         button.show();
         ch.show();
-        for (EnemyObject en : marins) {
-            en.show();
+        for (int i = 0; i < marins.size(); i++) {
+            marins.get(i).show();
         }
         failed.show();
         clear.show();
@@ -114,8 +114,8 @@ public class StateStage1 extends GameState {
         controller.release();
         button.release();
         ch.release();
-        for (EnemyObject en : marins)
-            en.release();
+        for (int i = 0; i < marins.size(); i++)
+            marins.get(i).release();
     }
     @Override
     public void keyPressed(int keyCode) {
@@ -144,10 +144,21 @@ public class StateStage1 extends GameState {
             button.pointerPressed(pointers, ch);
         }
         if (ok.pointerPressed(pointers)) {
-            if (ch.isDead())
-                changeState(Game.OVER_STATE);
-            if (noEnemy())
+            if (ch.isDead()) {
+                Record.calTime();
+                for (EnemyObject en : marins) {
+                    if (en.isDead())
+                        Record.killed++;
+                }
+                changeState(Game.OVER_DEFEAT_STAGE);
+            }
+            if (noEnemy()) {
+                for (EnemyObject en : marins) {
+                    if (en.isDead())
+                        Record.killed++;
+                }
                 changeState(Game.STAGE2_STATE);
+            }
         }
         return true;
 
