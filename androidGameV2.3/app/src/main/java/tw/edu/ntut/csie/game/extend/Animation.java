@@ -266,6 +266,15 @@ public class Animation implements GameObject {
                 this.addFrame(R.drawable.cd_1);
                 this.addFrame(R.drawable.cd_0);
                 break;
+            case 6:
+                this.addFrame(R.drawable.cd_6); 
+                this.addFrame(R.drawable.cd_5);
+                this.addFrame(R.drawable.cd_4);
+                this.addFrame(R.drawable.cd_3);
+                this.addFrame(R.drawable.cd_2);
+                this.addFrame(R.drawable.cd_1);
+                this.addFrame(R.drawable.cd_0);
+                break;
             case 5:
                 this.addFrame(R.drawable.cd_5);
                 this.addFrame(R.drawable.cd_4);

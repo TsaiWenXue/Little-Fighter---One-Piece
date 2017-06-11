@@ -2,6 +2,7 @@ package tw.edu.ntut.csie.game.state;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
@@ -46,6 +47,9 @@ public class Button implements GameObject, PointerEventHandler {
     public static boolean g_cd = false;
     public static boolean s_frame_bool = false;
     public static boolean fire_bool = false;
+
+    private boolean secModel_cd_bool = false;
+    long sec_cd = 0;
 
     private MovingBitmap attack;
     private MovingBitmap attack_pressed;
@@ -268,17 +272,22 @@ public class Button implements GameObject, PointerEventHandler {
             else if( s_skill.imageTouched(touchX, touchY)
             && !s_cd && (s_frame_bool || fire_bool) && ch.isPerforming()) {
                 sPointerPressed = true;
-                if(s_frame_bool)
-                    ch.setSecondModelVisible();
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
-                // s_cd = true;
-                // s_skill_cd.setVisible(s_cd);
-                // s_skill_cd.reset();
-                s_frame_bool = false;
-                s_trigger.setVisible(s_frame_bool);
-                if(!fire_bool)
+                if(!fire_bool){
                     fire_bool = true;
+                    secModel_cd_bool = true;
+                }
+                else if(fire_bool){
+                    s_cd = true;
+                    s_skill_cd.setVisible(s_cd);
+                    s_skill_cd.reset();
+                }
+                if(s_frame_bool){
+                    ch.setSecondModelVisible();
+                    s_frame_bool = false;
+                    s_trigger.setVisible(s_frame_bool);
+                }
             }
             else if( e_skill.imageTouched(touchX, touchY)
             && !e_cd && ch.isPerforming ()) {
@@ -353,17 +362,21 @@ public class Button implements GameObject, PointerEventHandler {
             else if( s_skill.imageTouched(touchX, touchY)
             && !s_cd && (s_frame_bool || fire_bool) && ch.isPerforming()) {
                 sPointerPressed = true;
-                if(s_frame_bool)
-                    ch.setSecondModelVisible();
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
-                // s_cd = true;
-                // s_skill_cd.setVisible(s_cd);
-                // s_skill_cd.reset();
-                s_frame_bool = false;
-                s_trigger.setVisible(s_frame_bool);
-                if(!fire_bool)
+                if(!fire_bool){
                     fire_bool = true;
+                }
+                else if(fire_bool){
+                    s_cd = true;
+                    s_skill_cd.setVisible(s_cd);
+                    s_skill_cd.reset();
+                }
+                if(s_frame_bool){
+                    ch.setSecondModelVisible();
+                    s_frame_bool = false;
+                    s_trigger.setVisible(s_frame_bool);
+                }
             }
             else if( e_skill.imageTouched(touchX, touchY)
             && !e_cd && ch.isPerforming()) {

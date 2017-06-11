@@ -61,7 +61,6 @@ public class Luffy implements CharacterObject {
 
     private boolean visible = true, visible_r = false;
     private boolean sec_visible = false;
-    private boolean first_S_touch = false;
     private boolean sec_visible_r = false;
     private boolean runVisible = false, runVisible_r = false;
     private boolean hitVisible = false, hitVisible_r = false;
@@ -252,7 +251,8 @@ public class Luffy implements CharacterObject {
             FSkill();
 
             if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
-                   GSkilling || GSkilling_r || FSkilling || FSkilling_r) )
+                   GSkilling || GSkilling_r || FSkilling || FSkilling_r ||
+                   SSkilling || SSkilling_r) )
                 setAttackArea();
 
         }
@@ -278,7 +278,8 @@ public class Luffy implements CharacterObject {
 
             if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
                    GSkilling || GSkilling_r || FSkilling || FSkilling_r ||
-                   jumping || jumping_r || defending || defending_r) ){
+                   SSkilling || SSkilling_r || jumping || jumping_r ||
+                   defending || defending_r) ){
                    secRunning(roadPx);
                }
 
@@ -295,7 +296,8 @@ public class Luffy implements CharacterObject {
             secSSkill();
 
             if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
-                   GSkilling || GSkilling_r || FSkilling || FSkilling_r) )
+                   GSkilling || GSkilling_r || FSkilling || FSkilling_r ||
+                   SSkilling || SSkilling_r) )
                 setAttackArea();
             }
 
@@ -972,7 +974,7 @@ public class Luffy implements CharacterObject {
     //sec_S perform
     public void secSSkill(){
         if (Button.sPointerPressed == true && (sec_visible == true || runVisible == true)
-            && Button.fire_bool && first_S_touch){
+            && Button.fire_bool){
 
             sec_visible = false;
             sec_visible_r = false;
@@ -986,8 +988,7 @@ public class Luffy implements CharacterObject {
             damage = 50;
 
         }
-        else if (Button.sPointerPressed == true && (sec_visible_r == true || runVisible_r == true)
-                && first_S_touch){
+        else if (Button.sPointerPressed == true && (sec_visible_r == true || runVisible_r == true)){
             sec_visible = false;
             sec_visible_r = false;
             runVisible = false;
@@ -1794,7 +1795,6 @@ public class Luffy implements CharacterObject {
     }
     public void setSecondModelVisible(){
         sec_visible = true;
-        first_S_touch = true;
     }
 
 }
