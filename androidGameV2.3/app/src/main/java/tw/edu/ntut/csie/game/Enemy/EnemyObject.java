@@ -15,7 +15,11 @@ public interface EnemyObject {
 
     public void show();
 
-    public void move(CharacterObject ch) ;
+    public void move(CharacterObject ch, int roadPx) ;
+    public int getDamage();
+    public int[] getAttackArea();
+    public boolean isAttacking();
+    public boolean isAttacking_r();
 
     public void release();
     public boolean isDead();

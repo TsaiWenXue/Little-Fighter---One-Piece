@@ -1,5 +1,8 @@
 package tw.edu.ntut.csie.game.Character;
 
+import java.util.ArrayList;
+
+import tw.edu.ntut.csie.game.Enemy.AttackObject;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.state.Button;
@@ -69,6 +72,13 @@ public class Zoro implements CharacterObject {
     public int getDamage() { return damage; }
     public int getHp() {
         return healthPoint;
+    }
+    public boolean getHitting() {return false;}
+    public void getHit(ArrayList<AttackObject> attacks, int roadPx){
+
+    }
+    public boolean isDead() {
+        return false;
     }
 
 
