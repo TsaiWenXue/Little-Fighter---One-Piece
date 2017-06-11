@@ -368,7 +368,7 @@ public class Luffy implements CharacterObject {
                  px = 800 - luffy.getWidth();
              setLocation(px, py);
          }
-         if (luffyHit.getCurrentFrameIndex() == -1 && luffyHit_r.getCurrentFrameIndex() == -1) {
+         if ((hitVisible || hitVisible_r) && luffyHit.getCurrentFrameIndex() == -1 && luffyHit_r.getCurrentFrameIndex() == -1) {
              if (hitVisible) {
                  visible = true;
                  hitVisible = false;
