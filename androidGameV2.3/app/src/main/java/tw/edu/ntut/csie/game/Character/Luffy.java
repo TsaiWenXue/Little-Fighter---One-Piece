@@ -222,15 +222,29 @@ public class Luffy implements CharacterObject {
     }
 
     public void move(int roadPx) {
+        luffy.move();           luffy_r.move();
+        luffyRun.move();        luffyRun_r.move();
+        luffyAttack.move();     luffyAttack_r.move();
+        luffyDefend.move();     luffyDefend_r.move();
+        luffyJump.move();       luffyJump_r.move();
+        luffyESkill.move();     luffyESkill_r.move();
+        luffyGSkill.move();     luffyGSkill_r.move();
+        luffyFSkill.move();     luffyFSkill_r.move();
+
+        sluffy.setVisible(sec_visible);
+        sluffy.move();     sluffy_r.move();
+        sluffyRun.move();        sluffyRun_r.move();
+        sluffyAttack.move();     sluffyAttack_r.move();
+        sluffyDefend.move();     sluffyDefend_r.move();
+        sluffyJump.move();       sluffyJump_r.move();
+        sluffyESkill.move();     sluffyESkill_r.move();
+        sluffyGSkill.move();     sluffyGSkill_r.move();
+        sluffyFSkill.move();     sluffyFSkill_r.move();
+        sluffySSkill.move();     sluffySSkill_r.move();
+
         if(!Button.fire_bool){
-            luffy.move();           luffy_r.move();
-            luffyRun.move();        luffyRun_r.move();
-            luffyAttack.move();     luffyAttack_r.move();
-            luffyDefend.move();     luffyDefend_r.move();
-            luffyJump.move();       luffyJump_r.move();
-            luffyESkill.move();     luffyESkill_r.move();
-            luffyGSkill.move();     luffyGSkill_r.move();
-            luffyFSkill.move();     luffyFSkill_r.move();
+            secSetInvisble();
+
 
             //To appear the health point line
             for (int i = 0; i < 100; i++) {
@@ -266,16 +280,6 @@ public class Luffy implements CharacterObject {
         }
         else if(Button.fire_bool){
             setInvisible();
-            sluffy.setVisible(sec_visible);
-            sluffy.move();     sluffy_r.move();
-            sluffyRun.move();        sluffyRun_r.move();
-            sluffyAttack.move();     sluffyAttack_r.move();
-            sluffyDefend.move();     sluffyDefend_r.move();
-            sluffyJump.move();       sluffyJump_r.move();
-            sluffyESkill.move();     sluffyESkill_r.move();
-            sluffyGSkill.move();     sluffyGSkill_r.move();
-            sluffyFSkill.move();     sluffyFSkill_r.move();
-            sluffySSkill.move();     sluffySSkill_r.move();
 
             for (int i = 0; i < 100; i++) {
                 if (i < 100*healthPoint/maxHp)
@@ -609,6 +613,26 @@ public class Luffy implements CharacterObject {
         luffyGSkill_r.setVisible(false);
         luffyFSkill.setVisible(false);
         luffyFSkill_r.setVisible(false);
+    }
+    public void secSetInvisble(){
+        sluffy.setVisible(false);
+        sluffy_r.setVisible(false);
+        sluffyRun.setVisible(false);
+        sluffyRun_r.setVisible(false);
+        sluffyAttack.setVisible(false);
+        sluffyAttack_r.setVisible(false);
+        sluffyDefend.setVisible(false);
+        sluffyDefend_r.setVisible(false);
+        sluffyJump.setVisible(false);
+        sluffyJump_r.setVisible(false);
+        sluffyESkill.setVisible(false);
+        sluffyESkill_r.setVisible(false);
+        sluffyGSkill.setVisible(false);
+        sluffyGSkill_r.setVisible(false);
+        sluffyFSkill.setVisible(false);
+        sluffyFSkill_r.setVisible(false);
+        sluffySSkill.setVisible(false);
+        sluffySSkill_r.setVisible(false);
     }
     public void secSetVisible() {
 
