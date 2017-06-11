@@ -26,7 +26,7 @@ public class SoundEffects implements ReleasableResource {
     /**
      * 預設音效載入時所使用的採樣率：100。
      */
-    public static final int DEFAULT_SOUND_QUALITY = 100;
+    public static final int DEFAULT_SOUND_QUALITY = 85;
 
     /**
      * 預設最大混和音效比數：10筆。

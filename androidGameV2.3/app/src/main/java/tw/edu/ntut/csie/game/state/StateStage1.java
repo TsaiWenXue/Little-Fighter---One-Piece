@@ -91,7 +91,6 @@ public class StateStage1 extends GameState {
         ch.release();
         controller.release();
         button.release();
-        ch.release();
 
         en01.release();
         for (EnemyObject en : marins)

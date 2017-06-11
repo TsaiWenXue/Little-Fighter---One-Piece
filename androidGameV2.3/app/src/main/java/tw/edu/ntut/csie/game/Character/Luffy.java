@@ -2,6 +2,7 @@ package tw.edu.ntut.csie.game.Character;
 
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
+import tw.edu.ntut.csie.game.core.SoundEffects;
 import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.state.Button;
 import tw.edu.ntut.csie.game.state.Navigation;
@@ -48,6 +49,7 @@ public class Luffy implements CharacterObject {
     private Animation sluffySSkill;
     private Animation sluffySSkill_r;
 
+    private SoundEffects luffySound;
 
     private MovingBitmap luffy_small;
 
@@ -107,6 +109,7 @@ public class Luffy implements CharacterObject {
         luffyFSkill = new Animation();
         luffyFSkill_r = new Animation();
 
+        luffySound = new SoundEffects();
 
         for (int i = 0 ; i < 100; i++) {
             hp.add(new MovingBitmap(R.drawable.healthpoint));
@@ -151,6 +154,8 @@ public class Luffy implements CharacterObject {
         secSetVisible();
         secSetCurrentIndex(-1);
         secSetLocation(px, py);
+
+        soundEffectsInit();
     }
 
     public int getX() {
@@ -290,14 +295,24 @@ public class Luffy implements CharacterObject {
     }
 
     public void release() {
-//        luffy.release();            luffy_r.release();
-//        luffyRun.release();         luffyRun_r.release();
-//        luffyAttack.release();      luffyAttack_r.release();
-//        luffyDefend.release();      luffyDefend_r.release();
-//        luffyJump.release();        luffyJump_r.release();
-//        luffyESkill.release();      luffyESkill_r.release();
-//        luffyGSkill.release();      luffyGSkill_r.release();
-//        luffyFSkill.release();      luffyFSkill_r.release();
+       luffy.release();            luffy_r.release();
+       luffyRun.release();         luffyRun_r.release();
+       luffyAttack.release();      luffyAttack_r.release();
+       luffyDefend.release();      luffyDefend_r.release();
+       luffyJump.release();        luffyJump_r.release();
+       luffyESkill.release();      luffyESkill_r.release();
+       luffyGSkill.release();      luffyGSkill_r.release();
+       luffyFSkill.release();      luffyFSkill_r.release();
+       sluffy.release();            sluffy_r.release();
+       sluffyRun.release();         sluffyRun_r.release();
+       sluffyAttack.release();      sluffyAttack_r.release();
+       sluffyDefend.release();      sluffyDefend_r.release();
+       sluffyJump.release();        sluffyJump_r.release();
+       sluffyESkill.release();      sluffyESkill_r.release();
+       sluffyGSkill.release();      sluffyGSkill_r.release();
+       sluffyFSkill.release();      sluffyFSkill_r.release();
+       sluffySSkill.release();      sluffySSkill_r.release();
+       luffy_small.release();       luffySound.release();
     }
 
 
@@ -558,7 +573,7 @@ public class Luffy implements CharacterObject {
             luffyESkill.reset();
             ESkilling = true;
             damage = 10;
-
+            luffySound.play(6);
         }
         else if (Button.ePointerPressed == true && (visible_r == true || runVisible_r == true)) {
             visible = false;
@@ -571,7 +586,7 @@ public class Luffy implements CharacterObject {
             luffyESkill_r.reset();
             ESkilling_r = true;
             damage = 10;
-
+            luffySound.play(6);
         }
 
         if ( luffyESkill.isLastFrame() && (ESkilling == true)) {
@@ -613,7 +628,7 @@ public class Luffy implements CharacterObject {
             sluffyESkill.reset();
             ESkilling = true;
             damage = 20;
-
+            luffySound.play(6);
         }
         else if (Button.ePointerPressed == true && (sec_visible_r == true || runVisible_r == true)) {
             sec_visible = false;
@@ -626,7 +641,7 @@ public class Luffy implements CharacterObject {
             sluffyESkill_r.reset();
             ESkilling_r = true;
             damage = 20;
-
+            luffySound.play(6);
         }
 
         if ( sluffyESkill.isLastFrame() && (ESkilling == true)) {
@@ -659,7 +674,6 @@ public class Luffy implements CharacterObject {
     //G skill perform
     public void GSkill() {
         if (Button.gPointerPressed == true && (visible == true || runVisible == true)){
-
             visible = false;
             visible_r = false;
             runVisible = false;
@@ -670,7 +684,7 @@ public class Luffy implements CharacterObject {
             luffyGSkill.reset();
             GSkilling = true;
             damage = 25;
-
+            luffySound.play(5);
         }
         else if (Button.gPointerPressed == true && (visible_r == true || runVisible_r == true)){
             visible = false;
@@ -683,7 +697,7 @@ public class Luffy implements CharacterObject {
             luffyGSkill_r.reset();
             GSkilling_r = true;
             damage = 25;
-
+            luffySound.play(5);
         }
 
         if ( luffyGSkill.isLastFrame() && (GSkilling == true)) {
@@ -719,7 +733,6 @@ public class Luffy implements CharacterObject {
     //Sec_G skill perform
     public void secGSkill() {
         if (Button.gPointerPressed == true && (sec_visible == true || runVisible == true)){
-
             sec_visible = false;
             sec_visible_r = false;
             runVisible = false;
@@ -730,7 +743,7 @@ public class Luffy implements CharacterObject {
             sluffyGSkill.reset();
             GSkilling = true;
             damage = 40;
-
+            luffySound.play(5);
         }
         else if (Button.gPointerPressed == true && (sec_visible_r == true || runVisible_r == true)){
             sec_visible = false;
@@ -743,7 +756,7 @@ public class Luffy implements CharacterObject {
             sluffyGSkill_r.reset();
             GSkilling_r = true;
             damage = 40;
-
+            luffySound.play(5);
         }
 
         if ( sluffyGSkill.isLastFrame() && (GSkilling == true)) {
@@ -774,7 +787,6 @@ public class Luffy implements CharacterObject {
     //F skill perform
     public void FSkill() {
         if (Button.fPointerPressed == true && (visible == true || runVisible == true)){
-
             visible = false;
             visible_r = false;
             runVisible = false;
@@ -785,7 +797,7 @@ public class Luffy implements CharacterObject {
             luffyFSkill.reset();
             FSkilling = true;
             damage = 40;
-
+            luffySound.play(7);
         }
         else if (Button.fPointerPressed == true && (visible_r == true || runVisible_r == true)){
             visible = false;
@@ -798,7 +810,7 @@ public class Luffy implements CharacterObject {
             luffyFSkill_r.reset();
             FSkilling_r = true;
             damage = 40;
-
+            luffySound.play(7);
         }
 
         if ( luffyFSkill.isLastFrame() && (FSkilling == true)) {
@@ -828,7 +840,6 @@ public class Luffy implements CharacterObject {
     //Sec_F skill perform
     public void secFSkill() {
         if (Button.fPointerPressed == true && (sec_visible == true || runVisible == true)){
-
             sec_visible = false;
             sec_visible_r = false;
             runVisible = false;
@@ -839,7 +850,7 @@ public class Luffy implements CharacterObject {
             sluffyFSkill.reset();
             FSkilling = true;
             damage = 45;
-
+            luffySound.play(7);
         }
         else if (Button.fPointerPressed == true && (sec_visible_r == true || runVisible_r == true)){
             sec_visible = false;
@@ -852,7 +863,7 @@ public class Luffy implements CharacterObject {
             sluffyFSkill_r.reset();
             FSkilling_r = true;
             damage = 45;
-
+            luffySound.play(7);
         }
 
         if ( sluffyFSkill.isLastFrame() && (FSkilling == true)) {
@@ -886,7 +897,6 @@ public class Luffy implements CharacterObject {
     public void secSSkill(){
         if (Button.sPointerPressed == true && (sec_visible == true || runVisible == true)
             && Button.fire_bool){
-
             sec_visible = false;
             sec_visible_r = false;
             runVisible = false;
@@ -897,7 +907,7 @@ public class Luffy implements CharacterObject {
             sluffySSkill.reset();
             SSkilling = true;
             damage = 50;
-
+            luffySound.play(4);
         }
         else if (Button.sPointerPressed == true && (sec_visible_r == true || runVisible_r == true)){
             sec_visible = false;
@@ -910,7 +920,7 @@ public class Luffy implements CharacterObject {
             sluffySSkill_r.reset();
             SSkilling_r = true;
             damage = 50;
-
+            luffySound.play(4);
         }
 
         if ( sluffySSkill.isLastFrame() && (SSkilling == true)) {
@@ -952,7 +962,7 @@ public class Luffy implements CharacterObject {
             luffyAttack.reset();
             attacking = true;
             damage = 10;
-
+            luffySound.play(1);
         }
         else if (Button.atPointerPressed == true && (visible_r == true || runVisible_r == true)){
             visible = false;
@@ -965,7 +975,7 @@ public class Luffy implements CharacterObject {
             luffyAttack_r.reset();
             attacking_r = true;
             damage = 10;
-
+            luffySound.play(1);
         }
 
         if ( luffyAttack.isLastFrame() && (attacking == true)) {
@@ -1005,7 +1015,7 @@ public class Luffy implements CharacterObject {
             sluffyAttack.reset();
             attacking = true;
             damage = 20;
-
+            luffySound.play(1);
         }
         else if (Button.atPointerPressed == true && (sec_visible_r == true || runVisible_r == true)){
             sec_visible = false;
@@ -1018,7 +1028,7 @@ public class Luffy implements CharacterObject {
             sluffyAttack_r.reset();
             attacking_r = true;
             damage = 20;
-
+            luffySound.play(1);
         }
 
         if ( sluffyAttack.isLastFrame() && (attacking == true)) {
@@ -1048,6 +1058,7 @@ public class Luffy implements CharacterObject {
     //Defending perform
     public void defend() {
         if (Button.dfPointerPressed == true && (visible == true || runVisible == true)){
+            luffySound.play(3);
             visible = false;
             visible_r = false;
             runVisible = false;
@@ -1058,7 +1069,6 @@ public class Luffy implements CharacterObject {
             luffyDefend.setVisible(Button.dfPointerPressed);
             luffyDefend.reset();
             defending = true;
-
         }
         else if (Button.dfPointerPressed == true && (visible_r == true || runVisible_r == true)){
             visible = false;
@@ -1071,7 +1081,7 @@ public class Luffy implements CharacterObject {
             luffyDefend_r.setVisible(Button.dfPointerPressed);
             luffyDefend_r.reset();
             defending_r = true;
-
+            luffySound.play(3);
         }
 
         if ( luffyDefend.isLastFrame() && (defending == true)) {
@@ -1101,6 +1111,7 @@ public class Luffy implements CharacterObject {
             sluffyDefend.setVisible(Button.dfPointerPressed);
             sluffyDefend.reset();
             defending = true;
+            luffySound.play(3);
         }
         else if (Button.dfPointerPressed == true && (sec_visible_r == true || runVisible_r == true)){
             sec_visible = false;
@@ -1113,6 +1124,7 @@ public class Luffy implements CharacterObject {
             sluffyDefend_r.setVisible(Button.dfPointerPressed);
             sluffyDefend_r.reset();
             defending_r = true;
+            luffySound.play(3);
         }
         if ( sluffyDefend.isLastFrame() && (defending == true)) {
             sec_visible = true;
@@ -1144,7 +1156,7 @@ public class Luffy implements CharacterObject {
             luffyJump.setVisible(Button.jpPointerPressed);
             luffyJump.reset();
             jumping = true;
-
+            luffySound.play(2);
         }
         else if (Button.jpPointerPressed == true && (visible_r == true || runVisible_r == true)){
             visible = false;
@@ -1156,7 +1168,7 @@ public class Luffy implements CharacterObject {
             luffyJump_r.setVisible(Button.jpPointerPressed);
             luffyJump_r.reset();
             jumping_r = true;
-
+            luffySound.play(2);
         }
 
         if ( luffyJump.isLastFrame() && (jumping == true)) {
@@ -1192,7 +1204,7 @@ public class Luffy implements CharacterObject {
             sluffyJump.setVisible(Button.jpPointerPressed);
             sluffyJump.reset();
             jumping = true;
-
+            luffySound.play(2);
         }
         else if (Button.jpPointerPressed == true && (sec_visible_r == true || runVisible_r == true)){
             sec_visible = false;
@@ -1204,6 +1216,7 @@ public class Luffy implements CharacterObject {
             sluffyJump_r.setVisible(Button.jpPointerPressed);
             sluffyJump_r.reset();
             jumping_r = true;
+            luffySound.play(2);
         }
         if ( sluffyJump.isLastFrame() && (jumping == true)) {
             sec_visible = true;
@@ -1695,5 +1708,13 @@ public class Luffy implements CharacterObject {
     public void setSecondModelVisible(){
         sec_visible = true;
     }
-
+    public void soundEffectsInit(){
+        luffySound.addSoundEffect(1, R.raw.lufat);
+        luffySound.addSoundEffect(2, R.raw.lufjp);
+        luffySound.addSoundEffect(3, R.raw.lufdf);
+        luffySound.addSoundEffect(4, R.raw.lufs);
+        luffySound.addSoundEffect(5, R.raw.lufg);
+        luffySound.addSoundEffect(6, R.raw.lufe);
+        luffySound.addSoundEffect(7, R.raw.luff);
+    }
 }

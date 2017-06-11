@@ -2,7 +2,6 @@ package tw.edu.ntut.csie.game.state;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
 import tw.edu.ntut.csie.game.Pointer;
 import tw.edu.ntut.csie.game.R;
@@ -632,8 +631,8 @@ public class Button implements GameObject, PointerEventHandler {
                 s_frame08.setVisible(false);
                 s_frame09.setVisible(false);
                 s_frame10.setVisible(true);
-                s_frame_count = 0;
                 s_frame_bool = true;
+                s_frame_count = 0;
                 break;
             }
         }
