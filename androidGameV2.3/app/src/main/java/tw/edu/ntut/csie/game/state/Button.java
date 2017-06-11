@@ -432,9 +432,9 @@ public class Button implements GameObject, PointerEventHandler {
                 g_skill_cd.setVisible(g_cd);
                 g_skill_cd.reset();
                 if(!fire_bool)
-                    s_frame_count+=5;
+                    s_frame_count++;
                 else
-                    s_frame_count-=5;
+                    s_frame_count--;
             }
             if(e_skill_cd.getCurrentFrameIndex() == -1){
             e_cd = false;
