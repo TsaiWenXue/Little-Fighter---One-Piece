@@ -46,6 +46,7 @@ public class Zoro implements CharacterObject {
         zoroAttack_r = new Animation();
 
         px = 400; py = 200;
+        initialize();
     }
 
     public void initialize() {

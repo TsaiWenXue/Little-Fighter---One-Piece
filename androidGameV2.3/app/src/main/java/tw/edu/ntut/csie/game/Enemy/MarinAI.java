@@ -45,6 +45,7 @@ public class MarinAI implements EnemyObject {
         marinAttack = new Animation();  marinAttack_r = new Animation();
 
         px = 600; py = 200;
+        initialize();
     }
 
     public void initialize() {
@@ -107,14 +108,10 @@ public class MarinAI implements EnemyObject {
                 attack(ch);
             }
         }
-        if (roadPx < 800 && roadPx > -800)
+        if (roadPx != 800 && roadPx != -800)
             px -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
 
-        else if ( (roadPx == 800 && ch.getX() >= 410) ||
-                (roadPx == -800 && ch.getX() <= 390) )
-            px -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
-
-        if (ch.getX() != 400) {
+        if (roadPx != 800 && roadPx != -800 && ch.getX() != 400) {
             px -= ch.getX() - 400;
         }
 
@@ -162,8 +159,8 @@ public class MarinAI implements EnemyObject {
     }
 
     public void moving(CharacterObject ch) {
-//        attackVisible = false;
-//        attackVisible_r = false;
+        attackVisible = false;
+        attackVisible_r = false;
         approachPlayer(ch);
         if (marinAttack.getCurrentFrameIndex()==-1 && marinAttack_r.getCurrentFrameIndex() == -1) {
             setAttackArea();

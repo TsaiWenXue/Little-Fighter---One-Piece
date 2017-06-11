@@ -91,7 +91,9 @@ public class Button implements GameObject, PointerEventHandler {
 
     private Animation fire;
 
-    public Button() {}
+    public Button() {
+        initialize();
+    }
 
     public void initialize(){
 

@@ -15,6 +15,8 @@ import tw.edu.ntut.csie.game.Enemy.AttackObject;
  */
 
 public class Luffy implements CharacterObject {
+    public ArrayList<MovingBitmap> hp;
+    public MovingBitmap hpBg;
     private Animation luffy;
     private Animation luffy_r;
     private Animation luffyRun;
@@ -93,6 +95,9 @@ public class Luffy implements CharacterObject {
 
 
     public Luffy () {
+        super();
+        hp = new ArrayList<MovingBitmap>();
+        hpBg = new MovingBitmap(R.drawable.healthpoint_bg);
         luffy_small = new MovingBitmap(R.drawable.luffy_s);
         luffy_small.setLocation(9, 18);
 
@@ -145,6 +150,7 @@ public class Luffy implements CharacterObject {
         sluffySSkill_r = new Animation();
 
         px = 400; py = 200;
+        initialize();
     }
 
     public void initialize(){
@@ -316,14 +322,15 @@ public class Luffy implements CharacterObject {
     }
 
     public void release() {
-       luffy.release();            luffy_r.release();
-       luffyRun.release();         luffyRun_r.release();
-       luffyAttack.release();      luffyAttack_r.release();
-       luffyDefend.release();      luffyDefend_r.release();
-       luffyJump.release();        luffyJump_r.release();
-       luffyESkill.release();      luffyESkill_r.release();
-       luffyGSkill.release();      luffyGSkill_r.release();
-       luffyFSkill.release();      luffyFSkill_r.release();
+       luffy.release();             luffy_r.release();
+       luffyRun.release();          luffyRun_r.release();
+       luffyAttack.release();       luffyAttack_r.release();
+       luffyDefend.release();       luffyDefend_r.release();
+       luffyJump.release();         luffyJump_r.release();
+       luffyESkill.release();       luffyESkill_r.release();
+       luffyGSkill.release();       luffyGSkill_r.release();
+       luffyFSkill.release();       luffyFSkill_r.release();
+       luffyHit.release();          luffyHit_r.release();
        sluffy.release();            sluffy_r.release();
        sluffyRun.release();         sluffyRun_r.release();
        sluffyAttack.release();      sluffyAttack_r.release();
@@ -338,16 +345,13 @@ public class Luffy implements CharacterObject {
         for (int i = 0; i < hp.size(); i++) {
             hp.get(i).release();
         }
+        hpBg.release();
     }
 
      /*************************
            * Get Hit Function Area           *
            *************************/
      public void getHit(ArrayList<AttackObject> attacks, int roadPx) {
-//         if (luffyHit.getCurrentFrameIndex() == -1)
-//             hitVisible = false;
-//         if (luffyHit_r.getCurrentFrameIndex() == -1)
-//             hitVisible_r = false;
          luffyHit.move();        luffyHit_r.move();
          if (!hitVisible && !hitVisible_r)
              for (AttackObject at : attacks) {
@@ -362,7 +366,7 @@ public class Luffy implements CharacterObject {
 
                      break;
                  }
-                 else if (at.isAttacking_r() && isInAttackArea(at.getAttackArea())) {
+                 if (at.isAttacking_r() && isInAttackArea(at.getAttackArea())) {
                      healthPoint -= at.damage;
                      setInvisible();
                      hitVisible = true;
@@ -391,8 +395,10 @@ public class Luffy implements CharacterObject {
          if ((hitVisible || hitVisible_r) && luffyHit.getCurrentFrameIndex() == -1 && luffyHit_r.getCurrentFrameIndex() == -1) {
              if (hitVisible) {
                  visible = true;
+                 visible_r = false;
                  hitVisible = false;
              } else if (hitVisible_r) {
+                 visible = false;
                  visible_r = true;
                  hitVisible_r = false;
              }
@@ -1725,8 +1731,8 @@ public class Luffy implements CharacterObject {
         luffyGSkill_r.setDelay(2);
         luffyFSkill.setDelay(2);
         luffyFSkill_r.setDelay(2);
-        luffyHit.setDelay(3);
-        luffyHit_r.setDelay(3);
+        luffyHit.setDelay(4);
+        luffyHit_r.setDelay(4);
     }
 
     public void secFrameDelay(){
