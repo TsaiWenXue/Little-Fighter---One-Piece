@@ -81,9 +81,10 @@ public class StateStage1 extends GameState {
                 attacks.add(new AttackObject(en));
             }
             bg.move(ch.getX());
-            ch.getHit(attacks, bg.getX());
             if (!ch.getHitting())
                 ch.move(bg.getX());
+            if (ch.isNotPerforming())
+                ch.getHit(attacks, bg.getX());
             button.move();
         }
     }

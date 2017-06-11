@@ -1,6 +1,5 @@
 package tw.edu.ntut.csie.game.state;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import tw.edu.ntut.csie.game.Pointer;
@@ -10,7 +9,6 @@ import tw.edu.ntut.csie.game.GameObject;
 import tw.edu.ntut.csie.game.PointerEventHandler;
 import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.Character.CharacterObject;
-import tw.edu.ntut.csie.game.Character.Luffy;
 
 public class Button implements GameObject, PointerEventHandler {
     private int at_x = 700;
@@ -253,23 +251,23 @@ public class Button implements GameObject, PointerEventHandler {
     public boolean pointerPressed(List<Pointer> pointers, CharacterObject ch) {
         int touchX = pointers.get(0).getX();
         int touchY = pointers.get(0).getY();
-            if ( attack.imageTouched(touchX, touchY) && ch.isPerforming()) {
+            if ( attack.imageTouched(touchX, touchY) && ch.isNotPerforming()) {
                 atPointerPressed = true;
                 attack_pressed.setVisible(true);
                 attack.setVisible(false);
             }
-            else if( defend.imageTouched(touchX, touchY) && ch.isPerforming()) {
+            else if( defend.imageTouched(touchX, touchY) && ch.isNotPerforming()) {
                 dfPointerPressed = true;
                 defend_pressed.setVisible(true);
                 defend.setVisible(false);
             }
-            else if( jump.imageTouched(touchX, touchY) && ch.isPerforming()) {
+            else if( jump.imageTouched(touchX, touchY) && ch.isNotPerforming()) {
                 jpPointerPressed = true;
                 jump_pressed.setVisible(true);
                 jump.setVisible(false);
             }
             else if( s_skill.imageTouched(touchX, touchY)
-            && !s_cd && (s_frame_bool || fire_bool) && ch.isPerforming()) {
+            && !s_cd && (s_frame_bool || fire_bool) && ch.isNotPerforming()) {
                 sPointerPressed = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
@@ -289,7 +287,7 @@ public class Button implements GameObject, PointerEventHandler {
                 }
             }
             else if( e_skill.imageTouched(touchX, touchY)
-            && !e_cd && ch.isPerforming ()) {
+            && !e_cd && ch.isNotPerforming()) {
                 ePointerPressed = true;
                 e_skill_pressed.setVisible(true);
                 e_skill.setVisible(false);
@@ -299,7 +297,7 @@ public class Button implements GameObject, PointerEventHandler {
                 s_frame_count++;
             }
             else if( f_skill.imageTouched(touchX, touchY)
-            && !f_cd && ch.isPerforming()) {
+            && !f_cd && ch.isNotPerforming()) {
                 fPointerPressed = true;
                 f_skill_pressed.setVisible(true);
                 f_skill.setVisible(false);
@@ -309,7 +307,7 @@ public class Button implements GameObject, PointerEventHandler {
                 s_frame_count++;
             }
             else if( g_skill.imageTouched(touchX, touchY)
-            && !g_cd && ch.isPerforming()) {
+            && !g_cd && ch.isNotPerforming()) {
                 gPointerPressed = true;
                 g_skill_pressed.setVisible(true);
                 g_skill.setVisible(false);
@@ -343,23 +341,23 @@ public class Button implements GameObject, PointerEventHandler {
         for(int i = 1; i < pointers.size(); i++){
             int touchX = pointers.get(i).getX();
             int touchY = pointers.get(i).getY();
-            if ( attack.imageTouched(touchX, touchY) && ch.isPerforming()) {
+            if ( attack.imageTouched(touchX, touchY) && ch.isNotPerforming()) {
                 atPointerPressed = true;
                 attack_pressed.setVisible(true);
                 attack.setVisible(false);
             }
-            else if( defend.imageTouched(touchX, touchY)  && ch.isPerforming()) {
+            else if( defend.imageTouched(touchX, touchY)  && ch.isNotPerforming()) {
                 dfPointerPressed = true;
                 defend_pressed.setVisible(true);
                 defend.setVisible(false);
             }
-            else if( jump.imageTouched(touchX, touchY) && ch.isPerforming() ) {
+            else if( jump.imageTouched(touchX, touchY) && ch.isNotPerforming() ) {
                 jpPointerPressed = true;
                 jump_pressed.setVisible(true);
                 jump.setVisible(false);
             }
             else if( s_skill.imageTouched(touchX, touchY)
-            && !s_cd && (s_frame_bool || fire_bool) && ch.isPerforming()) {
+            && !s_cd && (s_frame_bool || fire_bool) && ch.isNotPerforming()) {
                 sPointerPressed = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
@@ -378,7 +376,7 @@ public class Button implements GameObject, PointerEventHandler {
                 }
             }
             else if( e_skill.imageTouched(touchX, touchY)
-            && !e_cd && ch.isPerforming()) {
+            && !e_cd && ch.isNotPerforming()) {
                 ePointerPressed = true;
                 e_skill_pressed.setVisible(true);
                 e_skill.setVisible(false);
@@ -388,7 +386,7 @@ public class Button implements GameObject, PointerEventHandler {
                 s_frame_count++;
             }
             else if( f_skill.imageTouched(touchX, touchY)
-            && !f_cd && ch.isPerforming()) {
+            && !f_cd && ch.isNotPerforming()) {
                 fPointerPressed = true;
                 f_skill_pressed.setVisible(true);
                 f_skill.setVisible(false);
@@ -398,7 +396,7 @@ public class Button implements GameObject, PointerEventHandler {
                 s_frame_count++;
             }
             else if( g_skill.imageTouched(touchX, touchY)
-            && !g_cd && ch.isPerforming()) {
+            && !g_cd && ch.isNotPerforming()) {
                 gPointerPressed = true;
                 g_skill_pressed.setVisible(true);
                 g_skill.setVisible(false);

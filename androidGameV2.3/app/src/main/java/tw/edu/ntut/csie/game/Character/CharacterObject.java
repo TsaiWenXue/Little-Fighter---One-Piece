@@ -35,7 +35,7 @@ public interface CharacterObject {
 
     public boolean isAttacking();
     public boolean isAttacking_r();
-    public boolean isPerforming();
+    public boolean isNotPerforming();
     public void setSecondModelVisible();
     public boolean isDead();
 
