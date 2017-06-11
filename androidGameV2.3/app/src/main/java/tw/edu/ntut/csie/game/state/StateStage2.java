@@ -49,7 +49,7 @@ public class StateStage2 extends GameState{
     public void move() {
         bg.move(ch.getX());
         ch.move(bg.getX());
-        en.move(ch);
+        en.move(ch, bg.getX());
         button.move();
     }
 

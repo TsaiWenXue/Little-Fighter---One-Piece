@@ -207,4 +207,10 @@ public class MovingBitmap implements GameObject {
                 touchY > this.getY() && touchY < this.getY() + this.getHeight());
     }
 
+    /**
+     * 判斷圖片是否為visible
+     */
+    public boolean isVisible() {
+        return _visible;
+    }
 }

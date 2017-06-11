@@ -2,6 +2,7 @@ package tw.edu.ntut.csie.game.Character;
 
 import java.util.ArrayList;
 
+import tw.edu.ntut.csie.game.Enemy.AttackObject;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
 
@@ -36,4 +37,8 @@ public interface CharacterObject {
     public boolean isAttacking_r();
     public boolean isPerforming();
     public void setSecondModelVisible();
+    public boolean isDead();
+
+    public void getHit(ArrayList<AttackObject> at, int roadPx);
+    public boolean getHitting();
 }

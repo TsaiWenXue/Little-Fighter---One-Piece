@@ -46,6 +46,19 @@ public class Marin implements EnemyObject {
 
     public int getX() {return px;}
     public int getY() {return py;}
+    public int getDamage() {
+        return 0;
+    }
+    public int[] getAttackArea() {
+        int[] a = new int[4];
+        return a;
+    }
+    public boolean isAttacking() {
+        return false;
+    }
+    public boolean isAttacking_r() {
+        return false;
+    }
     public boolean isDead() {
         if (healthPoint <= 0)
             return true;
@@ -59,7 +72,7 @@ public class Marin implements EnemyObject {
 
     }
 
-    public void move(CharacterObject ch) {
+    public void move(CharacterObject ch, int roadPx) {
         marin.move();           marin_r.move();
         marinHit.move();        marinHit_r.move();
         marinDead.move();       marinDead_r.move();

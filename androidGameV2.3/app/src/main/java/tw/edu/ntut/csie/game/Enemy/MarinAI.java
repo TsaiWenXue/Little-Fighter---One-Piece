@@ -34,6 +34,8 @@ public class MarinAI implements EnemyObject {
 
     private final int maxHealthPoint = 100;
     private int healthPoint = maxHealthPoint;
+    private int damage = 50;
+    private int[] attackArea = new int[4];
 
     public MarinAI() {
         marin = new Animation();        marin_r = new Animation();
@@ -42,7 +44,7 @@ public class MarinAI implements EnemyObject {
         marinRun = new Animation();     marinRun_r = new Animation();
         marinAttack = new Animation();  marinAttack_r = new Animation();
 
-        px = 600; py = 200;
+        px = 450; py = 200;
     }
 
     public void initialize() {
@@ -62,6 +64,18 @@ public class MarinAI implements EnemyObject {
 
     public int getX() {return px;}
     public int getY() {return py;}
+    public int getDamage() {
+        return damage;
+    }
+    public int[] getAttackArea() {
+        return attackArea;
+    }
+    public boolean isAttacking() {
+        return attackVisible;
+    }
+    public boolean isAttacking_r() {
+        return attackVisible_r;
+    }
 
     public void show() {
         marin.show();           marin_r.show();
@@ -71,7 +85,7 @@ public class MarinAI implements EnemyObject {
         marinAttack.show();     marinAttack_r.show();
     }
 
-    public void move(CharacterObject ch) {
+    public void move(CharacterObject ch, int roadPx) {
         marin.move();           marin_r.move();
         marinHit.move();        marinHit_r.move();
         marinDead.move();       marinDead_r.move();
@@ -88,20 +102,21 @@ public class MarinAI implements EnemyObject {
         }
         else {
             getHit(ch);
-            if (!getHit && !getHit_r)
+            if (!getHit && !getHit_r && marinAttack.getCurrentFrameIndex() == -1 && marinAttack_r.getCurrentFrameIndex() == -1) {
                 moving(ch);
-
-            attack(ch);
+                attack(ch);
+            }
         }
-        if (Stage1BG.roadPx < 800 && Stage1BG.roadPx > -800)
+        if (roadPx < 800 && roadPx > -800)
             px -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
-        if (Stage1BG.roadPx > 800)
-            px = 800;
-        else if (Stage1BG.roadPx < -800)
-            px = -800;
-        else if ( (Stage1BG.roadPx == 800 && ch.getX() >= 410) ||
-                (Stage1BG.roadPx == -800 && ch.getX() <= 390) )
+
+        else if ( (roadPx == 800 && ch.getX() >= 410) ||
+                (roadPx == -800 && ch.getX() <= 390) )
             px -= (Navigation.controllerPx -  Navigation.initialCtrlPx)/5;
+
+        if (ch.getX() != 400) {
+            px -= ch.getX() - 400;
+        }
 
         setVisible();
         setLocation(px, py);
@@ -123,74 +138,43 @@ public class MarinAI implements EnemyObject {
      ********************/
 
     public void attack (CharacterObject ch) {
-        if (py + marin.getHeight() < ch.getY() + ch.getHeight()*3/4 ) {
-            if (px + marin.getWidth() > ch.getX()) {
-                attackVisible_r = true;
+
+        if (py + marin.getHeight() >= ch.getY() + ch.getHeight()*3/4 && py <= ch.getY() + ch.getWidth()*3/4) {
+            if (px + marin.getWidth() >= ch.getX() && px <= ch.getX()) {
                 visible = false;
                 visible_r = false;
-                marinAttack_r.reset();
-            }
-            else if (px < ch.getX() + ch.getWidth()){
+                runVisible = false;
+                runVisible_r = false;
                 attackVisible = true;
+                marinAttack.reset();
+                setAttackArea(marinAttack);
+            }
+            else if (px <= ch.getX() + ch.getWidth() && px >= ch.getX()){
                 visible = false;
                 visible_r = false;
-                marinAttack.reset();
-            }
-        }
-        else if (py > ch.getY() + ch.getHeight()/4) {
-            if (px + marin.getWidth() > ch.getX()) {
+                runVisible = false;
+                runVisible_r = false;
                 attackVisible_r = true;
-                visible = false;
-                visible_r = false;
                 marinAttack_r.reset();
-            }
-            else if (px < ch.getX() + ch.getWidth()){
-                attackVisible = true;
-                visible = false;
-                visible_r = false;
-                marinAttack.reset();
+                setAttackArea(marinAttack_r);
             }
         }
     }
 
     public void moving(CharacterObject ch) {
+//        attackVisible = false;
+//        attackVisible_r = false;
         approachPlayer(ch);
+        if (marinAttack.getCurrentFrameIndex()==-1 && marinAttack_r.getCurrentFrameIndex() == -1) {
+            setAttackArea();
+        }
     }
 
-//    public void escape(CharacterObject ch) {
-//        if (py > ch.getY() + ch.getHeight() && py < 375) {
-//            py -= 2;
-//            if (px > ch.getX()) {
-//                runVisible = true;
-//                visible = false;
-//                visible_r = false;
-//            }
-//            else {
-//                runVisible_r = true;
-//                visible = false;
-//                visible_r = false;
-//            }
-//        }
-//        else if (py + marin.getHeight() < ch.getY() && py > 175) {
-//            py += 2;
-//            if (px > ch.getX()) {
-//                runVisible = true;
-//                visible = false;
-//                visible_r = false;
-//            }
-//            else {
-//                runVisible_r = true;
-//                visible = false;
-//                visible_r = false;
-//            }
-//        }
-//
-//    }
-
+    //Let marin keep approaching player until player is in the attack area
     public void approachPlayer(CharacterObject ch) {
-        if (py + marin.getHeight() < ch.getY() + ch.getHeight()*3/4) {
+        if (py + marin.getHeight() < ch.getY() + ch.getHeight()*4/5) {
             py++;
-            if (px < ch.getX()) {
+            if (px + marin.getWidth() < ch.getX()) {
                 runVisible = true;
                 visible = false;
                 visible_r = false;
@@ -201,11 +185,11 @@ public class MarinAI implements EnemyObject {
                 visible_r = false;
             }
         }
-        else if (py > ch.getY() + ch.getHeight()/4) {
+        else if (py > ch.getY() + ch.getHeight()/3) {
             py--;
             visible = false;
             visible_r = false;
-            if (px < ch.getX())
+            if (px + marin.getWidth() < ch.getX())
                 runVisible = true;
             else
                 runVisible_r = true;
@@ -225,9 +209,15 @@ public class MarinAI implements EnemyObject {
         else {
             if(px < ch.getX() + ch.getWidth()/2) {
                 visible = true;
+                visible_r = false;
+                runVisible = false;
+                runVisible_r = false;
             }
             else {
+                visible = false;
                 visible_r = true;
+                runVisible = false;
+                runVisible_r = false;
             }
         }
     }
@@ -236,6 +226,20 @@ public class MarinAI implements EnemyObject {
     /************************
      * Move Function Area *
      ************************/
+
+    //Set marin's attack area by attack animation
+    public void setAttackArea(Animation skill) {
+        attackArea[0] = skill.getX();
+        attackArea[1] = skill.getY();
+        attackArea[2] = skill.getY() + skill.getHeight();
+        attackArea[3] = skill.getX() + skill.getWidth();
+    }
+    //reset marin's attack area
+    public void setAttackArea() {
+        for(int i = 0; i < 4; i++) {
+            attackArea[i] = 0;
+        }
+    }
 
     //Set marin's location
     public void setLocation(int x, int y) {
@@ -256,6 +260,8 @@ public class MarinAI implements EnemyObject {
     }
 
     public void getHit(CharacterObject ch) {
+//        attackVisible = false;
+//        attackVisible_r = false;
         runVisible = false;
         runVisible_r = false;
         if (ch.isAttacking_r()) {
