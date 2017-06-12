@@ -11,6 +11,7 @@ public class AttackObject {
     public int damage;
     public boolean attack = false, attack_r = false;
 
+    //To construct AttackObject with EnemyObject
     public AttackObject(EnemyObject en) {
         damage = en.getDamage();
         attackArea = en.getAttackArea();
@@ -18,6 +19,7 @@ public class AttackObject {
         attack_r = en.isAttacking_r();
     }
 
+    //Getting enemy's attack information
     public int[] getAttackArea() {
         return attackArea;
     }
