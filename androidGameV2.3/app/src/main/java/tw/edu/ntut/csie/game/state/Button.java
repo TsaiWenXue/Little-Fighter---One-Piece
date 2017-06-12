@@ -708,8 +708,10 @@ public void SframeSetVisibleBack(CharacterObject ch){
             s_frame08s.setVisible(false);
             s_frame09s.setVisible(false);
             s_frame10s.setVisible(false);
-            if(ch.isNotPerforming())
+            if(ch.isNotPerforming()){
                 fire_bool = false;
+                fire.setVisible(fire_bool);
+            }
             break;
         case(1):
             s_frame00.setVisible(false);

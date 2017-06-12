@@ -209,7 +209,6 @@ public class StateStage2 extends GameState{
                 ch = new Zoro();
                 break;
         }
-        ch.initialize();
     }
 
     public boolean noEnemy() {
