@@ -826,7 +826,6 @@ public class Luffy implements CharacterObject {
             GSkilling = false;
             luffyGSkill.setCurrentFrameIndex(-1);
             damage = 0;
-            healthPoint += 50;
         }
         else if ( luffyGSkill_r.isLastFrame() && (GSkilling_r == true)) {
             visible_r = true;
@@ -834,7 +833,6 @@ public class Luffy implements CharacterObject {
             GSkilling_r = false;
             luffyGSkill_r.setCurrentFrameIndex(-1);
             damage = 0;
-            healthPoint += 40;
 
         }
 
