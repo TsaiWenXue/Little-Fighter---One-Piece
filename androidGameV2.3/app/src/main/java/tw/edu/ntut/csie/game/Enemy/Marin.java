@@ -77,6 +77,7 @@ public class Marin implements EnemyObject {
         marinHit.move();        marinHit_r.move();
         marinDead.move();       marinDead_r.move();
 
+        //To handle if marin is dead
         if (healthPoint <= 0) {
             if (marinHit.isLastFrame())
                 deadVisible = true;
@@ -86,8 +87,8 @@ public class Marin implements EnemyObject {
         }
         else {
             getHit(ch);
-            moving(ch);
         }
+        //Let marin won't move with luffy
         if (Stage1BG.roadPx < 800 && Stage1BG.roadPx > -800)
             px -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
         if (Stage1BG.roadPx > 800)
@@ -129,19 +130,9 @@ public class Marin implements EnemyObject {
         marinDead.setVisible(deadVisible);        marinDead_r.setVisible(deadVisible_r);
     }
 
-    public void moving(CharacterObject ch) {
-        switch ((int)Math.random() * 3) {
-            case 0:
-                move1();
-                break;
-        }
-    }
-
-    public void move1() {
-
-    }
-
+    //To handle the event luffy get hit
     public void getHit(CharacterObject ch) {
+        //To determine if marin is getting hit and which side to get hit
         if (ch.isAttacking_r()) {
             if (px <= ch.getAttackArea()[3] && px + marin.getWidth() >= ch.getAttackArea()[0] &&
                     py + marin.getHeight() >= ch.getAttackArea()[1] && py <= ch.getAttackArea()[2] &&
@@ -165,11 +156,15 @@ public class Marin implements EnemyObject {
                 getHit_r = true;
             }
         }
+
+        //let marin be hit away
         if (marinHit.getCurrentFrameIndex() >= 0) {
             px--;
         } else if (marinHit_r.getCurrentFrameIndex() >= 0) {
             px++;
         }
+
+        //Handle the event marin finish getting hit
         if (marinHit.getCurrentFrameIndex() == -1 && marinHit_r.getCurrentFrameIndex() == -1) {
             if (getHit_r) {
                 visible_r = true;

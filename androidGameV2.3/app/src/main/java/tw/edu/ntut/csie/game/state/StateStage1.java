@@ -53,8 +53,10 @@ public class StateStage1 extends GameState {
         controller = new Navigation();
         button = new Button();
 
-
+        //Declare the character according to which character is selected in CharacterSelectState
         selectCharacter();
+
+        //Make all enemies
         marins = new ArrayList<EnemyObject>();
         for (int i = 0; i < enemyQuantity; i++) {
             marins.add(new MarinAI());
@@ -63,26 +65,32 @@ public class StateStage1 extends GameState {
 
     @Override
     public void move() {
+        //If character is dead, display the failed frame, and stop the stage.
         if (ch.isDead()) {
             failed.setVisible(true);
             ok.setLocation(350, 300);
             ok.setVisible(true);
         }
+        //If all enemies are dead, display the success frame
         else if (noEnemy()) {
             clear.setVisible(true);
             ok.setLocation(500, 330);
             ok.setVisible(true);
         }
+        //Apply the game in normal
         else {
             attacks = new ArrayList<>();
 
             for (int i = 0; i < marins.size(); i++) {
                 marins.get(i).move(ch, bg.getX());
+                //To get all marins attack area
                 attacks.add(new AttackObject(marins.get(i)));
             }
             bg.move(ch.getX());
+            //If character get hit, character couldn't move.
             if (!ch.getHitting())
                 ch.move(bg.getX());
+            //If character is attacking, character will not get hit.
             if (ch.isNotPerforming())
                 ch.getHit(attacks, bg.getX());
             button.move(ch);
@@ -144,6 +152,7 @@ public class StateStage1 extends GameState {
             button.pointerPressed(pointers, ch);
         }
         if (ok.pointerPressed(pointers)) {
+            //When player is dead, calculate the score, and change state after player pressed continue
             if (ch.isDead()) {
                 Record.calTime();
                 for (EnemyObject en : marins) {
@@ -152,6 +161,7 @@ public class StateStage1 extends GameState {
                 }
                 changeState(Game.OVER_DEFEAT_STAGE);
             }
+            //When player pass the stage, calculate the score, and change state after player pressed continue
             if (noEnemy()) {
                 for (EnemyObject en : marins) {
                     if (en.isDead())

@@ -45,6 +45,7 @@ public class MarinAI implements EnemyObject {
         marinRun = new Animation();     marinRun_r = new Animation();
         marinAttack = new Animation();  marinAttack_r = new Animation();
 
+        //Let Marin appear in different location each time.
         px = (int)(Math.random() * 300 + 500); py = (int)(Math.random() * 250 + 200);
         initialize();
     }
@@ -56,24 +57,6 @@ public class MarinAI implements EnemyObject {
         setVisible();
         setRepeating();
         setCurrentIndex();
-    }
-
-    public int getX() {return px;}
-    public int getY() {return py;}
-    public int getDamage() {
-        return damage;
-    }
-    public int[] getAttackArea() {
-        return attackArea;
-    }
-    public boolean isAttacking() {
-        return attackVisible;
-    }
-    public boolean isAttacking_r() {
-        return attackVisible_r;
-    }
-    public boolean isDead() {
-        return (deadVisible || deadVisible_r);
     }
 
     public void show() {
@@ -91,8 +74,9 @@ public class MarinAI implements EnemyObject {
         marinRun.move();        marinRun_r.move();
         marinAttack.move();     marinAttack_r.move();
 
-
+        //To handle marin dead event
         if (healthPoint <= 0) {
+            setAttackArea();
             if (marinHit.isLastFrame())
                 deadVisible = true;
             else if(marinHit_r.isLastFrame())
@@ -101,14 +85,16 @@ public class MarinAI implements EnemyObject {
         }
         else {
             getHit(ch);
+            //if marin is getting hit or attacking, it cannot move
             if (!getHit && !getHit_r && marinAttack.getCurrentFrameIndex() == -1 && marinAttack_r.getCurrentFrameIndex() == -1) {
                 moving(ch);
                 attack(ch);
             }
         }
+
+        //Let marin won't move with luffy
         if (roadPx != 800 && roadPx != -800)
             px -= (Navigation.controllerPx - Navigation.initialCtrlPx)/5;
-
         if (roadPx != 800 && roadPx != -800 && ch.getX() != 400) {
             px -= ch.getX() - 400;
         }
@@ -128,12 +114,34 @@ public class MarinAI implements EnemyObject {
     }
 
 
+    /************************
+     * Get information area *
+     ************************/
+
+    public int getX() {return px;}
+    public int getY() {return py;}
+    public int getDamage() {
+        return damage;
+    }
+    public int[] getAttackArea() {
+        return attackArea;
+    }
+    public boolean isAttacking() {
+        return attackVisible;
+    }
+    public boolean isAttacking_r() {
+        return attackVisible_r;
+    }
+    public boolean isDead() {
+        return (deadVisible || deadVisible_r);
+    }
+
     /********************
      * AI Function Area *
      ********************/
 
     public void attack (CharacterObject ch) {
-
+        //When player is in attack area, than attack
         if (py + marin.getHeight() >= ch.getY() + ch.getHeight()*3/4 && py <= ch.getY() + ch.getWidth()*3/4) {
             if (px + marin.getWidth() >= ch.getX() && px <= ch.getX()) {
                 visible = false;
@@ -156,6 +164,7 @@ public class MarinAI implements EnemyObject {
         }
     }
 
+    //Let marin move automatically
     public void moving(CharacterObject ch) {
         attackVisible = false;
         attackVisible_r = false;
@@ -285,9 +294,8 @@ public class MarinAI implements EnemyObject {
         marinAttack.setVisible(attackVisible);  marinAttack_r.setVisible(attackVisible_r);
     }
 
+    //Handle the event marin get hit
     public void getHit(CharacterObject ch) {
-//        attackVisible = false;
-//        attackVisible_r = false;
         runVisible = false;
         runVisible_r = false;
         if (ch.isAttacking_r()) {

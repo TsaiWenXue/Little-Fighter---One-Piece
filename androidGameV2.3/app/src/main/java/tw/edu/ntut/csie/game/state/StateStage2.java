@@ -53,7 +53,10 @@ public class StateStage2 extends GameState{
         controller = new Navigation();
         button = new Button();
 
+        //Declare the character according to which character is selected in CharacterSelectState
         selectCharacter();
+
+        //Make all enemies
         marins = new ArrayList<EnemyObject>();
         for (int i = 0; i < enemyQuantity; i++) {
             marins.add(new MarinAI());
@@ -62,16 +65,19 @@ public class StateStage2 extends GameState{
 
     @Override
     public void move() {
+        //If character is dead, display the failed frame, and stop the stage.
         if (ch.isDead()) {
             failed.setVisible(true);
             ok.setLocation(350, 300);
             ok.setVisible(true);
         }
+        //If all enemies are dead, display the success frame
         else if (noEnemy()) {
             clear.setVisible(true);
             ok.setLocation(500, 330);
             ok.setVisible(true);
         }
+        //Apply the game in normal
         else {
             attacks = new ArrayList<>();
 
@@ -143,6 +149,7 @@ public class StateStage2 extends GameState{
             button.pointerPressed(pointers, ch);
         }
         if (ok.pointerPressed(pointers)) {
+            //When player is dead, calculate the score, and change state after player pressed continue
             if (ch.isDead()) {
                 Record.calTime();
                 for (EnemyObject en : marins) {
@@ -151,6 +158,7 @@ public class StateStage2 extends GameState{
                 }
                 changeState(Game.OVER_DEFEAT_STAGE);
             }
+            //When player pass the stage, calculate the score, and change state after player pressed continues
             if (noEnemy()) {
                 Record.calTime();
                 for (EnemyObject en : marins) {
