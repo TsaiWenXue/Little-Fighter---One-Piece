@@ -143,12 +143,8 @@ public class CharacterSelectState extends GameState {
 
         luffy.release(); luffyName.release();
         zoro.release(); zoroName.release();
-
-      //  characterLeft.release();
-      //  characterRight.release();
-      //  stageLeft.release();
         stageRight.release();
-      //  difficultLeft.release();
+
         difficultRight.release();
 
         start.release();
@@ -158,28 +154,6 @@ public class CharacterSelectState extends GameState {
 
         easy.release();
         normal.release();
-
-
-        _music = null;
-        background = null;
-
-      //  luffy = null; //luffyName = null;
-      //  zoro = null; //zoroName = null;
-
-      //  characterLeft = null;
-      //  characterRight = null;
-      //  stageLeft = null;
-        stageRight = null;
-      //  difficultLeft = null;
-        difficultRight = null;
-
-        start = null;
-
-      //  stage1 = null;
-      //  stage2 = null;
-
-        // easy = null;
-      //  normal = null;
 
     }
 
@@ -208,9 +182,11 @@ public class CharacterSelectState extends GameState {
         if (pointers.size() == 1) {
             int touchX = pointers.get(0).getX();
             int touchY = pointers.get(0).getY();
+            //To start the game when start button pressed
             if (touchX > start_X && touchX < start_X + start.getWidth() &&
                 touchY > start_Y && touchY < start_Y + start.getHeight()) {
                 Record.reset();
+                //Select Stage
                 switch(stage){
                     case 0:
                     changeState(Game.STAGE1_STATE);
@@ -222,6 +198,7 @@ public class CharacterSelectState extends GameState {
                 }
             }
 
+            //Player select stage;
             if (touchX > stageRight_X && touchX < stageRight_X + stageRight.getWidth() &&
                 touchY > stageRight_Y && touchY < stageRight_Y + stageRight.getHeight()) {
                 stage++;
@@ -231,6 +208,7 @@ public class CharacterSelectState extends GameState {
                 stage--;
             }
 
+            //Player select difficult
             if (touchX > difficultRight_X && touchX < difficultRight_X + difficultRight.getWidth() &&
                 touchY > difficultRight_Y && touchY < difficultRight_Y + difficultRight.getHeight()) {
                 difficult++;
@@ -240,6 +218,7 @@ public class CharacterSelectState extends GameState {
                 difficult--;
             }
 
+            //Player select character
             if (touchX > characterRight_X && touchX < characterRight_X + characterRight.getWidth() &&
                 touchY > characterRight_Y && touchY < characterRight_Y + characterRight.getHeight()) {
                 character++;
@@ -249,6 +228,7 @@ public class CharacterSelectState extends GameState {
                 character--;
             }
 
+            //To handle the stage, difficult, character out of range
             if (stage < 0)
                 stage = -stage;
             if (difficult < 0)
@@ -259,6 +239,7 @@ public class CharacterSelectState extends GameState {
             difficult = difficult % 2;
             character = character % 2;
 
+            //Change the current stage name to selected stage
             switch (stage) {
                 case 0:
                     stage1.setVisible(true);
@@ -270,6 +251,7 @@ public class CharacterSelectState extends GameState {
                     break;
             }
 
+            //Change the current difficult name to selected difficult
             switch (difficult) {
                 case 0:
                     easy.setVisible(true);
@@ -281,6 +263,7 @@ public class CharacterSelectState extends GameState {
                     break;
             }
 
+            //Change the current character name and image to selected charater
             switch (character) {
                 case 0:
                     luffy.setVisible(true); luffyName.setVisible(true);

@@ -172,33 +172,6 @@ public class Luffy implements CharacterObject {
         soundEffectsInit();
     }
 
-    public int getX() {
-        return px;
-    }
-    public int getY() {
-        return py;
-    }
-    public int getWidth() {
-        return luffy.getWidth();
-    }
-    public int getHeight() {
-        return  luffy.getHeight();
-    }
-    public int getDamage() {return damage;}
-    public int getHp() {
-        return healthPoint;
-    }
-    public boolean isDead() {
-        return !(hp.get(0).isVisible());
-    }
-
-    public int[] getAttackArea() {
-        return attackArea;
-    }
-    public boolean getHitting() {
-        return (hitVisible || hitVisible_r);
-    }
-
     public void show() {
         luffy.show();           luffy_r.show();
         luffyRun.show();        luffyRun_r.show();
@@ -248,9 +221,10 @@ public class Luffy implements CharacterObject {
         sluffyFSkill.move();     sluffyFSkill_r.move();
         sluffySSkill.move();     sluffySSkill_r.move();
 
+        //Luffy in normal mode
         if(!Button.fire_bool){
+            //Let second mode invisible
             secSetInvisble();
-
 
             //To appear the health point line
             for (int i = 0; i < 100; i++) {
@@ -267,7 +241,9 @@ public class Luffy implements CharacterObject {
                    running(roadPx);
                }
 
+            //Set luffy's location according to px and py
             setLocation(px, py);
+            //Handle the event luffy should stop running
             stopRunning();
 
             // Perform each skills.
@@ -278,15 +254,19 @@ public class Luffy implements CharacterObject {
             GSkill();
             FSkill();
 
+            //Reset luffy's attack area while luffy is not attacking
             if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
                    GSkilling || GSkilling_r || FSkilling || FSkilling_r ||
                    SSkilling || SSkilling_r) )
                 setAttackArea();
 
         }
+        //Set luffy's second mode
         else if(Button.fire_bool){
+            //Let luffy's first mode invisible
             setInvisible();
 
+            //To appear the health point line
             for (int i = 0; i < 100; i++) {
                 if (i < 100*healthPoint/maxHp)
                     hp.get(i).setVisible(true);
@@ -294,6 +274,7 @@ public class Luffy implements CharacterObject {
                     hp.get(i).setVisible(false);
             }
 
+            //To perform running when luffy is not attacking
             if ( !(attacking || attacking_r || ESkilling || ESkilling_r ||
                    GSkilling || GSkilling_r || FSkilling || FSkilling_r ||
                    SSkilling || SSkilling_r || jumping || jumping_r ||
@@ -348,13 +329,47 @@ public class Luffy implements CharacterObject {
         hpBg.release();
     }
 
+    /************************
+     * Get information area *
+     ************************/
+    public int getX() {
+        return px;
+    }
+    public int getY() {
+        return py;
+    }
+    public int getWidth() {
+        return luffy.getWidth();
+    }
+    public int getHeight() {
+        return  luffy.getHeight();
+    }
+    public int getDamage() {return damage;}
+    public int getHp() {
+        return healthPoint;
+    }
+    public boolean isDead() {
+        return !(hp.get(0).isVisible());
+    }
+    public int[] getAttackArea() {
+        return attackArea;
+    }
+    public boolean getHitting() {
+        return (hitVisible || hitVisible_r);
+    }
+
      /*************************
-           * Get Hit Function Area           *
-           *************************/
+      * Get Hit Function Area *
+      *************************/
+
+      // Handle the event luffy get hit
      public void getHit(ArrayList<AttackObject> attacks, int roadPx) {
          luffyHit.move();        luffyHit_r.move();
+         //If luffy is not get hitting, then perform getHit
          if (!hitVisible && !hitVisible_r)
+            //If luffy is in one of enemieses attack area, then get hit
              for (AttackObject at : attacks) {
+                 //Decide which side to be hit
                  if (at.isAttacking() && isInAttackArea(at.getAttackArea())) {
                      healthPoint -= at.damage;
                      setInvisible();
@@ -362,6 +377,7 @@ public class Luffy implements CharacterObject {
                      luffyHit_r.setVisible(hitVisible_r);
                      luffyHit_r.reset();
 
+                     //luffy should stop running while get hit.
                      notRunning(roadPx);
 
                      break;
@@ -379,8 +395,11 @@ public class Luffy implements CharacterObject {
                  }
              }
 
+        //Let luffy get back to the middle of the screen after being hit away
          if (roadPx != 800 && roadPx != -800 && px != 400)
              px = 400;
+
+        //Let luffy be hit away
          if (luffyHit.getCurrentFrameIndex() >= 0) {
              px -= 10;
              if (px < 0)
@@ -392,6 +411,8 @@ public class Luffy implements CharacterObject {
                  px = 800 - luffy.getWidth();
              setLocation(px, py);
          }
+
+         //Handle the situation when luffy is finishing get hit event.
          if ((hitVisible || hitVisible_r) && luffyHit.getCurrentFrameIndex() == -1 && luffyHit_r.getCurrentFrameIndex() == -1) {
              if (hitVisible) {
                  visible = true;
@@ -406,6 +427,7 @@ public class Luffy implements CharacterObject {
          }
      }
 
+     //To determine if luffy is in the attack area
      public boolean isInAttackArea(int[] attackArea) {
          if ( px + luffy.getWidth() >= attackArea[0] && px <= attackArea[3] &&
                  py + luffy.getWidth() >= attackArea[1] && py <= attackArea[2])
@@ -484,7 +506,6 @@ public class Luffy implements CharacterObject {
             luffyRun_r.setVisible(runVisible_r);
         }
     }
-
     public void secRunning(int roadPx){
         moving(roadPx);
         if (Navigation.controllerPx - Navigation.initialCtrlPx < 0) {
@@ -536,7 +557,6 @@ public class Luffy implements CharacterObject {
             luffy.setVisible(visible);
         }
     }
-
     public void secStopRunning(){
         if (Navigation.controllerPx - Navigation.initialCtrlPx == 0 && runVisible_r == true) {
             sec_visible = false;
@@ -601,7 +621,28 @@ public class Luffy implements CharacterObject {
         sluffy.setVisible(sec_visible);
         sluffy_r.setVisible(sec_visible_r);
     }
+    public void secSetVisible() {
+        sluffy.setVisible(sec_visible);
+        sluffy_r.setVisible(sec_visible_r);
+        sluffyRun.setVisible(runVisible);
+        sluffyRun_r.setVisible(runVisible_r);
+        sluffyAttack.setVisible(false);
+        sluffyAttack_r.setVisible(false);
+        sluffyDefend.setVisible(false);
+        sluffyDefend_r.setVisible(false);
+        sluffyJump.setVisible(false);
+        sluffyJump_r.setVisible(false);
+        sluffyESkill.setVisible(false);
+        sluffyESkill_r.setVisible(false);
+        sluffyGSkill.setVisible(false);
+        sluffyGSkill_r.setVisible(false);
+        sluffyFSkill.setVisible(false);
+        sluffyFSkill_r.setVisible(false);
+        sluffySSkill.setVisible(false);
+        sluffySSkill_r.setVisible(false);
+    }
 
+    //Set all luffy invisible
     public void setInvisible(){
         luffy.setVisible(false);
         luffy_r.setVisible(false);
@@ -640,33 +681,12 @@ public class Luffy implements CharacterObject {
         sluffySSkill.setVisible(false);
         sluffySSkill_r.setVisible(false);
     }
-    public void secSetVisible() {
-
-        sluffy.setVisible(sec_visible);
-        sluffy_r.setVisible(sec_visible_r);
-        sluffyRun.setVisible(runVisible);
-        sluffyRun_r.setVisible(runVisible_r);
-        sluffyAttack.setVisible(false);
-        sluffyAttack_r.setVisible(false);
-        sluffyDefend.setVisible(false);
-        sluffyDefend_r.setVisible(false);
-        sluffyJump.setVisible(false);
-        sluffyJump_r.setVisible(false);
-        sluffyESkill.setVisible(false);
-        sluffyESkill_r.setVisible(false);
-        sluffyGSkill.setVisible(false);
-        sluffyGSkill_r.setVisible(false);
-        sluffyFSkill.setVisible(false);
-        sluffyFSkill_r.setVisible(false);
-        sluffySSkill.setVisible(false);
-        sluffySSkill_r.setVisible(false);
-    }
 
 
 
     /***********************
-         * Skill Function Area           *
-         ***********************/
+     * Skill Function Area *
+     ***********************/
 
     //Set Attack Area
     public void setAttackArea(Animation skill) {
@@ -684,6 +704,7 @@ public class Luffy implements CharacterObject {
 
     //E skill perform
     public void ESkill() {
+        //To determine which side to perform skill when E button is perssed.
         if (Button.ePointerPressed == true && (visible == true || runVisible == true)) {
             visible = false;
             visible_r = false;
@@ -711,6 +732,7 @@ public class Luffy implements CharacterObject {
             luffySound.play(6);
         }
 
+        //To reset luffy state after E skill finish performing
         if ( luffyESkill.isLastFrame() && (ESkilling == true)) {
             visible = true;
             setVisible();
@@ -726,15 +748,16 @@ public class Luffy implements CharacterObject {
             damage = 0;
         }
 
+        //Set luffy attack area according to E skill
         if(ESkilling)
             setAttackArea(luffyESkill);
         else if (ESkilling_r){
+            //To handle the different location setting when it faced left
             luffyESkill_r.setLocation( (px - luffyESkill_r.getWidth() + luffy_r.getWidth()) ,py);
             setAttackArea(luffyESkill_r);
             }
         Button.ePointerPressed = false;
     }
-
     //Sec_E skill perform
     public void secESkill() {
         if (Button.ePointerPressed == true && (sec_visible == true || runVisible == true)) {
@@ -1067,6 +1090,7 @@ public class Luffy implements CharacterObject {
 
         Button.sPointerPressed = false;
     }
+
     //Luffy attacking perform
     public void attack() {
         if (Button.atPointerPressed == true && (visible == true || runVisible == true)){
@@ -1120,7 +1144,6 @@ public class Luffy implements CharacterObject {
 
         Button.atPointerPressed = false;
     }
-
     public void secAttack() {
         if (Button.atPointerPressed == true && (sec_visible == true || runVisible == true)){
             sec_visible = false;
@@ -1173,6 +1196,7 @@ public class Luffy implements CharacterObject {
 
         Button.atPointerPressed = false;
     }
+
     //Defending perform
     public void defend() {
         if (Button.dfPointerPressed == true && (visible == true || runVisible == true)){
