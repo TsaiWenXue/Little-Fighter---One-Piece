@@ -218,6 +218,8 @@ public class Button implements GameObject, PointerEventHandler {
         e_skill_cd.move();
         f_skill_cd.move();
         g_skill_cd.move();
+
+        //
         if(fire_bool){
             fire.move();
             fire.setVisible(fire_bool);
@@ -225,6 +227,7 @@ public class Button implements GameObject, PointerEventHandler {
         }
         else
             SframeSetVisible();
+        //To handle the event when s_frame_count reach 10
         if(s_frame_bool){
             s_trigger.setVisible(s_frame_bool);
             s_trigger.move();
@@ -263,6 +266,7 @@ public class Button implements GameObject, PointerEventHandler {
     public boolean pointerPressed(List<Pointer> pointers, CharacterObject ch) {
         int touchX = pointers.get(0).getX();
         int touchY = pointers.get(0).getY();
+            //To handle the events for each button pressed
             if ( attack.imageTouched(touchX, touchY) && ch.isNotPerforming()) {
                 atPointerPressed = true;
                 attack_pressed.setVisible(true);
@@ -278,11 +282,13 @@ public class Button implements GameObject, PointerEventHandler {
                 jump_pressed.setVisible(true);
                 jump.setVisible(false);
             }
+            //S skill can only be pressed if s_frame_count reach ten, or is in s mode
             else if( s_skill.imageTouched(touchX, touchY)
             && !s_cd && (s_frame_bool || fire_bool) && ch.isNotPerforming()) {
                 sPointerPressed = true;
                 s_skill_pressed.setVisible(true);
                 s_skill.setVisible(false);
+                //To handle performing in different situations
                 if(!fire_bool){
                     fire_bool = true;
                 }
@@ -535,6 +541,8 @@ public class Button implements GameObject, PointerEventHandler {
         s_frame09s.setLocation(_x, _y);
         s_frame10s.setLocation(_x, _y);
     }
+
+    //To handle for S frame visible according to s_frame_count
     public void SframeSetVisible(){
     if(!s_frame_bool && !fire_bool){
         switch(s_frame_count){
@@ -695,165 +703,165 @@ public class Button implements GameObject, PointerEventHandler {
             s_frame09s.setVisible(false);
             s_frame10s.setVisible(false);
     }
-public void SframeSetVisibleBack(CharacterObject ch){
-    switch(s_frame_count){
-        case(0):
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(false);
-            if(ch.isNotPerforming())
-                fire_bool = false;
-            break;
-        case(1):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(true);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(false);
-            break;
-        case(2):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(true);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(false);
-            break;
-        case(3):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(true);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(false);
-            break;
-        case(4):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(true);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(false);
-            break;
-        case(5):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(true);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(false);
-            break;
-        case(6):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(true);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(false);
-            break;
-        case(7):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(true);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(false);
-            break;
-        case(8):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(true);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(false);
-            break;
-        case(9):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(true);
-            s_frame10s.setVisible(false);
-            break;
-        case(10):
-            s_frame00.setVisible(false);
-            s_frame01s.setVisible(false);
-            s_frame02s.setVisible(false);
-            s_frame03s.setVisible(false);
-            s_frame04s.setVisible(false);
-            s_frame05s.setVisible(false);
-            s_frame06s.setVisible(false);
-            s_frame07s.setVisible(false);
-            s_frame08s.setVisible(false);
-            s_frame09s.setVisible(false);
-            s_frame10s.setVisible(true);
-            break;
-        }
-        s_frame01.setVisible(false);
-        s_frame02.setVisible(false);
-        s_frame03.setVisible(false);
-        s_frame04.setVisible(false);
-        s_frame05.setVisible(false);
-        s_frame06.setVisible(false);
-        s_frame07.setVisible(false);
-        s_frame08.setVisible(false);
-        s_frame09.setVisible(false);
-        s_frame10.setVisible(false);
+    public void SframeSetVisibleBack(CharacterObject ch){
+        switch(s_frame_count){
+            case(0):
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(false);
+                if(ch.isNotPerforming())
+                    fire_bool = false;
+                break;
+            case(1):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(true);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(false);
+                break;
+            case(2):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(true);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(false);
+                break;
+            case(3):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(true);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(false);
+                break;
+            case(4):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(true);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(false);
+                break;
+            case(5):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(true);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(false);
+                break;
+            case(6):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(true);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(false);
+                break;
+            case(7):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(true);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(false);
+                break;
+            case(8):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(true);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(false);
+                break;
+            case(9):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(true);
+                s_frame10s.setVisible(false);
+                break;
+            case(10):
+                s_frame00.setVisible(false);
+                s_frame01s.setVisible(false);
+                s_frame02s.setVisible(false);
+                s_frame03s.setVisible(false);
+                s_frame04s.setVisible(false);
+                s_frame05s.setVisible(false);
+                s_frame06s.setVisible(false);
+                s_frame07s.setVisible(false);
+                s_frame08s.setVisible(false);
+                s_frame09s.setVisible(false);
+                s_frame10s.setVisible(true);
+                break;
+            }
+            s_frame01.setVisible(false);
+            s_frame02.setVisible(false);
+            s_frame03.setVisible(false);
+            s_frame04.setVisible(false);
+            s_frame05.setVisible(false);
+            s_frame06.setVisible(false);
+            s_frame07.setVisible(false);
+            s_frame08.setVisible(false);
+            s_frame09.setVisible(false);
+            s_frame10.setVisible(false);
 
-}
+    }
     public void SframeShow(){
 
         s_frame00.show();
