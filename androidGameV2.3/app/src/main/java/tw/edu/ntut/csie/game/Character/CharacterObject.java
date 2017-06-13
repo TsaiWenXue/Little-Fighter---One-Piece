@@ -39,4 +39,5 @@ public interface CharacterObject {
 
     public void getHit(ArrayList<AttackObject> at, int roadPx);
     public boolean getHitting();
+    public void secGetHit(ArrayList<AttackObject> attacks, int roadPx);
 }

@@ -20,6 +20,8 @@ public class StateStage1 extends GameState {
     private MovingBitmap failed;
     private MovingBitmap clear;
     private BitmapButton ok;
+    private MovingBitmap invincible;
+    private MovingBitmap invincible_pressed;
 
     private Navigation controller;
     private Button button;
@@ -38,6 +40,12 @@ public class StateStage1 extends GameState {
 
     @Override
     public void initialize(Map<String, Object> data) {
+        invincible = new MovingBitmap(R.drawable.invincible);
+        invincible_pressed = new MovingBitmap(R.drawable.invincible_pressed);
+        invincible.setLocation(700, 50);
+        invincible_pressed.setLocation(700, 50);
+        invincible_pressed.setVisible(false);
+
         bg = new Stage1BG();
         failed = new MovingBitmap(R.drawable.failed);
         clear = new MovingBitmap(R.drawable.stage_clear);
@@ -91,14 +99,19 @@ public class StateStage1 extends GameState {
             if (!ch.getHitting())
                 ch.move(bg.getX());
             //If character is attacking, character will not get hit.
-            if (ch.isNotPerforming())
-                ch.getHit(attacks, bg.getX());
+            if (!invincible_pressed.isVisible() && ch.isNotPerforming() ) {
+                if (!Button.fire_bool)
+                    ch.getHit(attacks, bg.getX());
+                else
+                    ch.secGetHit(attacks, bg.getX());
+            }
             button.move(ch);
         }
     }
 
     @Override
     public void show() {
+
         bg.show();
         controller.show();
         button.show();
@@ -109,6 +122,8 @@ public class StateStage1 extends GameState {
         failed.show();
         clear.show();
         ok.show();
+        invincible.show();
+        invincible_pressed.show();
     }
 
     @Override
@@ -118,6 +133,8 @@ public class StateStage1 extends GameState {
         failed.release();
         clear.release();
         ok.release();
+        invincible.release();
+        invincible_pressed.release();
 
         controller.release();
         button.release();
@@ -147,6 +164,16 @@ public class StateStage1 extends GameState {
 
     @Override
     public boolean pointerPressed(List<Pointer> pointers) {
+        for (int i = 0; i < pointers.size(); i++) {
+            int touchX = pointers.get(i).getX();
+            int touchY = pointers.get(i).getY();
+            if (invincible.imageTouched(touchX, touchY) && !invincible_pressed.isVisible()) {
+                invincible_pressed.setVisible(true);
+            }
+            else if (invincible.imageTouched(touchX, touchY) && invincible_pressed.isVisible()) {
+                invincible_pressed.setVisible(false);
+            }
+        }
         if (ch.getHp() > 0 && !ch.getHitting()) {
             controller.pointerPressed(pointers);
             button.pointerPressed(pointers, ch);
