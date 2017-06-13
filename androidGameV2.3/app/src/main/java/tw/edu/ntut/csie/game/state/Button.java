@@ -703,6 +703,7 @@ public class Button implements GameObject, PointerEventHandler {
             s_frame09s.setVisible(false);
             s_frame10s.setVisible(false);
     }
+
     public void SframeSetVisibleBack(CharacterObject ch){
         switch(s_frame_count){
             case(0):
@@ -860,7 +861,6 @@ public class Button implements GameObject, PointerEventHandler {
             s_frame08.setVisible(false);
             s_frame09.setVisible(false);
             s_frame10.setVisible(false);
-
     }
     public void SframeShow(){
 
