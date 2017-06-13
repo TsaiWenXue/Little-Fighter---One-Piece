@@ -30,7 +30,7 @@ public class StateStage2 extends GameState{
     private CharacterObject ch;
     private ArrayList<EnemyObject> marins;
 
-    private final static int enemyQuantity = 1;
+    private final static int enemyQuantity = 20;
     private int deadEnemiesQuantity = 0;
     private ArrayList<AttackObject> attacks;
 

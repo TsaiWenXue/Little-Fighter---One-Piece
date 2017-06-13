@@ -92,10 +92,8 @@ public class Luffy implements CharacterObject {
         return false;
     }
 
-
     private int[] attackArea = new int[4];
     private int damage = 0;
-
 
     public Luffy () {
         super();
@@ -199,7 +197,6 @@ public class Luffy implements CharacterObject {
         sluffyFSkill.show();     sluffyFSkill_r.show();
         sluffySSkill.show();     sluffySSkill_r.show();
         sLuffyHit.show();        sLuffyHit_r.show();
-
 
         hpBg.show();    luffy_small.show();
         for (int i = 0; i < 100; i++) {
@@ -362,12 +359,12 @@ public class Luffy implements CharacterObject {
         return attackArea;
     }
     public boolean getHitting() {
-        return (hitVisible || hitVisible_r || sHitVisible || sHitVisible_r) ;
+        return (hitVisible || hitVisible_r || sHitVisible || sHitVisible_r);
     }
 
      /********************
-           * Get Hit Function Area *
-           ********************/
+     * Get Hit Function Area *
+     ********************/
 
       // Handle the event luffy get hit
      public void getHit(ArrayList<AttackObject> attacks, int roadPx) {
@@ -420,7 +417,8 @@ public class Luffy implements CharacterObject {
              setLocation(px, py);
          }
          //Handle the situation when luffy is finishing get hit event.
-         if ((hitVisible || hitVisible_r) && luffyHit.getCurrentFrameIndex() == -1 && luffyHit_r.getCurrentFrameIndex() == -1) {
+         if ((hitVisible || hitVisible_r) && luffyHit.getCurrentFrameIndex() == -1
+            && luffyHit_r.getCurrentFrameIndex() == -1) {
              if (hitVisible) {
                  visible = true;
                  visible_r = false;
@@ -549,7 +547,6 @@ public class Luffy implements CharacterObject {
         sluffyFSkill.setLocation(x, y);      sluffyFSkill_r.setLocation(x, y);
         sluffySSkill.setLocation(x, y);      sluffySSkill_r.setLocation(x, y);
         sLuffyHit.setLocation(x, y);         sLuffyHit_r.setLocation(x, y);
-
     }
 
     //Let luffy run according to Navigarion
@@ -690,9 +687,6 @@ public class Luffy implements CharacterObject {
         luffyFSkill_r.setVisible(false);
         luffyHit.setVisible(hitVisible);
         luffyHit_r.setVisible(hitVisible_r);
-
-//        sluffy.setVisible(sec_visible);
-//        sluffy_r.setVisible(sec_visible_r);
     }
     public void secSetVisible() {
         sluffy.setVisible(sec_visible);
