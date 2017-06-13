@@ -77,6 +77,8 @@ public class Zoro implements CharacterObject {
     public boolean getHitting() {return false;}
     public void getHit(ArrayList<AttackObject> attacks, int roadPx){
 
+    } public void secGetHit(ArrayList<AttackObject> attacks, int roadPx) {
+
     }
     public boolean isDead() {
         return false;
